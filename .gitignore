@@ -1,0 +1,19 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Node (se qualcuno decide di installare dipendenze)
+node_modules/
+package-lock.json
+
+# Editor
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Sistemazione
+.install.sh
+*.bak

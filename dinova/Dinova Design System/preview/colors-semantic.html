@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #fff; font-family: 'Poppins', sans-serif; padding: 20px; }
+  .grid { display: flex; gap: 10px; flex-wrap: wrap; }
+  .swatch { width: 130px; }
+  .color-block { height: 56px; border-radius: 6px; display: flex; align-items: center; padding: 0 12px; }
+  .color-block span { font-size: 10px; font-weight: 600; }
+  .on-dark { color: #fff; }
+  .on-light { color: #00121A; }
+  .name { font-size: 11px; font-weight: 600; color: #00121A; margin-top: 6px; }
+  .var  { font-size: 9px; color: #49556D; margin-top: 2px; font-family: monospace; }
+  .section-label { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: #49556D; margin-bottom: 10px; }
+  .section { margin-bottom: 18px; }
+</style>
+</head>
+<body>
+  <div class="section">
+    <div class="section-label">Semantic Roles</div>
+    <div class="grid">
+      <div class="swatch">
+        <div class="color-block" style="background:#873BFF;"><span class="on-dark">Primary CTA</span></div>
+        <div class="name">Interactive Primary</div>
+        <div class="var">--interactive-primary</div>
+      </div>
+      <div class="swatch">
+        <div class="color-block" style="background:#00121A;"><span class="on-dark">Dark BG</span></div>
+        <div class="name">BG Page Dark</div>
+        <div class="var">--bg-page-dark</div>
+      </div>
+      <div class="swatch">
+        <div class="color-block" style="background:#F0F4F7; border:1px solid #DDE5ED;"><span class="on-light">Surface</span></div>
+        <div class="name">BG Surface</div>
+        <div class="var">--bg-surface</div>
+      </div>
+      <div class="swatch">
+        <div class="color-block" style="background:#AAE505;"><span class="on-light">Success</span></div>
+        <div class="name">Success / Lime</div>
+        <div class="var">--color-success</div>
+      </div>
+      <div class="swatch">
+        <div class="color-block" style="background:#FF7031;"><span class="on-dark">Warning</span></div>
+        <div class="name">Warning / Orange</div>
+        <div class="var">--color-warning</div>
+      </div>
+      <div class="swatch">
+        <div class="color-block" style="background:#5CD9FF;"><span class="on-light">Info</span></div>
+        <div class="name">Info / Cyan</div>
+        <div class="var">--color-info</div>
+      </div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-label">Text Roles</div>
+    <div class="grid">
+      <div class="swatch">
+        <div class="color-block" style="background:#00121A;"><span class="on-dark" style="font-size:12px;">Primary text</span></div>
+        <div class="name">Text Primary</div>
+        <div class="var">--text-primary</div>
+      </div>
+      <div class="swatch">
+        <div class="color-block" style="background:#F0F4F7; border:1px solid #DDE5ED;"><span class="on-light" style="font-size:12px;color:#49556D;">Secondary</span></div>
+        <div class="name">Text Secondary</div>
+        <div class="var">--text-secondary</div>
+      </div>
+      <div class="swatch">
+        <div class="color-block" style="background:#F0F4F7; border:1px solid #DDE5ED;"><span style="font-size:12px;color:#8899AA;">Muted</span></div>
+        <div class="name">Text Muted</div>
+        <div class="var">--text-muted</div>
+      </div>
+      <div class="swatch">
+        <div class="color-block" style="background:#873BFF;"><span class="on-dark" style="font-size:12px;">Inverse</span></div>
+        <div class="name">Text Inverse</div>
+        <div class="var">--text-inverse</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

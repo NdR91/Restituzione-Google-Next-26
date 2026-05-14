@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dinova — Corporate UI Kit</title>
+<link rel="stylesheet" href="../../colors_and_type.css">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --v:#873BFF; --dark:#00121A; --white:#fff; --off:#F0F4F7;
+  --orange:#FF7031; --pink:#FF70F3; --cyan:#5CD9FF; --lime:#AAE505;
+  --slate:#49556D; --bg2:#A7BBD8; --border:#DDE5ED;
+  --f:'Poppins',sans-serif;
+}
+body{background:#EAEEF3;font-family:var(--f);color:var(--dark);}
+
+/* ─── Page chrome ─── */
+.page-header{
+  background:var(--dark);padding:16px 32px;
+  display:flex;align-items:center;gap:20px;
+  position:sticky;top:0;z-index:100;
+}
+.page-header .brand{display:flex;align-items:center;gap:10px;}
+.o-mark{
+  width:26px;height:26px;border-radius:50%;
+  border:5px solid var(--v);flex-shrink:0;
+}
+.brand-name{font-size:15px;font-weight:600;color:var(--white);letter-spacing:-.01em;}
+.page-header .sep{width:1px;height:18px;background:rgba(255,255,255,.12);}
+.page-header .page-title{font-size:12px;color:rgba(255,255,255,.4);font-weight:500;letter-spacing:.04em;}
+.nav-tabs{display:flex;gap:4px;margin-left:auto;}
+.nav-tab{
+  padding:6px 14px;border-radius:5px;
+  font-size:12px;font-weight:600;letter-spacing:.03em;
+  cursor:pointer;border:none;background:transparent;
+  color:rgba(255,255,255,.45);transition:all .15s;font-family:var(--f);
+}
+.nav-tab:hover{color:rgba(255,255,255,.75);}
+.nav-tab.active{background:rgba(135,59,255,.25);color:var(--v);}
+
+/* ─── Canvas ─── */
+.canvas{padding:40px 32px;max-width:1400px;margin:0 auto;}
+.section-head{
+  display:flex;align-items:baseline;gap:16px;margin-bottom:24px;margin-top:40px;
+}
+.section-head:first-child{margin-top:0;}
+.section-head h2{font-size:18px;font-weight:700;color:var(--dark);}
+.section-head .desc{font-size:13px;color:var(--slate);}
+.rule{height:1px;background:var(--border);margin:32px 0;}
+
+/* ─── Component row ─── */
+.comp-row{display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start;margin-bottom:20px;}
+.comp-label{
+  font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--slate);margin-bottom:10px;
+}
+
+/* ─── BUTTONS ─── */
+.btn{
+  font-family:var(--f);font-weight:600;border:none;cursor:pointer;
+  border-radius:6px;letter-spacing:.01em;
+  transition:opacity .15s,transform .1s;
+  display:inline-flex;align-items:center;gap:6px;
+}
+.btn:hover{opacity:.84;}
+.btn:active{transform:scale(.98);}
+.btn-sm{font-size:11px;padding:7px 14px;}
+.btn-md{font-size:13px;padding:10px 20px;}
+.btn-lg{font-size:15px;padding:13px 28px;}
+.btn-primary{background:var(--v);color:#fff;}
+.btn-secondary{background:var(--dark);color:#fff;}
+.btn-outline{background:transparent;color:var(--v);border:1.5px solid var(--v);}
+.btn-outline-dark{background:transparent;color:var(--dark);border:1.5px solid var(--dark);}
+.btn-ghost{background:transparent;color:var(--v);}
+.btn-ghost:hover{background:rgba(135,59,255,.07);opacity:1;}
+.btn-orange{background:var(--orange);color:#fff;}
+.btn-disabled{background:#DDE5ED;color:#8899AA;cursor:not-allowed;}
+.btn-disabled:hover{opacity:1;}
+
+/* ─── BADGES ─── */
+.badge{
+  font-family:var(--f);font-size:10px;font-weight:600;
+  border-radius:4px;padding:3px 9px;
+  display:inline-flex;align-items:center;gap:4px;
+  letter-spacing:.02em;
+}
+.badge-pill{border-radius:9999px;}
+.bv{background:var(--v);color:#fff;}
+.bd{background:var(--dark);color:#fff;}
+.bo{background:var(--orange);color:#fff;}
+.bc{background:var(--cyan);color:var(--dark);}
+.bl{background:var(--lime);color:var(--dark);}
+.bp{background:var(--pink);color:var(--dark);}
+.bvs{background:#EDE5FF;color:var(--v);}
+.bcs{background:#E0F8FF;color:#007CA8;}
+.bls{background:#EEFF99;color:#3D6400;}
+.bov{background:transparent;color:var(--v);border:1.5px solid var(--v);}
+.tag-item{
+  font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  padding:2px 8px;border-radius:3px;font-family:var(--f);
+}
+
+/* ─── CARDS ─── */
+.card{
+  border-radius:8px;padding:20px;
+  background:var(--white);
+  box-shadow:0 1px 4px rgba(0,18,26,.07);
+}
+.card-dark{background:var(--dark);}
+.card-violet{background:var(--v);}
+.card-surface{background:var(--off);border:1px solid var(--border);}
+.card .clabel{
+  font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--v);margin-bottom:8px;
+}
+.card-dark .clabel{color:var(--cyan);}
+.card-violet .clabel{color:rgba(255,255,255,.55);}
+.card .ctitle{font-size:15px;font-weight:600;color:var(--dark);margin-bottom:6px;line-height:1.2;}
+.card-dark .ctitle,.card-violet .ctitle{color:#fff;}
+.card .cbody{font-size:12px;color:var(--slate);line-height:1.5;}
+.card-dark .cbody{color:rgba(255,255,255,.55);}
+.card-violet .cbody{color:rgba(255,255,255,.7);}
+.divider{height:1px;background:var(--border);margin:10px 0;}
+.divider-dark{background:rgba(255,255,255,.1);}
+.stat-num{font-size:2.4rem;font-weight:800;color:var(--v);letter-spacing:-.03em;line-height:1;}
+.stat-num.light{color:#fff;}
+.stat-lbl{font-size:12px;color:var(--slate);margin-top:4px;}
+.stat-lbl.light{color:rgba(255,255,255,.6);}
+
+/* ─── FORMS ─── */
+.field{display:flex;flex-direction:column;gap:6px;width:220px;}
+.field label{font-size:11px;font-weight:600;color:var(--dark);}
+.field input,.field select,.field textarea{
+  font-family:var(--f);font-size:13px;
+  padding:9px 12px;border-radius:6px;
+  border:1.5px solid var(--border);
+  background:var(--white);color:var(--dark);
+  outline:none;transition:border-color .15s;
+}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--v);}
+.field input.error{border-color:#FF4040;}
+.field .hint{font-size:10px;color:var(--slate);}
+.field .err-msg{font-size:10px;color:#FF4040;}
+
+/* ─── NAV BAR ─── */
+.ui-nav{
+  background:var(--white);
+  border-bottom:1px solid var(--border);
+  padding:0 24px;
+  display:flex;align-items:center;gap:0;
+  height:56px;border-radius:8px 8px 0 0;
+  box-shadow:0 1px 4px rgba(0,18,26,.07);
+}
+.ui-nav .nav-brand{display:flex;align-items:center;gap:8px;margin-right:32px;}
+.ui-nav .nav-brand .on{width:20px;height:20px;border-radius:50%;border:4px solid var(--v);}
+.ui-nav .nav-brand span{font-size:14px;font-weight:600;color:var(--dark);}
+.ui-nav .nav-item{
+  font-size:13px;font-weight:500;color:var(--slate);
+  padding:0 16px;height:100%;display:flex;align-items:center;
+  border-bottom:2px solid transparent;cursor:pointer;
+  transition:color .15s,border-color .15s;
+}
+.ui-nav .nav-item:hover{color:var(--dark);}
+.ui-nav .nav-item.active{color:var(--v);border-bottom-color:var(--v);}
+.ui-nav .nav-actions{margin-left:auto;display:flex;gap:8px;align-items:center;}
+
+/* ─── ALERT ─── */
+.alert{
+  border-radius:7px;padding:12px 16px;
+  display:flex;align-items:flex-start;gap:10px;
+  font-size:13px;line-height:1.4;
+}
+.alert .ai{font-size:14px;flex-shrink:0;margin-top:1px;}
+.alert-violet{background:#EDE5FF;color:var(--v);}
+.alert-success{background:#F0FFD0;color:#3D6400;}
+.alert-warning{background:#FFF0E6;color:#C04000;}
+.alert-info{background:#E0F8FF;color:#007CA8;}
+
+/* ─── DARK PANEL ─── */
+.dark-panel{background:var(--dark);border-radius:8px;padding:20px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+
+/* ─── PROGRESS BAR ─── */
+.progress-wrap{width:220px;}
+.progress-label{font-size:11px;font-weight:600;color:var(--dark);margin-bottom:6px;display:flex;justify-content:space-between;}
+.progress-track{height:6px;background:var(--off);border-radius:9999px;overflow:hidden;}
+.progress-fill{height:100%;border-radius:9999px;background:var(--v);}
+
+/* ─── STAT ROW ─── */
+.stat-row{display:flex;gap:0;background:var(--white);border-radius:8px;box-shadow:0 1px 4px rgba(0,18,26,.07);overflow:hidden;}
+.stat-cell{
+  flex:1;padding:20px 24px;border-right:1px solid var(--border);
+  display:flex;flex-direction:column;gap:4px;
+}
+.stat-cell:last-child{border-right:none;}
+.stat-cell .sc-val{font-size:2rem;font-weight:800;color:var(--v);letter-spacing:-.02em;line-height:1;}
+.stat-cell .sc-lbl{font-size:12px;color:var(--slate);}
+.stat-cell .sc-delta{font-size:10px;font-weight:600;color:#3D6400;margin-top:2px;}
+
+/* ─── TABLE ─── */
+.ui-table{width:100%;border-collapse:collapse;font-size:13px;}
+.ui-table th{
+  background:var(--off);padding:10px 14px;
+  text-align:left;font-size:10px;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--slate);
+  border-bottom:1px solid var(--border);
+}
+.ui-table td{
+  padding:12px 14px;border-bottom:1px solid var(--off);color:var(--dark);
+}
+.ui-table tr:last-child td{border-bottom:none;}
+.ui-table tr:hover td{background:#F8FAFB;}
+.ui-table .badge{vertical-align:middle;}
+
+/* ─── CHIP / TAG ─── */
+.chip{
+  font-family:var(--f);font-size:11px;font-weight:500;
+  padding:4px 12px;border-radius:9999px;
+  background:var(--off);color:var(--slate);
+  cursor:pointer;border:1.5px solid var(--border);
+  transition:all .15s;
+}
+.chip:hover,.chip.sel{background:var(--v);color:#fff;border-color:var(--v);}
+
+/* ─── AVATAR ─── */
+.avatar{
+  width:40px;height:40px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;font-weight:700;flex-shrink:0;
+}
+.av-sm{width:30px;height:30px;font-size:11px;}
+.av-lg{width:56px;height:56px;font-size:20px;}
+.av-violet{background:#EDE5FF;color:var(--v);}
+.av-dark{background:var(--dark);color:#fff;}
+.av-cyan{background:#E0F8FF;color:#007CA8;}
+.av-lime{background:#EEFF99;color:#3D6400;}
+
+/* ─── TOGGLE ─── */
+.toggle-wrap{display:flex;align-items:center;gap:10px;cursor:pointer;}
+.toggle{
+  width:40px;height:22px;border-radius:11px;
+  background:var(--border);position:relative;transition:background .2s;flex-shrink:0;
+}
+.toggle.on{background:var(--v);}
+.toggle::after{
+  content:'';position:absolute;
+  top:3px;left:3px;
+  width:16px;height:16px;border-radius:50%;background:#fff;
+  transition:transform .2s;
+}
+.toggle.on::after{transform:translateX(18px);}
+.toggle-label{font-size:13px;font-weight:500;color:var(--dark);}
+</style>
+</head>
+<body>
+
+<!-- Page header -->
+<div class="page-header">
+  <div class="brand">
+    <img src="../../assets/logo-wordmark-white.png" alt="Dinova" style="height:22px;">
+  </div>
+  <div class="sep"></div>
+  <span class="page-title">Corporate UI Kit</span>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="showSection('components')">Components</button>
+    <button class="nav-tab" onclick="showSection('patterns')">Patterns</button>
+    <button class="nav-tab" onclick="showSection('data')">Data</button>
+  </div>
+</div>
+
+<div class="canvas">
+
+  <!-- ════════════════════════════
+       SECTION: BUTTONS
+  ════════════════════════════ -->
+  <div class="section-head">
+    <h2>Buttons</h2>
+    <span class="desc">Primary, secondary, outline, ghost, accent — three sizes.</span>
+  </div>
+
+  <div class="comp-label">Primary</div>
+  <div class="comp-row">
+    <button class="btn btn-primary btn-sm">Small</button>
+    <button class="btn btn-primary btn-md">Medium</button>
+    <button class="btn btn-primary btn-lg">Large</button>
+    <button class="btn btn-primary btn-md btn-disabled" disabled>Disabled</button>
+  </div>
+
+  <div class="comp-label">Secondary & Outline</div>
+  <div class="comp-row">
+    <button class="btn btn-secondary btn-md">Secondary</button>
+    <button class="btn btn-outline btn-md">Outline Violet</button>
+    <button class="btn btn-outline-dark btn-md">Outline Dark</button>
+    <button class="btn btn-ghost btn-md">Ghost</button>
+  </div>
+
+  <div class="comp-label">Accents</div>
+  <div class="comp-row">
+    <button class="btn btn-orange btn-md">Orange</button>
+    <button class="btn btn-md" style="background:var(--cyan);color:var(--dark);">Cyan</button>
+    <button class="btn btn-md" style="background:var(--lime);color:var(--dark);">Lime</button>
+    <button class="btn btn-md" style="background:var(--pink);color:var(--dark);">Pink</button>
+  </div>
+
+  <div class="comp-label">On Dark</div>
+  <div class="dark-panel">
+    <button class="btn btn-primary btn-md">Primary</button>
+    <button class="btn btn-md" style="background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.4);">Outline White</button>
+    <button class="btn btn-outline btn-md">Outline Violet</button>
+  </div>
+
+  <div class="rule"></div>
+
+  <!-- ════════════════════════════
+       SECTION: BADGES & TAGS
+  ════════════════════════════ -->
+  <div class="section-head">
+    <h2>Badges & Tags</h2>
+    <span class="desc">Filled, soft, outline, pill, and label tag variants.</span>
+  </div>
+
+  <div class="comp-label">Filled</div>
+  <div class="comp-row">
+    <span class="badge bv">AI & Data</span>
+    <span class="badge bd">Cybersecurity</span>
+    <span class="badge bo">Cloud</span>
+    <span class="badge bc">Brand & Digital</span>
+    <span class="badge bl">Consolidate</span>
+    <span class="badge bp">Enable</span>
+  </div>
+
+  <div class="comp-label">Soft / Tinted</div>
+  <div class="comp-row">
+    <span class="badge bvs">AI Solutions</span>
+    <span class="badge bcs">Cloud Native</span>
+    <span class="badge bls">Data-driven</span>
+    <span class="badge" style="background:#FFF0E6;color:#C04000;">Cyber Aware</span>
+  </div>
+
+  <div class="comp-label">Outline & Pill</div>
+  <div class="comp-row">
+    <span class="badge bov">Partner</span>
+    <span class="badge badge-pill bv">Violet Pill</span>
+    <span class="badge badge-pill bvs">Soft Pill</span>
+    <span class="badge badge-pill bov">Outline Pill</span>
+  </div>
+
+  <div class="comp-label">Tags (uppercase)</div>
+  <div class="comp-row">
+    <span class="tag-item" style="background:var(--v);color:#fff;">NEW</span>
+    <span class="tag-item" style="background:var(--dark);color:#fff;">BETA</span>
+    <span class="tag-item" style="background:var(--off);color:var(--slate);border:1px solid var(--border);">LABEL</span>
+    <span class="tag-item" style="background:#EDE5FF;color:var(--v);">PROMO</span>
+  </div>
+
+  <div class="rule"></div>
+
+  <!-- ════════════════════════════
+       SECTION: CARDS
+  ════════════════════════════ -->
+  <div class="section-head">
+    <h2>Cards</h2>
+    <span class="desc">Content, dark, violet, stat, surface variants.</span>
+  </div>
+
+  <div class="comp-row" style="align-items:stretch;">
+    <div class="card" style="width:200px;">
+      <div class="clabel">AI & Data Solutions</div>
+      <div class="ctitle">Intelligent Agents</div>
+      <div class="divider"></div>
+      <div class="cbody">Automazioni su misura e soluzioni intelligenti per il business.</div>
+    </div>
+    <div class="card card-dark" style="width:200px;">
+      <div class="clabel">Cybersecurity</div>
+      <div class="ctitle">Cyber Defence</div>
+      <div class="divider divider-dark"></div>
+      <div class="cbody">Rileviamo e mitighiamo i rischi cyber.</div>
+    </div>
+    <div class="card card-violet" style="width:200px;">
+      <div class="clabel">Cloud</div>
+      <div class="ctitle">Cloud Engineering</div>
+      <div class="divider divider-dark"></div>
+      <div class="cbody">Soluzioni cloud-native e scalabili.</div>
+    </div>
+    <div class="card" style="width:160px;">
+      <div class="clabel">Numeri</div>
+      <div class="stat-num">+1600</div>
+      <div class="stat-lbl">Clienti</div>
+    </div>
+    <div class="card card-dark" style="width:160px;">
+      <div class="clabel" style="color:var(--cyan);">Risultati</div>
+      <div class="stat-num light">+8300</div>
+      <div class="stat-lbl light">Progetti</div>
+    </div>
+    <div class="card card-surface" style="width:200px;">
+      <div class="clabel" style="color:var(--slate);">Prodotto</div>
+      <div class="ctitle">DEEP SCAN</div>
+      <div class="cbody">Human Risk Profiling per la cybersecurity aziendale.</div>
+    </div>
+  </div>
+
+  <div class="rule"></div>
+
+  <!-- ════════════════════════════
+       SECTION: FORMS
+  ════════════════════════════ -->
+  <div class="section-head">
+    <h2>Forms</h2>
+    <span class="desc">Input, select, textarea — default, focus, error states.</span>
+  </div>
+
+  <div class="comp-row" style="align-items:flex-start;">
+    <div class="field">
+      <label>Nome azienda</label>
+      <input type="text" placeholder="es. Dinova S.r.l.">
+      <span class="hint">Ragione sociale completa</span>
+    </div>
+    <div class="field">
+      <label>Settore</label>
+      <select>
+        <option>Tecnologia</option>
+        <option>Manifatturiero</option>
+        <option>Finance</option>
+        <option>Healthcare</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Email di contatto</label>
+      <input type="email" class="error" value="email@non-valida">
+      <span class="err-msg">Formato email non valido</span>
+    </div>
+    <div class="field">
+      <label>Messaggio</label>
+      <textarea rows="3" placeholder="Descrivi la tua esigenza…" style="resize:vertical;"></textarea>
+    </div>
+    <div class="field" style="justify-content:flex-end;gap:10px;">
+      <div class="toggle-wrap" onclick="this.querySelector('.toggle').classList.toggle('on')">
+        <div class="toggle on"></div>
+        <span class="toggle-label">Newsletter attiva</span>
+      </div>
+      <div class="toggle-wrap" onclick="this.querySelector('.toggle').classList.toggle('on')">
+        <div class="toggle"></div>
+        <span class="toggle-label">Notifiche email</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="rule"></div>
+
+  <!-- ════════════════════════════
+       SECTION: NAVIGATION
+  ════════════════════════════ -->
+  <div class="section-head">
+    <h2>Navigation</h2>
+    <span class="desc">Top nav bar with brand, links, and actions.</span>
+  </div>
+
+  <div class="ui-nav">
+    <div class="nav-brand">
+      <div class="on"></div>
+      <span>dinova</span>
+    </div>
+    <div class="nav-item active">Servizi</div>
+    <div class="nav-item">Prodotti</div>
+    <div class="nav-item">Case Studies</div>
+    <div class="nav-item">Chi siamo</div>
+    <div class="nav-actions">
+      <button class="btn btn-ghost btn-sm">Accedi</button>
+      <button class="btn btn-primary btn-sm">Contattaci</button>
+    </div>
+  </div>
+
+  <div class="rule"></div>
+
+  <!-- ════════════════════════════
+       SECTION: ALERTS
+  ════════════════════════════ -->
+  <div class="section-head">
+    <h2>Alerts</h2>
+    <span class="desc">Violet, success, warning, info — inline notification banners.</span>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:10px;max-width:600px;">
+    <div class="alert alert-violet">
+      <span class="ai">✦</span>
+      <div><strong>AI integrata</strong> — La tua piattaforma è pronta per l'integrazione con LUCA, il workplace AI di Dinova.</div>
+    </div>
+    <div class="alert alert-success">
+      <span class="ai">✓</span>
+      <div><strong>Certificazione verificata</strong> — ISO/IEC 27001:2022 attiva. Tutti i sistemi sono conformi.</div>
+    </div>
+    <div class="alert alert-warning">
+      <span class="ai">⚠</span>
+      <div><strong>Attenzione</strong> — Rilevata una vulnerabilità nel perimetro. Avvia Deep Scan per l'analisi.</div>
+    </div>
+    <div class="alert alert-info">
+      <span class="ai">ℹ</span>
+      <div><strong>Aggiornamento disponibile</strong> — Nuova versione di XYLER con threat intelligence avanzata.</div>
+    </div>
+  </div>
+
+  <div class="rule"></div>
+
+  <!-- ════════════════════════════
+       SECTION: AVATARS & CHIPS
+  ════════════════════════════ -->
+  <div class="section-head">
+    <h2>Avatars & Chips</h2>
+    <span class="desc">User avatars in multiple sizes and filter chips.</span>
+  </div>
+
+  <div class="comp-label">Avatars</div>
+  <div class="comp-row" style="align-items:center;">
+    <div class="avatar av-violet">MC</div>
+    <div class="avatar av-dark">GR</div>
+    <div class="avatar av-cyan">LB</div>
+    <div class="avatar av-lime">FM</div>
+    <div class="avatar av-sm av-violet">A</div>
+    <div class="avatar av-lg av-dark">DV</div>
+  </div>
+
+  <div class="comp-label">Filter Chips</div>
+  <div class="comp-row">
+    <div class="chip sel">Tutti</div>
+    <div class="chip" onclick="this.classList.toggle('sel')">AI & Data</div>
+    <div class="chip" onclick="this.classList.toggle('sel')">Cybersecurity</div>
+    <div class="chip" onclick="this.classList.toggle('sel')">Cloud</div>
+    <div class="chip" onclick="this.classList.toggle('sel')">Brand</div>
+    <div class="chip" onclick="this.classList.toggle('sel')">Formazione</div>
+  </div>
+
+  <div class="rule"></div>
+
+  <!-- ════════════════════════════
+       SECTION: STAT ROW
+  ════════════════════════════ -->
+  <div class="section-head">
+    <h2>Stats Row</h2>
+    <span class="desc">KPI strip component for dashboards and overview pages.</span>
+  </div>
+
+  <div class="stat-row">
+    <div class="stat-cell">
+      <div class="sc-val">+1600</div>
+      <div class="sc-lbl">Clienti attivi</div>
+      <div class="sc-delta">↑ +12% vs 2024</div>
+    </div>
+    <div class="stat-cell">
+      <div class="sc-val">+8300</div>
+      <div class="sc-lbl">Progetti completati</div>
+      <div class="sc-delta">↑ +8% vs 2024</div>
+    </div>
+    <div class="stat-cell">
+      <div class="sc-val">+350</div>
+      <div class="sc-lbl">Persone nel team</div>
+      <div class="sc-delta">↑ +22% vs 2024</div>
+    </div>
+    <div class="stat-cell">
+      <div class="sc-val" style="color:var(--lime);">4</div>
+      <div class="sc-lbl">Competence Center</div>
+      <div class="sc-delta sc-delta" style="color:var(--slate);">AI · Cyber · Cloud · Brand</div>
+    </div>
+  </div>
+
+  <div class="rule"></div>
+
+  <!-- ════════════════════════════
+       SECTION: PROGRESS
+  ════════════════════════════ -->
+  <div class="section-head">
+    <h2>Progress Bars</h2>
+    <span class="desc">Branded progress indicators for projects, skills, adoption.</span>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:16px;">
+    <div class="progress-wrap">
+      <div class="progress-label"><span>AI Adoption</span><span style="color:var(--v);font-weight:700;">78%</span></div>
+      <div class="progress-track"><div class="progress-fill" style="width:78%;background:var(--v);"></div></div>
+    </div>
+    <div class="progress-wrap">
+      <div class="progress-label"><span>Cyber Readiness</span><span style="color:var(--cyan);font-weight:700;">92%</span></div>
+      <div class="progress-track"><div class="progress-fill" style="width:92%;background:var(--cyan);"></div></div>
+    </div>
+    <div class="progress-wrap">
+      <div class="progress-label"><span>Cloud Migration</span><span style="color:var(--orange);font-weight:700;">54%</span></div>
+      <div class="progress-track"><div class="progress-fill" style="width:54%;background:var(--orange);"></div></div>
+    </div>
+    <div class="progress-wrap">
+      <div class="progress-label"><span>Brand Score</span><span style="color:var(--lime);font-weight:700;">87%</span></div>
+      <div class="progress-track"><div class="progress-fill" style="width:87%;background:var(--lime);"></div></div>
+    </div>
+  </div>
+
+  <div class="rule"></div>
+
+  <!-- ════════════════════════════
+       SECTION: TABLE
+  ════════════════════════════ -->
+  <div class="section-head">
+    <h2>Table</h2>
+    <span class="desc">Data table with hover row, badges, and status indicators.</span>
+  </div>
+
+  <div style="background:var(--white);border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(0,18,26,.07);">
+    <table class="ui-table" style="width:100%;">
+      <thead>
+        <tr>
+          <th>Progetto</th>
+          <th>Area</th>
+          <th>Cliente</th>
+          <th>Stato</th>
+          <th>Data</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>LUCA Implementation</strong></td>
+          <td><span class="badge bvs">AI & Data</span></td>
+          <td>Ducati Motor</td>
+          <td><span class="badge bl">Completato</span></td>
+          <td style="color:var(--slate);">Mar 2025</td>
+        </tr>
+        <tr>
+          <td><strong>Cyber Risk Assessment</strong></td>
+          <td><span class="badge bd">Cybersecurity</span></td>
+          <td>Lavazza SpA</td>
+          <td><span class="badge bv">In corso</span></td>
+          <td style="color:var(--slate);">Apr 2025</td>
+        </tr>
+        <tr>
+          <td><strong>Cloud Migration</strong></td>
+          <td><span class="badge bo">Cloud</span></td>
+          <td>Maserati</td>
+          <td><span class="badge" style="background:#FFF0E6;color:#C04000;">In attesa</span></td>
+          <td style="color:var(--slate);">Mag 2025</td>
+        </tr>
+        <tr>
+          <td><strong>Brand Rebrand Digital</strong></td>
+          <td><span class="badge bc">Brand</span></td>
+          <td>Michelin Italia</td>
+          <td><span class="badge bvs">Pianificato</span></td>
+          <td style="color:var(--slate);">Giu 2025</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div style="height:40px;"></div>
+
+</div><!-- /canvas -->
+
+<script>
+function showSection(id){
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+  event.target.classList.add('active');
+}
+// Toggle chips
+document.querySelectorAll('.chip').forEach(c=>{
+  c.addEventListener('click',function(){
+    document.querySelectorAll('.chip').forEach(x=>x.classList.remove('sel'));
+    this.classList.add('sel');
+  });
+});
+</script>
+</body>
+</html>

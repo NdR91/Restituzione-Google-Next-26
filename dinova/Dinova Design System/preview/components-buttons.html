@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #F0F4F7; font-family: 'Poppins', sans-serif; padding: 20px; }
+  .section { margin-bottom: 20px; }
+  .section-label { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: #49556D; margin-bottom: 10px; }
+  .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  .btn {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+    letter-spacing: 0.01em;
+    transition: opacity 0.15s ease, transform 0.1s ease;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .btn:hover { opacity: 0.85; }
+  .btn:active { transform: scale(0.98); }
+  /* Sizes */
+  .btn-sm { font-size: 12px; padding: 7px 14px; }
+  .btn-md { font-size: 14px; padding: 10px 20px; }
+  .btn-lg { font-size: 15px; padding: 13px 28px; }
+  /* Variants */
+  .btn-primary { background: #873BFF; color: #fff; }
+  .btn-secondary { background: #00121A; color: #fff; }
+  .btn-outline { background: transparent; color: #873BFF; border: 1.5px solid #873BFF; }
+  .btn-outline-dark { background: transparent; color: #00121A; border: 1.5px solid #00121A; }
+  .btn-ghost { background: transparent; color: #873BFF; }
+  .btn-ghost:hover { background: rgba(135,59,255,0.08); opacity: 1; }
+  .btn-orange { background: #FF7031; color: #fff; }
+  .btn-disabled { background: #DDE5ED; color: #8899AA; cursor: not-allowed; }
+  .btn-disabled:hover { opacity: 1; }
+  /* Dark bg demo */
+  .dark-row { background: #00121A; padding: 12px; border-radius: 8px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+</style>
+</head>
+<body>
+  <div class="section">
+    <div class="section-label">Primary Buttons</div>
+    <div class="row">
+      <button class="btn btn-primary btn-sm">Small</button>
+      <button class="btn btn-primary btn-md">Medium</button>
+      <button class="btn btn-primary btn-lg">Large</button>
+      <button class="btn btn-primary btn-lg btn-disabled" disabled>Disabled</button>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-label">Secondary / Outline</div>
+    <div class="row">
+      <button class="btn btn-secondary btn-md">Secondary</button>
+      <button class="btn btn-outline btn-md">Outline Violet</button>
+      <button class="btn btn-outline-dark btn-md">Outline Dark</button>
+      <button class="btn btn-ghost btn-md">Ghost</button>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-label">Accent</div>
+    <div class="row">
+      <button class="btn btn-orange btn-md">Orange</button>
+      <button class="btn btn-md" style="background:#5CD9FF; color:#00121A;">Cyan</button>
+      <button class="btn btn-md" style="background:#AAE505; color:#00121A;">Lime</button>
+      <button class="btn btn-md" style="background:#FF70F3; color:#00121A;">Pink</button>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-label">On Dark Background</div>
+    <div class="dark-row">
+      <button class="btn btn-primary btn-md">Primary</button>
+      <button class="btn btn-md" style="background:transparent; color:#fff; border:1.5px solid #fff;">Outline White</button>
+      <button class="btn btn-md" style="background:transparent; color:#873BFF; border:1.5px solid #873BFF;">Outline Violet</button>
+    </div>
+  </div>
+</body>
+</html>

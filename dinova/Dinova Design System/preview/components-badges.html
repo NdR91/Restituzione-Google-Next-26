@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #F0F4F7; font-family: 'Poppins', sans-serif; padding: 20px; }
+  .section { margin-bottom: 20px; }
+  .section-label { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: #49556D; margin-bottom: 10px; }
+  .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .badge {
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    border-radius: 4px;
+    padding: 3px 9px;
+    display: inline-flex; align-items: center; gap: 4px;
+    letter-spacing: 0.02em;
+  }
+  .badge-pill { border-radius: 9999px; }
+  /* Filled */
+  .badge-violet { background: #873BFF; color: #fff; }
+  .badge-dark { background: #00121A; color: #fff; }
+  .badge-orange { background: #FF7031; color: #fff; }
+  .badge-cyan { background: #5CD9FF; color: #00121A; }
+  .badge-lime { background: #AAE505; color: #00121A; }
+  .badge-pink { background: #FF70F3; color: #00121A; }
+  .badge-slate { background: #49556D; color: #fff; }
+  /* Soft / tinted */
+  .badge-violet-soft { background: #EDE5FF; color: #873BFF; }
+  .badge-cyan-soft { background: #E0F8FF; color: #007CA8; }
+  .badge-lime-soft { background: #EEFF99; color: #3D6400; }
+  .badge-orange-soft { background: #FFEEE6; color: #C04000; }
+  /* Outline */
+  .badge-outline-violet { background: transparent; color: #873BFF; border: 1px solid #873BFF; }
+  .badge-outline-dark { background: transparent; color: #00121A; border: 1px solid #00121A; }
+  /* Labels / tags */
+  .tag {
+    font-family: 'Poppins', sans-serif;
+    font-size: 9px; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    padding: 2px 8px; border-radius: 3px;
+  }
+  .tag-violet { background: #873BFF; color: #fff; }
+  .tag-dark { background: #00121A; color: #fff; }
+</style>
+</head>
+<body>
+  <div class="section">
+    <div class="section-label">Filled Badges</div>
+    <div class="row">
+      <span class="badge badge-violet">AI & Data</span>
+      <span class="badge badge-dark">Cybersecurity</span>
+      <span class="badge badge-orange">Cloud</span>
+      <span class="badge badge-cyan">Brand & Digital</span>
+      <span class="badge badge-lime">Consolidate</span>
+      <span class="badge badge-pink">Enable</span>
+      <span class="badge badge-slate">Enhance</span>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-label">Soft / Tinted</div>
+    <div class="row">
+      <span class="badge badge-violet-soft">AI Solutions</span>
+      <span class="badge badge-cyan-soft">Cloud Native</span>
+      <span class="badge badge-lime-soft">Data-driven</span>
+      <span class="badge badge-orange-soft">Cyber Aware</span>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-label">Outline</div>
+    <div class="row">
+      <span class="badge badge-outline-violet">Partner</span>
+      <span class="badge badge-outline-dark">Certificazione ISO</span>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-label">Pill Variants</div>
+    <div class="row">
+      <span class="badge badge-pill badge-violet">Violet Pill</span>
+      <span class="badge badge-pill badge-violet-soft">Soft Pill</span>
+      <span class="badge badge-pill badge-outline-violet">Outline Pill</span>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-label">Uppercase Tags</div>
+    <div class="row">
+      <span class="tag tag-violet">New</span>
+      <span class="tag tag-dark">Beta</span>
+      <span class="tag" style="background:#F0F4F7; color:#49556D; border:1px solid #DDE5ED;">Label</span>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #F0F4F7; font-family: 'Poppins', sans-serif; padding: 20px; }
+  .grid { display: flex; gap: 12px; flex-wrap: wrap; }
+  .card { border-radius: 8px; overflow: hidden; width: 200px; }
+  .img-wrap { height: 120px; overflow: hidden; }
+  .img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+  .info { background: #fff; padding: 8px 10px; }
+  .name { font-size: 10px; font-weight: 600; color: #00121A; }
+  .desc { font-size: 9px; color: #49556D; margin-top: 2px; }
+</style>
+</head>
+<body>
+  <div class="grid">
+    <div class="card">
+      <div class="img-wrap"><img src="../assets/illus-woman-ai.png" alt="Woman AI workplace illustration"></div>
+      <div class="info"><div class="name">Woman — AI Workplace</div><div class="desc">Light BG · Flat design modern</div></div>
+    </div>
+    <div class="card">
+      <div class="img-wrap"><img src="../assets/illus-man-design.png" alt="Man design tools illustration"></div>
+      <div class="info"><div class="name">Man — Design & Data</div><div class="desc">Light BG · Purple jacket</div></div>
+    </div>
+    <div class="card">
+      <div class="img-wrap"><img src="../assets/illus-woman-vr.png" alt="Woman VR headset illustration"></div>
+      <div class="info"><div class="name">Woman — VR / Digital</div><div class="desc">Light BG · Tech interaction</div></div>
+    </div>
+    <div class="card">
+      <div class="img-wrap" style="background:#00121A;"><img src="../assets/illus-woman-ai.jpg" alt="Woman AI illustration on dark"></div>
+      <div class="info"><div class="name">Woman — AI (Dark BG)</div><div class="desc">Dark BG negativo variant</div></div>
+    </div>
+  </div>
+</body>
+</html>

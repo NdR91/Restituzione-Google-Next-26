@@ -1,0 +1,20 @@
+{
+  "devDependencies": {
+    "playwright": "^1.59.1"
+  },
+  "name": "google_next",
+  "version": "1.0.0",
+  "description": "Standalone web experience for Google Cloud Next '26 sales restitution.",
+  "main": "Google Cloud Next 26 - V2.html",
+  "dependencies": {
+    "playwright-core": "^1.59.1"
+  },
+  "scripts": {
+    "check:playwright": "node -e \"const { chromium } = require('playwright'); console.log('playwright ok')\"",
+    "test": "npm run check:playwright"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}

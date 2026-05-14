@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #F0F4F7; font-family: 'Poppins', sans-serif; padding: 20px; }
+  .grid { display: flex; gap: 12px; flex-wrap: wrap; }
+  .card { border-radius: 8px; overflow: hidden; width: 200px; box-shadow: 0 2px 8px rgba(0,18,26,0.1); }
+  .img-wrap { height: 110px; overflow: hidden; position: relative; }
+  .img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+  .img-wrap .overlay { position: absolute; inset: 0; background: rgba(0,18,26,0.3); }
+  .info { background: #fff; padding: 8px 10px; }
+  .name { font-size: 10px; font-weight: 600; color: #00121A; }
+  .desc { font-size: 9px; color: #49556D; margin-top: 2px; }
+  .color-bg { width: 100%; height: 110px; }
+</style>
+</head>
+<body>
+  <div class="grid">
+    <div class="card">
+      <div class="img-wrap"><img src="../assets/bg-o-dark.png" alt="O mark dark background"></div>
+      <div class="info"><div class="name">O Mark — Dark</div><div class="desc">Primary dark slide BG</div></div>
+    </div>
+    <div class="card">
+      <div class="img-wrap"><img src="../assets/bg-o-purple.png" alt="O mark purple gradient"></div>
+      <div class="info"><div class="name">O Mark — Purple Grad</div><div class="desc">Chapter opener BG</div></div>
+    </div>
+    <div class="card">
+      <div class="img-wrap"><img src="../assets/bg-o-purple-light.png" alt="O mark purple light"></div>
+      <div class="info"><div class="name">O Mark — Purple/Dark</div><div class="desc">Cover slide variant</div></div>
+    </div>
+    <div class="card">
+      <div class="img-wrap"><img src="../assets/bg-purple-solid.png" alt="Solid purple background"></div>
+      <div class="info"><div class="name">Solid Violet</div><div class="desc">Chapter / section opener</div></div>
+    </div>
+    <div class="card">
+      <div class="img-wrap"><img src="../assets/bg-data-particles.jpg" alt="Data particles background"></div>
+      <div class="info"><div class="name">Data Particles</div><div class="desc">Dark abstract tech BG</div></div>
+    </div>
+    <div class="card">
+      <div class="img-wrap"><img src="../assets/bg-data-city.jpg" alt="3D wireframe city background"></div>
+      <div class="info"><div class="name">3D Wireframe City</div><div class="desc">Dark tech/AI slide BG</div></div>
+    </div>
+    <div class="card">
+      <div class="img-wrap"><img src="../assets/photo-team-purple.jpg" alt="Team photo with violet overlay"></div>
+      <div class="info"><div class="name">Team — Violet Duotone</div><div class="desc">Photo + violet color overlay</div></div>
+    </div>
+  </div>
+</body>
+</html>

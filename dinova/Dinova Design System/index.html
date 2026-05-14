@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dinova Design System</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --v:#873BFF;--dark:#00121A;--white:#fff;--off:#F0F4F7;
+  --slate:#49556D;--border:#DDE5ED;--bg2:#A7BBD8;
+  --orange:#FF7031;--cyan:#5CD9FF;--lime:#AAE505;--pink:#FF70F3;
+  --f:'Poppins',sans-serif;
+}
+body{background:var(--off);font-family:var(--f);color:var(--dark);}
+
+/* header */
+.hdr{
+  background:var(--dark);padding:0 48px;height:64px;
+  display:flex;align-items:center;gap:16px;
+  position:sticky;top:0;z-index:50;
+}
+.hdr .brand{display:flex;align-items:center;gap:10px;}
+.hdr .o{width:26px;height:26px;border-radius:50%;border:5px solid var(--v);}
+.hdr .name{font-size:15px;font-weight:600;color:#fff;letter-spacing:-.01em;}
+.hdr .sep{width:1px;height:20px;background:rgba(255,255,255,.1);}
+.hdr .tag{font-size:11px;color:rgba(255,255,255,.4);font-weight:500;letter-spacing:.06em;}
+.hdr .version{margin-left:auto;font-size:10px;color:rgba(255,255,255,.25);font-weight:500;letter-spacing:.08em;}
+
+/* hero */
+.hero{
+  background:var(--dark);padding:64px 48px 56px;
+  position:relative;overflow:hidden;
+}
+.hero .o-ring{
+  position:absolute;right:-80px;top:-100px;
+  width:480px;height:480px;border-radius:50%;
+  border:90px solid rgba(135,59,255,.25);pointer-events:none;
+}
+.hero .o-ring2{
+  position:absolute;right:120px;bottom:-140px;
+  width:320px;height:320px;border-radius:50%;
+  border:60px solid rgba(135,59,255,.12);pointer-events:none;
+}
+.hero .eyebrow{
+  font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--v);margin-bottom:16px;
+}
+.hero h1{
+  font-size:48px;font-weight:800;color:#fff;
+  letter-spacing:-.025em;line-height:1.05;
+  margin-bottom:16px;max-width:560px;
+}
+.hero h1 em{font-style:normal;color:var(--v);}
+.hero p{
+  font-size:16px;font-weight:300;color:rgba(255,255,255,.6);
+  max-width:480px;line-height:1.6;margin-bottom:32px;
+}
+.hero .pills{display:flex;gap:8px;flex-wrap:wrap;}
+.hero .pill{
+  font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+  padding:4px 12px;border-radius:4px;
+}
+
+/* main layout */
+.main{display:flex;align-items:flex-start;gap:0;}
+.sidebar{
+  width:240px;flex-shrink:0;
+  position:sticky;top:64px;height:calc(100vh - 64px);
+  overflow-y:auto;
+  background:var(--white);border-right:1px solid var(--border);
+  padding:24px 0;
+}
+.sidebar .s-section{padding:0 20px;margin-bottom:4px;}
+.sidebar .s-label{
+  font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--bg2);margin-bottom:8px;padding:0 4px;
+}
+.sidebar a{
+  display:block;font-size:13px;font-weight:500;color:var(--slate);
+  padding:7px 8px;border-radius:5px;text-decoration:none;
+  transition:all .12s;margin-bottom:1px;
+}
+.sidebar a:hover{color:var(--dark);background:var(--off);}
+.sidebar a.active{color:var(--v);background:#EDE5FF;}
+.sidebar .divider{height:1px;background:var(--border);margin:12px 20px;}
+
+/* content */
+.content{flex:1;padding:40px 48px;min-width:0;}
+.cat-section{margin-bottom:56px;}
+.cat-head{
+  display:flex;align-items:baseline;gap:12px;margin-bottom:28px;
+  padding-bottom:14px;border-bottom:2px solid var(--border);
+}
+.cat-head h2{font-size:22px;font-weight:700;}
+.cat-head .cnt{
+  font-size:11px;font-weight:600;padding:3px 9px;border-radius:4px;
+  background:#EDE5FF;color:var(--v);
+}
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;}
+.ds-card{
+  background:var(--white);border-radius:10px;overflow:hidden;
+  border:1px solid var(--border);
+  transition:box-shadow .15s,border-color .15s;
+  text-decoration:none;color:inherit;display:block;
+}
+.ds-card:hover{box-shadow:0 4px 16px rgba(0,18,26,.1);border-color:var(--bg2);}
+.ds-card .preview{
+  height:140px;overflow:hidden;
+  background:var(--off);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+}
+.ds-card .preview iframe{
+  width:200%;height:200%;
+  transform:scale(.5);transform-origin:top left;
+  border:none;pointer-events:none;
+}
+.ds-card .preview .preview-bg{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+}
+.ds-card .info{padding:14px 16px;}
+.ds-card .info .card-group{
+  font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  margin-bottom:5px;
+}
+.ds-card .info h3{font-size:14px;font-weight:600;margin-bottom:4px;}
+.ds-card .info p{font-size:12px;color:var(--slate);line-height:1.4;}
+.ds-card .info .open-btn{
+  display:inline-block;margin-top:10px;
+  font-size:11px;font-weight:600;color:var(--v);
+  text-decoration:none;
+}
+.ds-card .info .open-btn:hover{text-decoration:underline;}
+
+/* color groups */
+.grp-Colors .card-group{color:var(--v);}
+.grp-Type .card-group{color:var(--dark);}
+.grp-Spacing .card-group{color:var(--slate);}
+.grp-Components .card-group{color:var(--orange);}
+.grp-Brand .card-group{color:var(--pink);}
+
+/* color preview swatches */
+.swatch-row{display:flex;gap:4px;padding:20px;}
+.sw{width:40px;height:40px;border-radius:6px;}
+
+/* type preview */
+.type-preview{padding:20px;display:flex;flex-direction:column;gap:6px;}
+.tp-xl{font-size:28px;font-weight:700;color:var(--dark);line-height:1;}
+.tp-sm{font-size:13px;font-weight:400;color:var(--slate);}
+.tp-label{font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--v);}
+
+/* spacing preview */
+.spacing-preview{padding:20px;display:flex;flex-direction:column;gap:6px;}
+.sp-bar{background:var(--v);border-radius:3px;height:6px;}
+
+/* button preview */
+.btn-preview{padding:20px;display:flex;flex-direction:column;gap:8px;}
+
+/* inline btn */
+.ibtn{
+  font-family:var(--f);font-size:12px;font-weight:600;border:none;
+  border-radius:5px;padding:8px 16px;cursor:pointer;
+  display:inline-flex;align-items:center;
+}
+
+/* brand preview */
+.brand-preview{
+  padding:20px;display:flex;align-items:center;justify-content:center;
+  background:var(--dark);height:100%;
+}
+.brand-o-big{
+  width:80px;height:80px;border-radius:50%;
+  border:16px solid var(--v);
+}
+
+/* card preview */
+.card-preview{padding:14px;display:flex;flex-direction:column;gap:8px;}
+.mini-card{background:var(--off);border-radius:6px;padding:10px 12px;}
+.mini-card .mc-label{font-size:8px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--v);margin-bottom:4px;}
+.mini-card .mc-title{font-size:12px;font-weight:600;color:var(--dark);}
+
+/* token file card */
+.token-card{
+  background:var(--dark);border-radius:10px;padding:24px 28px;
+  display:flex;align-items:center;justify-content:space-between;
+  margin-top:8px;
+}
+.token-card .tc-info h3{font-size:15px;font-weight:600;color:#fff;margin-bottom:4px;}
+.token-card .tc-info p{font-size:12px;color:rgba(255,255,255,.45);}
+.token-card .tc-btn{
+  font-family:var(--f);font-size:12px;font-weight:600;
+  background:var(--v);color:#fff;border:none;
+  border-radius:5px;padding:8px 16px;cursor:pointer;
+}
+
+/* responsive */
+@media(max-width:900px){.sidebar{display:none;}.content{padding:24px;}}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="hdr">
+  <div class="brand">
+    <img src="assets/logo-wordmark-white.png" alt="Dinova" style="height:22px;">
+  </div>
+  <div class="sep"></div>
+  <span class="tag">Design System</span>
+  <span class="version">v1.0 · 2025</span>
+</div>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="o-ring"></div>
+  <div class="o-ring2"></div>
+  <div class="eyebrow">Dinova Design System</div>
+  <h1>Identità visiva.<br><em>Costruita per scalare.</em></h1>
+  <p>Colori, tipografia, componenti e template per costruire comunicazioni Dinova coerenti, professionali e impattanti.</p>
+  <div class="pills">
+    <span class="pill" style="background:rgba(135,59,255,.15);color:var(--v);">Poppins · Rubik</span>
+    <span class="pill" style="background:rgba(255,112,49,.15);color:var(--orange);">10 slide layouts</span>
+    <span class="pill" style="background:rgba(92,217,255,.15);color:#007CA8);">UI Components</span>
+    <span class="pill" style="background:rgba(170,229,5,.15);color:#3D6400);">Brand assets</span>
+  </div>
+</div>
+
+<!-- Main -->
+<div class="main">
+
+  <!-- Sidebar -->
+  <nav class="sidebar">
+    <div class="s-section">
+      <div class="s-label">Colors</div>
+      <a href="preview/colors-primary.html" target="preview">Primary Colors</a>
+      <a href="preview/colors-secondary.html" target="preview">Secondary Colors</a>
+      <a href="preview/colors-semantic.html" target="preview">Semantic Roles</a>
+    </div>
+    <div class="sidebar .divider"></div>
+    <div class="s-section">
+      <div class="s-label">Typography</div>
+      <a href="preview/type-scale.html" target="preview">Type Scale</a>
+      <a href="preview/type-poppins.html" target="preview">Poppins Weights</a>
+    </div>
+    <div class="s-section">
+      <div class="s-label">Spacing</div>
+      <a href="preview/spacing-tokens.html" target="preview">Spacing & Radius</a>
+    </div>
+    <div class="sidebar .divider"></div>
+    <div class="s-section">
+      <div class="s-label">Components</div>
+      <a href="preview/components-buttons.html" target="preview">Buttons</a>
+      <a href="preview/components-cards.html" target="preview">Cards</a>
+      <a href="preview/components-badges.html" target="preview">Badges & Tags</a>
+      <a href="ui_kits/corporate/index.html" target="preview">Corporate UI Kit</a>
+    </div>
+    <div class="s-section">
+      <div class="s-label">Brand</div>
+      <a href="preview/logo-variants.html" target="preview">Logo Variants</a>
+      <a href="preview/illustrations.html" target="preview">Illustrations</a>
+      <a href="preview/backgrounds.html" target="preview">Backgrounds</a>
+    </div>
+    <div class="s-section">
+      <div class="s-label">Slides</div>
+      <a href="slides/index.html" target="preview">Slide Template Kit</a>
+    </div>
+    <div class="s-section">
+      <div class="s-label">Tokens</div>
+      <a href="colors_and_type.css" target="preview">CSS Variables</a>
+      <a href="README.md" target="preview">README</a>
+    </div>
+  </nav>
+
+  <!-- Content -->
+  <div class="content">
+
+    <!-- Colors -->
+    <div class="cat-section">
+      <div class="cat-head">
+        <h2>Colors</h2>
+        <span class="cnt">3</span>
+      </div>
+      <div class="cards-grid">
+
+        <a class="ds-card grp-Colors" href="preview/colors-primary.html" target="preview">
+          <div class="preview">
+            <div class="swatch-row">
+              <div class="sw" style="background:#873BFF;"></div>
+              <div class="sw" style="background:#00121A;"></div>
+              <div class="sw" style="background:#ffffff;border:1px solid #DDE5ED;"></div>
+              <div class="sw" style="background:#F0F4F7;"></div>
+              <div class="sw" style="background:#C9ADFF;"></div>
+              <div class="sw" style="background:#6B1FE0;"></div>
+            </div>
+          </div>
+          <div class="info">
+            <div class="card-group">Colors</div>
+            <h3>Primary Colors</h3>
+            <p>Brand violet, dark navy, white — primary palette + violet scale</p>
+            <span class="open-btn">Open →</span>
+          </div>
+        </a>
+
+        <a class="ds-card grp-Colors" href="preview/colors-secondary.html" target="preview">
+          <div class="preview">
+            <div class="swatch-row">
+              <div class="sw" style="background:#FF7031;"></div>
+              <div class="sw" style="background:#FF70F3;"></div>
+              <div class="sw" style="background:#5CD9FF;"></div>
+              <div class="sw" style="background:#AAE505;"></div>
+              <div class="sw" style="background:#49556D;"></div>
+              <div class="sw" style="background:#A7BBD8;"></div>
+            </div>
+          </div>
+          <div class="info">
+            <div class="card-group">Colors</div>
+            <h3>Secondary Colors</h3>
+            <p>Accent palette: orange, pink, cyan, lime, slate + neutral scale</p>
+            <span class="open-btn">Open →</span>
+          </div>
+        </a>
+
+        <a class="ds-card grp-Colors" href="preview/colors-semantic.html" target="preview">
+          <div class="preview">
+            <div class="swatch-row" style="flex-wrap:wrap;width:180px;">
+              <div class="sw" style="background:#873BFF;border-radius:5px;display:flex;align-items:center;justify-content:center;"><span style="font-size:7px;color:#fff;font-weight:700;">CTA</span></div>
+              <div class="sw" style="background:#00121A;border-radius:5px;display:flex;align-items:center;justify-content:center;"><span style="font-size:7px;color:#fff;font-weight:700;">BG</span></div>
+              <div class="sw" style="background:#AAE505;border-radius:5px;display:flex;align-items:center;justify-content:center;"><span style="font-size:7px;color:#3D6400;font-weight:700;">OK</span></div>
+              <div class="sw" style="background:#FF7031;border-radius:5px;display:flex;align-items:center;justify-content:center;"><span style="font-size:7px;color:#fff;font-weight:700;">WARN</span></div>
+            </div>
+          </div>
+          <div class="info">
+            <div class="card-group">Colors</div>
+            <h3>Semantic Colors</h3>
+            <p>Semantic roles: interactive, bg, text, borders, states</p>
+            <span class="open-btn">Open →</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- Typography -->
+    <div class="cat-section">
+      <div class="cat-head">
+        <h2>Typography</h2>
+        <span class="cnt">2</span>
+      </div>
+      <div class="cards-grid">
+
+        <a class="ds-card grp-Type" href="preview/type-scale.html" target="preview">
+          <div class="preview" style="background:#fff;">
+            <div class="type-preview">
+              <div class="tp-xl">Innovation</div>
+              <div style="font-size:18px;font-weight:600;color:var(--dark);">does. Intelligence</div>
+              <div class="tp-sm">guides. — dinova.one</div>
+              <div class="tp-label">Competence Center</div>
+            </div>
+          </div>
+          <div class="info">
+            <div class="card-group">Type</div>
+            <h3>Type Scale</h3>
+            <p>Full scale from 12px caption to 104px display — Poppins</p>
+            <span class="open-btn">Open →</span>
+          </div>
+        </a>
+
+        <a class="ds-card grp-Type" href="preview/type-poppins.html" target="preview">
+          <div class="preview" style="background:#fff;">
+            <div class="type-preview">
+              <div style="font-size:18px;font-weight:200;color:var(--dark);">Poppins ExtraLight</div>
+              <div style="font-size:18px;font-weight:400;color:var(--dark);">Poppins Regular</div>
+              <div style="font-size:18px;font-weight:600;color:var(--dark);">Poppins SemiBold</div>
+              <div style="font-size:18px;font-weight:800;color:var(--v);">Poppins ExtraBold</div>
+            </div>
+          </div>
+          <div class="info">
+            <div class="card-group">Type</div>
+            <h3>Poppins Weights</h3>
+            <p>ExtraLight → ExtraBold + Rubik Black impact weight</p>
+            <span class="open-btn">Open →</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- Spacing -->
+    <div class="cat-section">
+      <div class="cat-head">
+        <h2>Spacing</h2>
+        <span class="cnt">1</span>
+      </div>
+      <div class="cards-grid">
+        <a class="ds-card grp-Spacing" href="preview/spacing-tokens.html" target="preview">
+          <div class="preview" style="background:#fff;">
+            <div class="spacing-preview">
+              <div class="sp-bar" style="width:4px;"></div>
+              <div class="sp-bar" style="width:8px;"></div>
+              <div class="sp-bar" style="width:16px;"></div>
+              <div class="sp-bar" style="width:32px;"></div>
+              <div class="sp-bar" style="width:64px;"></div>
+              <div class="sp-bar" style="width:128px;"></div>
+            </div>
+          </div>
+          <div class="info">
+            <div class="card-group">Spacing</div>
+            <h3>Spacing & Radius</h3>
+            <p>Spacing scale (4–128px) + border radius tokens (0 → pill)</p>
+            <span class="open-btn">Open →</span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Components -->
+    <div class="cat-section">
+      <div class="cat-head">
+        <h2>Components</h2>
+        <span class="cnt">4</span>
+      </div>
+      <div class="cards-grid">
+
+        <a class="ds-card grp-Components" href="preview/components-buttons.html" target="preview">
+          <div class="preview" style="background:var(--off);">
+            <div class="btn-preview">
+              <div><button class="ibtn" style="background:var(--v);color:#fff;">Primary</button></div>
+              <div><button class="ibtn" style="background:var(--dark);color:#fff;">Secondary</button></div>
+              <div><button class="ibtn" style="background:transparent;color:var(--v);border:1.5px solid var(--v);">Outline</button></div>
+            </div>
+          </div>
+          <div class="info">
+            <div class="card-group">Components</div>
+            <h3>Buttons</h3>
+            <p>Primary, secondary, outline, ghost, accent, disabled — all sizes</p>
+            <span class="open-btn">Open →</span>
+          </div>
+        </a>
+
+        <a class="ds-card grp-Components" href="preview/components-cards.html" target="preview">
+          <div class="preview" style="background:var(--off);">
+            <div class="card-preview">
+              <div class="mini-card">
+                <div class="mc-label">AI & Data</div>
+                <div class="mc-title">Intelligent Agents</div>
+              </div>
+              <div class="mini-card" style="background:var(--dark);">
+                <div class="mc-label" style="color:var(--cyan);">Cybersecurity</div>
+                <div class="mc-title" style="color:#fff;">Cyber Defence</div>
+              </div>
+            </div>
+          </div>
+          <div class="info">
+            <div class="card-group">Components</div>
+            <h3>Cards</h3>
+            <p>Content, dark, violet, stat, and service card variants</p>
+            <span class="open-btn">Open →</span>
+          </div>
+        </a>
+
+        <a class="ds-card grp-Components" href="preview/components-badges.html" target="preview">
+          <div class="preview" style="background:var(--off);flex-wrap:wrap;gap:6px;padding:20px;">
+            <span style="background:var(--v);color:#fff;font-size:10px;font-weight:600;padding:3px 9px;border-radius:4px;font-family:var(--f);">AI & Data</span>
+            <span style="background:var(--dark);color:#fff;font-size:10px;font-weight:600;padding:3px 9px;border-radius:4px;font-family:var(--f);">Cyber</span>
+            <span style="background:var(--cyan);color:var(--dark);font-size:10px;font-weight:600;padding:3px 9px;border-radius:4px;font-family:var(--f);">Cloud</span>
+            <span style="background:#EDE5FF;color:var(--v);font-size:10px;font-weight:600;padding:3px 9px;border-radius:4px;font-family:var(--f);">Soft</span>
+            <span style="background:transparent;color:var(--v);font-size:10px;font-weight:600;padding:3px 9px;border-radius:9999px;border:1.5px solid var(--v);font-family:var(--f);">Pill</span>
+            <span style="background:var(--lime);color:var(--dark);font-size:10px;font-weight:600;padding:3px 9px;border-radius:4px;font-family:var(--f);">Lime</span>
+          </div>
+          <div class="info">
+            <div class="card-group">Components</div>
+            <h3>Badges & Tags</h3>
+            <p>Filled, soft/tinted, outline, pill, and uppercase tag variants</p>
+            <span class="open-btn">Open →</span>
+          </div>
+        </a>
+
+        <a class="ds-card grp-Components" href="ui_kits/corporate/index.html" target="preview">
+          <div class="preview" style="background:var(--dark);">
+            <div style="padding:20px;display:flex;flex-direction:column;gap:8px;width:100%;">
+              <div style="background:rgba(135,59,255,.15);border-radius:6px;padding:8px 12px;display:flex;align-items:center;justify-content:space-between;">
+                <span style="font-size:11px;font-weight:600;color:var(--v);font-family:var(--f);">Servizi</span>
+                <span style="font-size:11px;color:rgba(255,255,255,.35);font-family:var(--f);">Prodotti</span>
+                <span style="font-size:11px;color:rgba(255,255,255,.35);font-family:var(--f);">Chi siamo</span>
+              </div>
+              <div style="background:rgba(255,255,255,.05);border-radius:6px;padding:10px 12px;">
+                <div style="font-size:8px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--v);margin-bottom:4px;font-family:var(--f);">AI & DATA</div>
+                <div style="font-size:12px;font-weight:600;color:#fff;font-family:var(--f);">Intelligent Agents</div>
+              </div>
+            </div>
+          </div>
+          <div class="info">
+            <div class="card-group">Components</div>
+            <h3>Corporate UI Kit</h3>
+            <p>Buttons, badges, cards, forms, nav, alerts, tables, stats, avatars</p>
+            <span class="open-btn">Open →</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- Brand -->
+    <div class="cat-section">
+      <div class="cat-head">
+        <h2>Brand</h2>
+        <span class="cnt">3 assets + 10 slides</span>
+      </div>
+      <div class="cards-grid">
+
+        <a class="ds-card grp-Brand" href="preview/logo-variants.html" target="preview">
+          <div class="preview">
+            <div class="brand-preview">
+              <div class="brand-o-big"></div>
+            </div>
+          </div>
+          <div class="info">
+            <div class="card-group">Brand</div>
+            <h3>Logo Variants</h3>
+            <p>Dinova "O" mark in all colorways: violet, dark, white on violet, stacked</p>
+            <span class="open-btn">Open →</span>
+          </div>
+        </a>
+
+        <a class="ds-card grp-Brand" href="preview/illustrations.html" target="preview">
+          <div class="preview" style="overflow:hidden;">
+            <img src="assets/illus-woman-ai.png" style="height:100%;width:auto;object-fit:contain;" alt="">
+          </div>
+          <div class="info">
+            <div class="card-group">Brand</div>
+            <h3>Illustrations</h3>
+            <p>Custom flat-design illustrations — light + dark variants</p>
+            <span class="open-btn">Open →</span>
+          </div>
+        </a>
+
+        <a class="ds-card grp-Brand" href="preview/backgrounds.html" target="preview">
+          <div class="preview" style="overflow:hidden;">
+            <img src="assets/bg-o-dark.png" style="width:100%;height:100%;object-fit:cover;" alt="">
+          </div>
+          <div class="info">
+            <div class="card-group">Brand</div>
+            <h3>Backgrounds</h3>
+            <p>O mark, solid violet, data particles, wireframe city, photo duotone</p>
+            <span class="open-btn">Open →</span>
+          </div>
+        </a>
+
+        <a class="ds-card grp-Brand" href="slides/index.html" target="preview">
+          <div class="preview" style="background:var(--dark);overflow:hidden;position:relative;">
+            <div style="position:absolute;right:-30px;top:-40px;width:220px;height:220px;border-radius:50%;border:44px solid rgba(135,59,255,.8);"></div>
+            <div style="position:absolute;right:80px;top:20px;width:140px;height:180px;border-radius:50%;background:var(--dark);"></div>
+            <div style="position:relative;z-index:2;padding:20px;display:flex;flex-direction:column;gap:6px;">
+              <div style="font-size:8px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--v);font-family:var(--f);">Company Profile · 2025</div>
+              <div style="font-size:22px;font-weight:800;color:#fff;letter-spacing:-.02em;font-family:var(--f);line-height:1.1;">Innovation<br>does.</div>
+            </div>
+          </div>
+          <div class="info">
+            <div class="card-group">Brand</div>
+            <h3>Slide Template Kit</h3>
+            <p>10 slide layouts: cover, chapter, vision, stats, pillars, content, products, index, photo, closing</p>
+            <span class="open-btn">Open →</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- CSS Tokens -->
+    <div class="token-card">
+      <div class="tc-info">
+        <h3>CSS Design Tokens</h3>
+        <p>colors_and_type.css — All colors, type, spacing, radii, shadows as CSS custom properties</p>
+      </div>
+      <button class="tc-btn" onclick="window.open('colors_and_type.css','preview')">Open tokens →</button>
+    </div>
+
+    <div style="height:48px;"></div>
+
+  </div><!-- /content -->
+</div><!-- /main -->
+
+</body>
+</html>

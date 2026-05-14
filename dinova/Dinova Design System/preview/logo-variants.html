@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #F0F4F7; font-family: 'Poppins', sans-serif; padding: 20px; }
+  .grid { display: flex; gap: 14px; flex-wrap: wrap; align-items: flex-start; }
+  .card {
+    border-radius: 8px; overflow: hidden;
+    display: flex; flex-direction: column;
+  }
+  .preview {
+    display: flex; align-items: center; justify-content: center;
+    padding: 24px 32px; min-height: 100px;
+  }
+  .preview img { max-width: 180px; max-height: 60px; object-fit: contain; }
+  .info { padding: 10px 14px; }
+  .label { font-size: 9px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #49556D; }
+  .name { font-size: 12px; font-weight: 600; color: #00121A; margin-top: 3px; }
+  .file { font-size: 9px; color: #8899AA; margin-top: 2px; font-family: monospace; }
+
+  /* O mark only cards */
+  .o-wrap { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 20px 28px; }
+  .o-mark {
+    border-radius: 50%;
+    border-style: solid;
+    flex-shrink: 0;
+  }
+</style>
+</head>
+<body>
+  <div class="grid">
+
+    <!-- Wordmark dark on white -->
+    <div class="card" style="background:#fff; width:220px; box-shadow:0 1px 4px rgba(0,18,26,.08);">
+      <div class="preview" style="background:#fff;">
+        <img src="../assets/logo-wordmark-dark.png" alt="Dinova wordmark dark">
+      </div>
+      <div class="info">
+        <div class="label">Primary</div>
+        <div class="name">Wordmark — Dark on White</div>
+        <div class="file">logo-wordmark-dark.png</div>
+      </div>
+    </div>
+
+    <!-- Wordmark white on dark -->
+    <div class="card" style="background:#00121A; width:220px;">
+      <div class="preview" style="background:#00121A;">
+        <img src="../assets/logo-wordmark-white.png" alt="Dinova wordmark white">
+      </div>
+      <div class="info" style="background:#00121A;">
+        <div class="label" style="color:#49556D;">On Dark</div>
+        <div class="name" style="color:#fff;">Wordmark — White on Dark</div>
+        <div class="file" style="color:#49556D;">logo-wordmark-white.png</div>
+      </div>
+    </div>
+
+    <!-- Wordmark white on violet -->
+    <div class="card" style="background:#873BFF; width:220px;">
+      <div class="preview" style="background:#873BFF;">
+        <img src="../assets/logo-wordmark-white.png" alt="Dinova wordmark white on violet">
+      </div>
+      <div class="info" style="background:#873BFF;">
+        <div class="label" style="color:rgba(255,255,255,.5);">On Violet</div>
+        <div class="name" style="color:#fff;">Wordmark — White on Violet</div>
+        <div class="file" style="color:rgba(255,255,255,.4);">logo-wordmark-white.png</div>
+      </div>
+    </div>
+
+    <!-- O mark only variants -->
+    <div class="card" style="background:#fff; width:140px; box-shadow:0 1px 4px rgba(0,18,26,.08);">
+      <div class="preview">
+        <div class="o-wrap">
+          <div class="o-mark" style="width:56px;height:56px;border:11px solid #873BFF;"></div>
+          <div class="o-mark" style="width:36px;height:36px;border:7px solid #873BFF;"></div>
+          <div class="o-mark" style="width:22px;height:22px;border:4px solid #873BFF;"></div>
+        </div>
+      </div>
+      <div class="info">
+        <div class="label">Mark only</div>
+        <div class="name">O Mark — Violet</div>
+        <div class="file">CSS border-radius:50%</div>
+      </div>
+    </div>
+
+    <div class="card" style="background:#00121A; width:140px;">
+      <div class="preview" style="background:#00121A;">
+        <div class="o-wrap">
+          <div class="o-mark" style="width:56px;height:56px;border:11px solid #873BFF;"></div>
+          <div class="o-mark" style="width:36px;height:36px;border:7px solid #fff;"></div>
+          <div class="o-mark" style="width:22px;height:22px;border:4px solid rgba(255,255,255,.3);"></div>
+        </div>
+      </div>
+      <div class="info" style="background:#00121A;">
+        <div class="label" style="color:#49556D;">Mark only</div>
+        <div class="name" style="color:#fff;">O Mark — Dark BG</div>
+        <div class="file" style="color:#49556D;">CSS only</div>
+      </div>
+    </div>
+
+    <!-- Clearspace guide -->
+    <div class="card" style="background:#F0F4F7; width:220px; border:1px solid #DDE5ED;">
+      <div class="preview" style="position:relative; padding:32px;">
+        <div style="position:absolute;inset:12px;border:1px dashed #BCC9D6;border-radius:4px;"></div>
+        <img src="../assets/logo-wordmark-dark.png" alt="" style="max-width:150px;max-height:44px;object-fit:contain;position:relative;z-index:2;">
+      </div>
+      <div class="info">
+        <div class="label">Usage guide</div>
+        <div class="name">Clearspace</div>
+        <div class="file">Min. padding = O height</div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

@@ -36,10 +36,7 @@ Prima di iniziare qualsiasi modifica: **salvare `index.html` → `archive/v2-fin
 
 ### Modifiche
 
-- [x] **Apertura** — unire Intro + Shift in un'unica sezione:
-  - Tenere l'animazione "app for that" → "agent for that"
-  - Rimuovere i numeri (8M seats, +60%, $750M) — verbale: "no statistiche fredde"
-  - Aggiungere immagine Premio Partner dell'Anno
+- [x] **Apertura** — Intro ridisegnata (GIF, grafica, logo GCN26, copy aggiornato); Shift mantenuta come sezione standalone senza numeri
 
 - [x] **Gemini Enterprise** (ex Platform) — ristrutturare in 2 blocchi con bottoni interattivi espandibili:
   - **Build & Scale:** Agent Studio, Agent Skills, Long Running Tasks, Agent Inbox
@@ -55,7 +52,7 @@ Prima di iniziare qualsiasi modifica: **salvare `index.html` → `archive/v2-fin
   - Data
   - Altro tema da definire con Fabio
 
-- [ ] **Chiusura "Unire i puntini"** — nuova sezione con schema visivo/animazione:
+- [x] **Chiusura "Unire i puntini"** — nuova sezione con schema visivo/animazione:
   - Gemini Enterprise → Agentic Platform
   - Agentic Platform → AI Security (Agent Identity + Gateway)
   - AI Security → Wiz + Cloudflare (multi-cloud)

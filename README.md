@@ -13,7 +13,7 @@ git clone <repository-url>
 cd google_next
 
 # Apri nel browser
-open "Google Cloud Next 26 - V2.html"
+open index.html
 ```
 
 ---
@@ -22,10 +22,14 @@ open "Google Cloud Next 26 - V2.html"
 
 ```
 google_next/
-├── Google Cloud Next 26 - V2.html    ← 📄 Pagina principale (apri questo!)
-├── copy.md                            ← 📝 Testi completi di tutte le sezioni
-├── ANALISI_V2.md                     ← 📊 Analisi visiva + issue list
-├── GOOGLE_NEXT_26_V2_BLUEPRINT.md   ← 🔧 Specifiche tecniche
+├── index.html                        ← 📄 Pagina principale (apri questo!)
+├── CLAUDE.md                         ← 🤖 Contesto per agenti AI
+├── AGENTS.md                         ← 🤖 Linee guida per agenti AI
+│
+├── docs/                             ← 📚 Documentazione di progetto
+│   ├── BLUEPRINT.md                  ← 🔧 Specifiche tecniche V2
+│   ├── ANALISI_V2.md                 ← 📊 Analisi visiva + issue list
+│   └── copy.md                       ← 📝 Testi completi di tutte le sezioni
 │
 ├── dinova/                           ← 🎨 Design System
 │   ├── assets/
@@ -34,16 +38,16 @@ google_next/
 │   ├── colors_and_type.css           ← 🎨 Token colori e tipografia
 │   └── Dinova Design System/         ← 📚 Documentazione design system
 │
-├── uploads/                          ← 📄 Materiali di riferimento
+├── uploads/                          ← 📄 Materiali di riferimento (read-only)
 │   ├── Next26_WebExperience_Brief.md ← 📋 Brief originale
 │   ├── AM_Next26_22-04_Partner...    ← 📝 Transcript keynote
 │   └── *.pdf                          ← 📊 Deck presentazione
 │
-├── archive/                          ← 💾 Versioni precedenti (non usare)
-│   ├── Google Cloud Next 26.html
-│   └── Google Cloud Next 26 - Standalone.html
+├── archive/                          ← 💾 Versioni precedenti (read-only)
+│   ├── v1-standalone.html
+│   └── v2.html
 │
-└── package.json                      ← 📦 Dipendenze (solo per test)
+└── package.json                      ← 📦 Dipendenze (solo Playwright per test)
 ```
 
 ---
@@ -53,7 +57,7 @@ google_next/
 ### 1. Apri la pagina
 
 ```bash
-open "Google Cloud Next 26 - V2.html"
+open index.html
 ```
 
 La pagina è **standalone** — non richiede server, compilazione o dipendenze. Funziona in qualsiasi browser moderno.

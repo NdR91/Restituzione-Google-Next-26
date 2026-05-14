@@ -17,3 +17,6 @@ package-lock.json
 # Sistemazione
 .install.sh
 *.bak
+
+# Large binary reference material (not part of the built page)
+uploads/*.pptx

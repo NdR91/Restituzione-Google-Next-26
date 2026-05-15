@@ -20,3 +20,6 @@ package-lock.json
 
 # Large binary reference material (not part of the built page)
 uploads/*.pptx
+
+# Claude Code worktrees e sessioni agenti
+.claude/

@@ -30,10 +30,10 @@
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { min-height: 100%; overflow-y: auto; margin: 0; scroll-behavior: smooth; background: var(--dinova-dark); }
+    html { height: 100%; overflow: hidden; margin: 0; scroll-behavior: smooth; background: var(--dinova-dark); }
     body {
-      min-height: 100%;
-      overflow: visible;
+      height: 100%;
+      overflow: hidden;
       margin: 0;
       font-family: 'Poppins', 'Helvetica Neue', Arial, sans-serif;
       color: var(--white);
@@ -52,9 +52,9 @@
     }
 
     a { color: inherit; text-decoration: none; }
-    main { }
-    section { position: relative; z-index: 1; height: 100vh; overflow: hidden; display: flex; align-items: center; }
-    .inner { width: min(1520px, calc(100vw - 120px)); margin: 0 auto; padding: calc(var(--nav-h) + 32px) 0 32px; }
+    main { height: 100vh; overflow-y: scroll; scroll-snap-type: y mandatory; scroll-behavior: smooth; }
+    section { position: relative; z-index: 1; height: 100vh; min-height: 100vh; scroll-snap-align: start; display: flex; align-items: center; overflow: hidden; }
+    .inner { width: min(1520px, calc(100vw - 120px)); margin: 0 auto; padding: 100px 0 72px; }
     .kicker { display: inline-flex; gap: 10px; align-items: center; color: var(--g-blue); font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; margin-bottom: 22px; }
     .kicker::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: currentColor; box-shadow: 0 0 18px currentColor; }
     h1, h2, h3 { letter-spacing: -.045em; line-height: .98; }
@@ -248,16 +248,16 @@
     }
 
     /* ── Gemini Enterprise — Feature Spotlight ── */
-    #gemini-enterprise { background: var(--dinova-dark); align-items: stretch; }
+    #gemini-enterprise { background: var(--dinova-dark); align-items: flex-start; }
     #gemini-enterprise .inner {
       display: flex;
       flex-direction: column;
-      height: 100vh;
-      padding-top: calc(var(--nav-h) + 20px);
-      padding-bottom: 20px;
+      height: 100%;
+      padding-top: calc(var(--nav-h) + 28px);
+      padding-bottom: 0;
     }
-    #gemini-enterprise h2 { margin-bottom: 2px; }
-    #gemini-enterprise .lead { margin-bottom: 16px; max-width: 680px; font-size: clamp(16px, 1.4vw, 24px); }
+    #gemini-enterprise h2 { margin-bottom: 4px; }
+    #gemini-enterprise .lead { margin-bottom: 28px; max-width: 680px; }
 
     .ge-spotlight {
       display: grid;
@@ -265,7 +265,6 @@
       gap: 40px;
       flex: 1;
       min-height: 0;
-      overflow: hidden;
     }
 
     /* ── Left Navigation ── */
@@ -325,10 +324,7 @@
       background: rgba(255,255,255,.025);
       border: 1px solid rgba(255,255,255,.08);
       border-radius: 12px;
-      overflow-y: auto;
-      height: 100%;
-      scrollbar-width: thin;
-      scrollbar-color: rgba(255,255,255,.15) transparent;
+      overflow: hidden;
     }
     .ge-panel-inner {
       padding: 28px 32px;
@@ -414,7 +410,7 @@
     .ge-badge.ga { color: var(--g-green); background: rgba(52,168,83,.15); }
     .ge-badge.preview { color: var(--g-yellow); background: rgba(251,188,4,.15); }
 
-    #stack { height: 100vh; align-items: center; background: var(--dinova-dark); }
+    #stack { min-height: 100vh; align-items: center; background: var(--dinova-dark); }
     .stack-sticky { position: relative; width: min(1520px, calc(100vw - 120px)); margin: 0 auto; min-height: calc(100vh - var(--nav-h)); display: grid; grid-template-columns: minmax(230px, .4fr) minmax(390px, .64fr) minmax(500px, .86fr); gap: 58px; align-items: center; padding: 46px 0 42px; }
     .stack-stage { position: relative; height: 540px; display: grid; place-items: center; }
     .stack-asset-wrap { position: relative; width: min(246px, 15vw); z-index: 1; margin: 0; transition: transform .55s var(--ease), filter .55s var(--ease), opacity .55s var(--ease); }
@@ -444,34 +440,22 @@
     /* ── Novità ── */
     #novita {
       background: var(--dinova-dark);
-      align-items: stretch;
     }
     #novita .inner {
-      padding-top: calc(var(--nav-h) + 14px);
-      padding-bottom: 14px;
-    }
-    .h2-novita { font-size: clamp(30px, 3.6vw, 62px); }
-
-    .novita-header {
+      padding-top: calc(var(--nav-h) + 48px);
+      padding-bottom: 72px;
       display: flex;
-      align-items: flex-end;
-      gap: 40px;
-      margin-bottom: 16px;
+      flex-direction: column;
+      height: 100%;
     }
-    .novita-header-left {
-      flex: 1;
-      min-width: 0;
-    }
-    .novita-header-left .lead { margin-bottom: 0; }
+    .h2-novita { font-size: clamp(38px, 4.8vw, 84px); }
 
     .novita-filters {
       display: flex;
-      flex-direction: column;
+      flex-wrap: wrap;
       gap: 8px;
-      margin: 0;
-      flex-shrink: 0;
-      min-width: 180px;
-      align-self: flex-end;
+      margin-top: 24px;
+      margin-bottom: 28px;
     }
     .novita-pill {
       background: transparent;
@@ -500,13 +484,14 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 12px;
+      flex: 1;
     }
     .novita-tile {
       background: rgba(255,255,255,.03);
       border: 1px solid rgba(255,255,255,.08);
       border-radius: 10px;
       border-left: 3px solid transparent;
-      padding: 14px 16px;
+      padding: 20px 22px;
       text-align: left;
       cursor: pointer;
       font-family: inherit;
@@ -766,14 +751,16 @@
       }
       #novita .inner {
         height: auto;
-        padding-top: calc(var(--nav-h) + 24px);
-        padding-bottom: 32px;
+        padding-top: calc(var(--nav-h) + 42px);
+        padding-bottom: 58px;
       }
       #novita .lead {
         margin-top: 20px;
       }
-      .novita-header { flex-direction: column; align-items: flex-start; gap: 16px; margin-bottom: 12px; }
-      .novita-filters { flex-direction: row; flex-wrap: wrap; min-width: 0; margin-top: 0; margin-bottom: 0; }
+      .novita-filters {
+        margin-top: 22px;
+        margin-bottom: 24px;
+      }
       .novita-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
       .novita-tile {
         padding: 14px 16px;
@@ -815,9 +802,8 @@
     }
 
     /* ── Closing ── */
-    #closing { scroll-margin-top: var(--nav-h); background: var(--dinova-dark); align-items: center; }
-    #closing .inner { padding-top: calc(var(--nav-h) + 16px); padding-bottom: 16px; }
-    .closing-lead { max-width: 780px; margin-bottom: 16px; }
+    #closing { scroll-margin-top: var(--nav-h); background: var(--dinova-dark); }
+    .closing-lead { max-width: 780px; margin-bottom: 24px; }
 
     .closing-grid {
       display: grid;
@@ -948,30 +934,6 @@
       .footer-brand { align-items: flex-start; flex-direction: column; gap: 16px; }
       .o-ring { width: 460px; height: 460px; border-width: 74px; }
     }
-    /* ── Media query verticali: schermi bassi ── */
-    @media (max-height: 820px) {
-      h1 { font-size: clamp(56px, 7vw, 96px); }
-      h2 { font-size: clamp(42px, 5vw, 72px); }
-      .lead { font-size: clamp(18px, 1.6vw, 24px); margin-top: 14px; }
-      .inner { padding-top: calc(var(--nav-h) + 14px); padding-bottom: 20px; }
-      .ge-panel-inner { padding: 20px 24px; }
-      .ge-placeholder { max-height: 200px; }
-      .novita-filters { margin-top: 10px; margin-bottom: 12px; }
-      .novita-tile { padding: 10px 14px; }
-      #gemini-enterprise .inner { padding-top: calc(var(--nav-h) + 12px); padding-bottom: 12px; }
-      #novita .inner { padding-top: calc(var(--nav-h) + 10px); padding-bottom: 10px; }
-      #closing .inner { padding-top: calc(var(--nav-h) + 10px); padding-bottom: 10px; }
-    }
-
-    @media (max-height: 680px) {
-      h1 { font-size: clamp(44px, 6vw, 72px); }
-      h2 { font-size: clamp(32px, 4vw, 56px); }
-      .lead { font-size: clamp(16px, 1.4vw, 20px); }
-      .kicker { margin-bottom: 12px; }
-      .inner { padding-top: calc(var(--nav-h) + 10px); padding-bottom: 14px; }
-      .h2-novita { font-size: clamp(26px, 3vw, 48px); }
-    }
-
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       *, *::before, *::after { animation: none !important; transition: none !important; }
@@ -1158,18 +1120,15 @@
     
     <section id="novita" data-nav="novita" aria-label="Novità Next '26">
       <div class="inner">
-        <div class="novita-header">
-          <div class="novita-header-left">
-            <div class="kicker reveal">Annunci principali</div>
-            <h2 class="reveal delay-1 h2-novita">Cosa è stato annunciato.</h2>
-            <p class="lead reveal delay-2">Nove novità chiave da Next '26 — divise per layer dello stack. Agent Platform è trattato nella sezione dedicata.</p>
-          </div>
-          <div class="novita-filters reveal" role="tablist" aria-label="Filtra per categoria">
-            <button class="novita-pill active" data-filter="all" role="tab" aria-selected="true">Tutti <span class="pill-count">9</span></button>
-            <button class="novita-pill" data-filter="AI Hypercomputer" role="tab" aria-selected="false">AI Hypercomputer <span class="pill-count">2</span></button>
-            <button class="novita-pill" data-filter="Agentic Data Cloud" role="tab" aria-selected="false">Agentic Data Cloud <span class="pill-count">3</span></button>
-            <button class="novita-pill" data-filter="Security" role="tab" aria-selected="false">Security <span class="pill-count">4</span></button>
-          </div>
+        <div class="kicker reveal">Annunci principali</div>
+        <h2 class="reveal delay-1 h2-novita">Cosa è stato annunciato.</h2>
+        <p class="lead reveal delay-2">Nove novità chiave da Next '26 — divise per layer dello stack. Agent Platform è trattato nella sezione dedicata.</p>
+
+        <div class="novita-filters reveal" role="tablist" aria-label="Filtra per categoria">
+          <button class="novita-pill active" data-filter="all" role="tab" aria-selected="true">Tutti <span class="pill-count">9</span></button>
+          <button class="novita-pill" data-filter="AI Hypercomputer" role="tab" aria-selected="false">AI Hypercomputer <span class="pill-count">2</span></button>
+          <button class="novita-pill" data-filter="Agentic Data Cloud" role="tab" aria-selected="false">Agentic Data Cloud <span class="pill-count">3</span></button>
+          <button class="novita-pill" data-filter="Security" role="tab" aria-selected="false">Security <span class="pill-count">4</span></button>
         </div>
 
         <div class="novita-grid" role="list" aria-label="Annunci Next '26">

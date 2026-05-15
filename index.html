@@ -283,6 +283,75 @@
     .footer-brand { display: flex; align-items: center; justify-content: space-between; margin-top: 48px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,.1); color: rgba(255,255,255,.34); font-size: 12px; }
     .footer-brand img { height: 22px; opacity: .75; }
 
+    
+    /* ── Novità ── */
+    #novita { scroll-margin-top: var(--nav-h); padding-bottom: 60px; }
+    .novita-filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 42px; }
+    .novita-pill {
+      background: transparent; border: 1px solid rgba(255,255,255,.18); color: var(--muted);
+      padding: 8px 18px; border-radius: 20px; font-size: 13px; font-weight: 500;
+      cursor: pointer; font-family: inherit; transition: var(--ease) .2s all; display: inline-flex; align-items: center; gap: 8px;
+    }
+    .novita-pill:hover { border-color: rgba(255,255,255,.4); color: var(--white); }
+    .novita-pill.active { background: var(--white); color: var(--dinova-dark); border-color: var(--white); }
+    .novita-pill.active .pill-count { opacity: 0.6; }
+    .novita-pill:focus-visible, .novita-card-head:focus-visible { outline: 2px solid var(--g-yellow); outline-offset: 3px; }
+    .pill-count { opacity: 0.5; font-size: 12px; transition: var(--ease) .2s all; }
+    
+    .novita-grid { max-width: 920px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px; }
+    .novita-card {
+      background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.08);
+      border-radius: 12px; overflow: hidden; transition: transform .3s var(--ease), border-color .3s;
+    }
+    .novita-card:hover { transform: translateY(-2px); border-color: rgba(255,255,255,.15); }
+    .novita-card.hidden { display: none; }
+    .novita-card-head {
+      width: 100%; text-align: left; background: none; border: none; font: inherit; color: inherit;
+      padding: 24px; cursor: pointer; display: flex; flex-direction: column; gap: 10px; position: relative;
+    }
+    .novita-card-head::after {
+      content: '+'; position: absolute; right: 24px; top: 24px; font-size: 24px; line-height: 1;
+      color: rgba(255,255,255,.24); transition: transform .3s var(--ease);
+    }
+    .novita-card.is-expanded .novita-card-head::after { transform: rotate(45deg); color: var(--white); }
+    
+    .novita-meta { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; padding-right: 28px; }
+    .novita-cat { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; }
+    .novita-cat--blue { color: var(--g-blue); }
+    .novita-cat--cyan { color: var(--dinova-cyan); }
+    .novita-cat--red { color: var(--g-red); }
+    
+    .ge-badge.pre-annuncio { color: var(--g-red); background: rgba(234,67,53,.15); }
+    .ge-badge.ga-preview { color: var(--dinova-cyan); background: rgba(92,217,255,.12); }
+    
+    .novita-kpi {
+      font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px;
+      background: rgba(255,255,255,.05); color: var(--muted);
+    }
+    
+    .novita-title { font-size: clamp(20px, 1.8vw, 24px); line-height: 1.35; max-width: 90%; }
+    .novita-tagline { font-size: clamp(14px, 1.2vw, 16px); color: var(--muted); font-style: italic; line-height: 1.5; max-width: 90%; }
+    
+    .novita-body {
+      display: grid; grid-template-rows: 0fr; transition: grid-template-rows .4s var(--ease);
+      visibility: hidden;
+    }
+    .novita-body-inner {
+      overflow: hidden; padding: 0 24px; opacity: 0; transition: opacity .3s var(--ease), padding .3s var(--ease);
+      border-top: 1px solid transparent; background: rgba(255,255,255,.015);
+    }
+    .novita-card.is-expanded .novita-body { grid-template-rows: 1fr; visibility: visible; }
+    .novita-card.is-expanded .novita-body-inner { padding: 0 24px 24px; opacity: 1; border-color: rgba(255,255,255,.06); }
+    
+    .novita-desc { margin-top: 24px; margin-bottom: 20px; }
+    .novita-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--white); margin-bottom: 8px; opacity: 0.6; }
+    .novita-desc p { font-size: 15px; color: var(--white); line-height: 1.6; font-weight: 300; }
+    
+    .novita-angle { background: rgba(255,255,255,.04); padding: 18px 20px; border-radius: 8px; border: 1px solid rgba(255,255,255,.06); }
+    .novita-angle .novita-label { color: var(--g-yellow); opacity: 1; display: flex; align-items: center; gap: 6px; }
+    .novita-angle .novita-label::before { content: ''; display: block; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+    .novita-angle p { font-size: 14px; font-weight: 400; color: rgba(255,255,255,.8); line-height: 1.6; margin-top: 6px; }
+
     /* ── Closing ── */
     #closing { scroll-margin-top: var(--nav-h); }
     .closing-lead { max-width: 780px; }
@@ -434,6 +503,7 @@
       <a class="nav-link" href="#shift">Shift</a>
       <a class="nav-link" href="#stack">Stack</a>
       <a class="nav-link" href="#gemini-enterprise">Gemini</a>
+      <a class="nav-link" href="#novita">Novità</a>
       <a class="nav-link" href="#closing">Chiusura</a>
     </div>
     <div class="nav-mark"><span class="dot" style="background:#4285F4"></span><span class="dot" style="background:#EA4335"></span><span class="dot" style="background:#FBBC04"></span><span class="dot" style="background:#34A853"></span> GCN26</div>
@@ -586,6 +656,251 @@
           <img src="dinova/assets/gemini-platform-full.png" alt="Gemini Agent Platform" class="platform-full-img" />
         </div>
 
+      </div>
+    </section>
+
+    
+    <section id="novita" data-nav="novita" aria-label="Novità Next '26">
+      <div class="inner">
+        <div class="kicker reveal">Annunci principali</div>
+        <h2 class="reveal delay-1" style="font-size: clamp(38px, 4.8vw, 84px);">Cosa è stato annunciato.</h2>
+        <p class="lead reveal delay-2">Nove novità chiave da Next '26 — divise per layer dello stack. Agent Platform è trattato nella sezione dedicata.</p>
+
+        <div class="novita-filters reveal" role="tablist" aria-label="Filtra per categoria">
+          <button class="novita-pill active" data-filter="all" role="tab" aria-selected="true">Tutti <span class="pill-count">9</span></button>
+          <button class="novita-pill" data-filter="AI Hypercomputer" role="tab" aria-selected="false">AI Hypercomputer <span class="pill-count">2</span></button>
+          <button class="novita-pill" data-filter="Agentic Data Cloud" role="tab" aria-selected="false">Agentic Data Cloud <span class="pill-count">3</span></button>
+          <button class="novita-pill" data-filter="Security" role="tab" aria-selected="false">Security <span class="pill-count">4</span></button>
+        </div>
+
+        <div class="novita-grid">
+
+          <!-- CARD 1 -->
+          <article class="novita-card reveal delay-2" data-category="AI Hypercomputer" data-id="1">
+            <button class="novita-card-head" aria-expanded="false" aria-controls="novita-body-1">
+              <div class="novita-meta">
+                <span class="novita-cat novita-cat--blue">AI Hypercomputer</span>
+                <span class="ge-badge pre-annuncio">Pre-annuncio</span>
+                <span class="novita-kpi">2.7x price/performance TPU 8t · 10 TB/s storage · 20x vs altri hyperscaler</span>
+              </div>
+              <h3 class="novita-title">Google all-in sull&#39;AI: infrastruttura senza paragoni</h3>
+              <p class="novita-tagline">TPU 8ª generazione, Virgo Network, Managed Lustre: Google sta costruendo la macchina AI più potente al mondo — e la rende disponibile a chiunque lavori su GCP.</p>
+            </button>
+            <div class="novita-body" id="novita-body-1">
+              <div class="novita-body-inner">
+                <div class="novita-desc">
+                  <div class="novita-label">Descrizione</div>
+                  <p>TPU 8t scala fino a 9.600 chip in un singolo superpod con 2 petabyte di memoria condivisa: i modelli frontier si addestrano in settimane, non mesi. TPU 8i è il chip per l&#39;inferenza real-time — triplica la SRAM on-chip, riduce la latenza dei modelli complessi fino al 5x. Virgo Network li connette tutti: 134.000 TPU in un cluster non-blocking con 4x la bandwidth delle generazioni precedenti, eliminando il collo di bottiglia di rete che rallenta i competitor. Managed Lustre porta il throughput dello storage a 10 TB/s — 10x rispetto all&#39;anno scorso, 20x rispetto agli altri hyperscaler. Il messaggio per il mercato è chiaro: Google non segue la corsa all&#39;AI, la sta costruendo mattone per mattone.</p>
+                </div>
+                <div class="novita-angle">
+                  <div class="novita-label">Angolo commerciale</div>
+                  <p>Non si vendono i chip — si vende la credibilità dell&#39;infrastruttura. Per un cliente che valuta dove costruire la propria strategia AI, lavorare su GCP significa avere accesso alla stessa macchina su cui girano Gemini e i modelli Google DeepMind. Il vantaggio competitivo non è acquistabile altrove.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- CARD 2 -->
+          <article class="novita-card reveal delay-2" data-category="AI Hypercomputer" data-id="2">
+            <button class="novita-card-head" aria-expanded="false" aria-controls="novita-body-2">
+              <div class="novita-meta">
+                <span class="novita-cat novita-cat--blue">AI Hypercomputer</span>
+                <span class="ge-badge ga">GA</span>
+                <span class="novita-kpi">-20% TCO Oracle · 2x price-performance Axion N4A · 20 region Oracle@GCP</span>
+              </div>
+              <h3 class="novita-title">Compute enterprise: TCO migliore, senza cambiare il codice</h3>
+              <p class="novita-tagline">Da Oracle on-prem al cloud con il 20% di risparmio garantito, e VM general-purpose con il doppio della price-performance: GCP ridisegna il TCO dei workload più critici.</p>
+            </button>
+            <div class="novita-body" id="novita-body-2">
+              <div class="novita-body-inner">
+                <div class="novita-desc">
+                  <div class="novita-label">Descrizione</div>
+                  <p>Le istanze M4N, con 26.57 GiB di RAM per vCPU e IOPS leader di mercato via Hyperdisk Extreme, abbattono il costo totale dei workload Oracle di oltre il 20%: meno core necessari significa meno licenze, con risparmio immediato e misurabile. Oracle Database@Google Cloud si espande a 20 region con supporto GoldenGate e replica BigQuery near-real-time — la migrazione non è mai stata così solida dal punto di vista enterprise. Sul fronte general-purpose, le istanze N4A basate sul processore Arm custom Axion di Google offrono fino a 2x la price-performance e 80% in più di efficienza energetica rispetto alle VM x86 comparabili, su workload Java, microservizi, batch e web server senza toccare una riga di applicazione.</p>
+                </div>
+                <div class="novita-angle">
+                  <div class="novita-label">Angolo commerciale</div>
+                  <p>Il TCO è l&#39;argomento che apre le porte in qualsiasi conversazione di migrazione. Un risparmio superiore al 20% su Oracle è verificabile prima ancora di firmare — e questo accelera l&#39;approvazione del budget a qualsiasi livello decisionale. Sul compute general-purpose, la leva è la semplicità: stesso workload, costo dimezzato, zero rework applicativo.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- CARD 3 -->
+          <article class="novita-card reveal delay-2" data-category="Agentic Data Cloud" data-id="3">
+            <button class="novita-card-head" aria-expanded="false" aria-controls="novita-body-3">
+              <div class="novita-meta">
+                <span class="novita-cat novita-cat--cyan">Agentic Data Cloud</span>
+                <span class="ge-badge ga">GA</span>
+                
+              </div>
+              <h3 class="novita-title">I tuoi dati capiscono il business, non solo la sintassi</h3>
+              <p class="novita-tagline">Knowledge Catalog mappa relazioni e significati business attraverso l&#39;intero data estate aziendale — in tempo reale, continuamente aggiornato.</p>
+            </button>
+            <div class="novita-body" id="novita-body-3">
+              <div class="novita-body-inner">
+                <div class="novita-desc">
+                  <div class="novita-label">Descrizione</div>
+                  <p>Knowledge Catalog sostituisce i dizionari di dati statici con un motore di contesto dinamico: estrae entità, risolve definizioni conflittuali tra sistemi diversi e costruisce una mappa semantica del business aggiornata in continuo. Gli agenti AI che operano su questi dati smettono di produrre risposte generiche e iniziano a rispondere con la precisione di un analista senior che conosce l&#39;azienda da anni. Il Deep Research Agent in Gemini Enterprise lo usa nativamente per sintetizzare dati live, documenti interni e ricerche web in un&#39;unica risposta deterministica.</p>
+                </div>
+                <div class="novita-angle">
+                  <div class="novita-label">Angolo commerciale</div>
+                  <p>È la risposta alla domanda che ogni responsabile dati pone durante le demo: &#39;Ma i vostri agenti capiscono davvero il mio business?&#39; Knowledge Catalog è la risposta tecnica — e commerciale. Senza un layer semantico come questo, qualsiasi progetto AI in produzione rimane una demo.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- CARD 4 -->
+          <article class="novita-card reveal delay-2" data-category="Agentic Data Cloud" data-id="4">
+            <button class="novita-card-head" aria-expanded="false" aria-controls="novita-body-4">
+              <div class="novita-meta">
+                <span class="novita-cat novita-cat--cyan">Agentic Data Cloud</span>
+                <span class="ge-badge ga">GA</span>
+                <span class="novita-kpi">ROI 117% stimato · Payback in 6 mesi</span>
+              </div>
+              <h3 class="novita-title">Dati liberi dai silos, su qualsiasi cloud</h3>
+              <p class="novita-tagline">Spanner Omni gira su altri cloud, on-prem, persino sul laptop: i dati aziendali sono finalmente portabili senza lock-in.</p>
+            </button>
+            <div class="novita-body" id="novita-body-4">
+              <div class="novita-body-inner">
+                <div class="novita-desc">
+                  <div class="novita-label">Descrizione</div>
+                  <p>Il database transazionale distribuito di Google esce dal perimetro GCP e diventa deployabile anywhere — multi-cloud, on-prem, edge. L&#39;Iceberg REST Catalog bidirezionale permette lettura e scrittura cross-engine senza ETL. Lakehouse federation per AlloyDB offre sincronizzazione zero-ETL con BigQuery. Per le organizzazioni già su altri cloud, il messaggio è preciso: Google Cloud non richiede di abbandonare lo stack esistente, lo unifica.</p>
+                </div>
+                <div class="novita-angle">
+                  <div class="novita-label">Angolo commerciale</div>
+                  <p>L&#39;argomento anti-lock-in è tra i più usati dai competitor per bloccare conversazioni su GCP. Spanner Omni lo smonta in modo definitivo: è Google che porta i propri database fuori dal proprio cloud, non il cliente che cede il controllo. Efficace come apertura con CTO strutturalmente diffidenti verso i hyperscaler.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- CARD 5 -->
+          <article class="novita-card reveal delay-2" data-category="Agentic Data Cloud" data-id="5">
+            <button class="novita-card-head" aria-expanded="false" aria-controls="novita-body-5">
+              <div class="novita-meta">
+                <span class="novita-cat novita-cat--cyan">Agentic Data Cloud</span>
+                <span class="ge-badge ga">GA</span>
+                <span class="novita-kpi">-34% costi BigQuery · +35% YoY velocità query</span>
+              </div>
+              <h3 class="novita-title">Chiedi ai tuoi dati invece di interrogarli</h3>
+              <p class="novita-tagline">Conversational Analytics: agenti analitici in linguaggio naturale su BigQuery, AlloyDB, Spanner, Looker — senza SQL, senza data scientist.</p>
+            </button>
+            <div class="novita-body" id="novita-body-5">
+              <div class="novita-body-inner">
+                <div class="novita-desc">
+                  <div class="novita-label">Descrizione</div>
+                  <p>Chiunque in azienda può dialogare in linguaggio naturale con dati live su tutti i principali database Google Cloud. Il sistema supporta follow-up conversazionali, genera insight, suggerisce domande successive. Dashboard Agents trasformano le dashboard statiche in interfacce dialoganti. BigQuery avanza del 35% YoY sulla velocità delle query con Advanced Runtime Optimizations, con savings fino al 34% sui workload variabili via Fluid Scaling.</p>
+                </div>
+                <div class="novita-angle">
+                  <div class="novita-label">Angolo commerciale</div>
+                  <p>Use case immediato e tangibile per figure di business non tecniche — CFO, Operations, Sales — che prendono decisioni sui dati ma non usano SQL. In una proposta di managed services, questo è il risultato visibile che il management apprezza e ricorda. Riduce anche la dipendenza dal team dati per le analisi di routine.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- CARD 6 -->
+          <article class="novita-card reveal delay-2" data-category="Security" data-id="6">
+            <button class="novita-card-head" aria-expanded="false" aria-controls="novita-body-6">
+              <div class="novita-meta">
+                <span class="novita-cat novita-cat--red">Security</span>
+                <span class="ge-badge ga-preview">GA / Preview</span>
+                
+              </div>
+              <h3 class="novita-title">Wiz è Google Cloud: security AI-native senza compromessi</h3>
+              <p class="novita-tagline">Red, Blue, Green Agent: Wiz porta l&#39;automazione agentic al ciclo completo di sicurezza cloud e AI — ora nativamente integrata in GCP.</p>
+            </button>
+            <div class="novita-body" id="novita-body-6">
+              <div class="novita-body-inner">
+                <div class="novita-desc">
+                  <div class="novita-label">Descrizione</div>
+                  <p>Wiz è ora parte di Google Cloud, con copertura agentless completa per ambienti multi-cloud e AI. Red Agent (Preview) simula attacchi come un avversario esterno reale. Blue Agent (GA) automatizza threat hunting e investigation dall&#39;intero stack code-to-cloud. Green Agent (Preview) converte i security findings in piani di remediation per i team responsabili, riducendo il Mean Time to Remediation. Wiz Agentic Workflows orchestra tutto in un hub visuale con human-in-the-loop configurabile e drag-and-drop. Coverage totale: qualsiasi CSP, hosted e custom code, cloud e PaaS, ambienti AI inclusi.</p>
+                </div>
+                <div class="novita-angle">
+                  <div class="novita-label">Angolo commerciale</div>
+                  <p>L&#39;integrazione Wiz-GCP abbassa significativamente la frizione nel proporre security cloud ai clienti già su GCP: una piattaforma sola, un vendor da gestire, una console. Nelle conversazioni con CISO, il posizionamento rispetto a stack frammentati (CrowdStrike + Defender + tool custom) diventa immediato.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- CARD 7 -->
+          <article class="novita-card reveal delay-2" data-category="Security" data-id="7">
+            <button class="novita-card-head" aria-expanded="false" aria-controls="novita-body-7">
+              <div class="novita-meta">
+                <span class="novita-cat novita-cat--red">Security</span>
+                <span class="ge-badge ga">GA</span>
+                <span class="novita-kpi">5M+ alert processati · Da 30 min a 1 min per alert</span>
+              </div>
+              <h3 class="novita-title">Il SOC che non dorme mai e impara da ogni alert</h3>
+              <p class="novita-tagline">Threat Hunting, Detection Engineering e Third-Party Context Agent: il SOC autonomo è realtà su Google Security Operations.</p>
+            </button>
+            <div class="novita-body" id="novita-body-7">
+              <div class="novita-body-inner">
+                <div class="novita-desc">
+                  <div class="novita-label">Descrizione</div>
+                  <p>Tre nuovi agenti specializzati completano il portfolio SecOps: il Threat Hunting Agent caccia proattivamente pattern d&#39;attacco nascosti (dwell-time threats, quelli che sfuggono alle difese tradizionali); il Detection Engineering Agent genera automaticamente regole YARA-L per scenari non ancora coperti; il Third-Party Context Agent arricchisce i workflow con dati contestuali da fonti esterne. Il Triage & Investigation Agent, già in GA, ha processato oltre 5 milioni di alert — riducendo il tempo medio di analisi da 30 minuti a 1 minuto.</p>
+                </div>
+                <div class="novita-angle">
+                  <div class="novita-label">Angolo commerciale</div>
+                  <p>L&#39;argomento più efficace con CISO che hanno team SOC sottodimensionati: &#39;Aggiungete la capacità operativa di un analyst senior che lavora h24, a un costo mensile prevedibile.&#39; Rilevante anche per clienti con obblighi NIS2, dove la copertura h24 è un requisito che pesa sul budget delle strutture più piccole.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- CARD 8 -->
+          <article class="novita-card reveal delay-2" data-category="Security" data-id="8">
+            <button class="novita-card-head" aria-expanded="false" aria-controls="novita-body-8">
+              <div class="novita-meta">
+                <span class="novita-cat novita-cat--red">Security</span>
+                <span class="ge-badge ga">GA</span>
+                
+              </div>
+              <h3 class="novita-title">Governance AI senza frenare l&#39;innovazione</h3>
+              <p class="novita-tagline">Agent Identity, Model Armor, Agent Gateway: ogni agente ha un&#39;identità verificabile, ogni interazione è ispezionata, ogni dato sensibile è protetto.</p>
+            </button>
+            <div class="novita-body" id="novita-body-8">
+              <div class="novita-body-inner">
+                <div class="novita-desc">
+                  <div class="novita-label">Descrizione</div>
+                  <p>La triade di governance agentic: Agent Identity assegna un ID crittografico univoco a ogni agente con audit trail completo; Model Armor protegge a runtime contro prompt injection, tool poisoning e data leakage — integrato con Firebase, Agent Runtime, Agent Gateway, senza modificare il codice; Agent Gateway è il punto di controllo centralizzato per tutto il traffico agentic, con supporto nativo per i protocolli MCP e A2A. Security Command Center Standard introduce ora data security posture management, compliance e risk analysis senza costi aggiuntivi.</p>
+                </div>
+                <div class="novita-angle">
+                  <div class="novita-label">Angolo commerciale</div>
+                  <p>La governance è l&#39;argomento che trasforma i &#39;curiosi dell&#39;AI&#39; in &#39;compratori di AI enterprise&#39;. Non è un vincolo operativo — è il motivo per cui il CFO e il Legal approvano il budget. Nelle conversazioni in cui sono presenti sia il responsabile tecnico che quello di business, questo layer è il fattore abilitante di tutto il resto.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- CARD 9 -->
+          <article class="novita-card reveal delay-2" data-category="Security" data-id="9">
+            <button class="novita-card-head" aria-expanded="false" aria-controls="novita-body-9">
+              <div class="novita-meta">
+                <span class="novita-cat novita-cat--red">Security</span>
+                <span class="ge-badge preview">Preview</span>
+                
+              </div>
+              <h3 class="novita-title">Controlla l&#39;AI che i tuoi dipendenti usano senza saperlo</h3>
+              <p class="novita-tagline">Chrome Enterprise e Google Cloud Fraud Defense: il browser e il digital trust diventano il perimetro di sicurezza dell&#39;era agentica.</p>
+            </button>
+            <div class="novita-body" id="novita-body-9">
+              <div class="novita-body-inner">
+                <div class="novita-desc">
+                  <div class="novita-label">Descrizione</div>
+                  <p>Con l&#39;esplosione degli strumenti AI non autorizzati (shadow AI), Chrome Enterprise introduce reporting specifico per mappare quali servizi AI vengono usati nell&#39;organizzazione e da chi, con AI-aware extension threat detections che identificano estensioni browser che esfiltrano dati verso endpoint non approvati. In parallelo, reCAPTCHA evolve in Google Cloud Fraud Defense: verifica human, bot e agenti autonomi nell&#39;intera customer journey digitale — dalla registrazione al pagamento — con le stesse segnalature e la stessa scala che proteggono l&#39;ecosistema Google.</p>
+                </div>
+                <div class="novita-angle">
+                  <div class="novita-label">Angolo commerciale</div>
+                  <p>Il tema shadow AI è uno dei più immediati con CISO e DPO: il problema esiste già, è diffuso, e la maggior parte delle organizzazioni non ha ancora strumenti per misurarlo. L&#39;entry point è la visibilità, non il blocco — il che abbassa significativamente la resistenza interna all&#39;adozione.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+
+        </div>
       </div>
     </section>
 
@@ -771,10 +1086,69 @@
       });
     };
 
+
+    const initNovita = () => {
+      const pills = document.querySelectorAll('.novita-pill');
+      const cards = document.querySelectorAll('.novita-card');
+      
+      // Filtri
+      pills.forEach(pill => {
+        pill.addEventListener('click', () => {
+          // Update pills
+          pills.forEach(p => {
+            p.classList.remove('active');
+            p.setAttribute('aria-selected', 'false');
+          });
+          pill.classList.add('active');
+          pill.setAttribute('aria-selected', 'true');
+          
+          const filter = pill.dataset.filter;
+          
+          // Update cards
+          cards.forEach(card => {
+            if (filter === 'all' || card.dataset.category === filter) {
+              card.classList.remove('hidden');
+            } else {
+              card.classList.add('hidden');
+            }
+          });
+        });
+      });
+
+      // Expand / Collapse (Acordeon behaviour)
+      const heads = document.querySelectorAll('.novita-card-head');
+      let activeCard = null;
+
+      heads.forEach(head => {
+        head.addEventListener('click', () => {
+          const card = head.closest('.novita-card');
+          
+          if (activeCard && activeCard !== card) {
+            activeCard.classList.remove('is-expanded');
+            activeCard.querySelector('.novita-card-head').setAttribute('aria-expanded', 'false');
+            activeCard.querySelector('.novita-body').setAttribute('aria-hidden', 'true');
+          }
+
+          if (card.classList.contains('is-expanded')) {
+            card.classList.remove('is-expanded');
+            head.setAttribute('aria-expanded', 'false');
+            card.querySelector('.novita-body').setAttribute('aria-hidden', 'true');
+            activeCard = null;
+          } else {
+            card.classList.add('is-expanded');
+            head.setAttribute('aria-expanded', 'true');
+            card.querySelector('.novita-body').setAttribute('aria-hidden', 'false');
+            activeCard = card;
+          }
+        });
+      });
+    };
+
     initReveal();
     initNav();
     initStack();
     initGeminiEnterprise();
+    initNovita();
   </script>
 </body>
 </html>

@@ -1,0 +1,1770 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Google Cloud Next ’26 — Restituzione Sales V2</title>
+  <style>
+    @font-face { font-family: 'Poppins'; src: url('dinova/Dinova Design System/fonts/Poppins-Light.ttf') format('truetype'); font-weight: 300; font-display: swap; }
+    @font-face { font-family: 'Poppins'; src: url('dinova/Dinova Design System/fonts/Poppins-Regular.ttf') format('truetype'); font-weight: 400; font-display: swap; }
+    @font-face { font-family: 'Poppins'; src: url('dinova/Dinova Design System/fonts/Poppins-Medium.ttf') format('truetype'); font-weight: 500; font-display: swap; }
+    @font-face { font-family: 'Poppins'; src: url('dinova/Dinova Design System/fonts/Poppins-SemiBold.ttf') format('truetype'); font-weight: 600; font-display: swap; }
+    @font-face { font-family: 'Poppins'; src: url('dinova/Dinova Design System/fonts/Poppins-Bold.ttf') format('truetype'); font-weight: 700; font-display: swap; }
+    @font-face { font-family: 'Poppins'; src: url('dinova/Dinova Design System/fonts/Poppins-ExtraBold.ttf') format('truetype'); font-weight: 800; font-display: swap; }
+
+    :root {
+      --dinova-dark: #00121A;
+      --dinova-violet: #873BFF;
+      --dinova-off: #F0F4F7;
+      --dinova-cyan: #5CD9FF;
+      --dinova-lime: #AAE505;
+      --g-blue: #4285F4;
+      --g-red: #EA4335;
+      --g-yellow: #FBBC04;
+      --g-green: #34A853;
+      --white: #FFFFFF;
+      --muted: rgba(255,255,255,.56);
+      --faint: rgba(255,255,255,.12);
+      --ease: cubic-bezier(.22,1,.36,1);
+      --nav-h: 58px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { height: 100%; overflow: hidden; margin: 0; scroll-behavior: smooth; background: var(--dinova-dark); }
+    body {
+      height: 100%;
+      overflow: hidden;
+      margin: 0;
+      font-family: 'Poppins', 'Helvetica Neue', Arial, sans-serif;
+      color: var(--white);
+      background: var(--dinova-dark);
+      -webkit-font-smoothing: antialiased;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 85% 8%, rgba(135,59,255,.06), transparent 32%),
+        radial-gradient(circle at 10% 80%, rgba(66,133,244,.12), transparent 34%);
+      z-index: 0;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    main { height: 100vh; overflow-y: scroll; scroll-snap-type: y mandatory; scroll-behavior: smooth; }
+    section { position: relative; z-index: 1; height: 100vh; min-height: 100vh; scroll-snap-align: start; display: flex; align-items: center; overflow: hidden; }
+    .inner { width: min(1520px, calc(100vw - 120px)); margin: 0 auto; padding: 100px 0 72px; }
+    .kicker { display: inline-flex; gap: 10px; align-items: center; color: var(--g-blue); font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; margin-bottom: 22px; }
+    .kicker::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: currentColor; box-shadow: 0 0 18px currentColor; }
+    h1, h2, h3 { letter-spacing: -.045em; line-height: .98; }
+    h1 { font-size: clamp(72px, 9vw, 150px); font-weight: 800; }
+    h2 { font-size: clamp(54px, 6.2vw, 104px); font-weight: 800; }
+    h3 { font-size: clamp(28px, 3.4vw, 54px); font-weight: 800; }
+    p { color: var(--muted); font-size: clamp(17px, 1.3vw, 22px); line-height: 1.55; font-weight: 300; }
+    .lead { max-width: 940px; margin-top: 28px; font-size: clamp(22px, 2vw, 34px); color: rgba(255,255,255,.72); line-height: 1.35; }
+    .strong { color: var(--white); font-weight: 600; }
+    .blue { color: var(--g-blue); } .yellow { color: var(--g-yellow); } .green { color: var(--g-green); } .violet { color: var(--dinova-violet); }
+
+    #nav {
+      position: fixed; top: 0; left: 0; right: 0; height: var(--nav-h); z-index: 20;
+      display: flex; align-items: center; gap: 28px; padding: 0 34px;
+      background: rgba(0,18,26,.84); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .nav-logo { height: 19px; opacity: .92; flex: 0 0 auto; }
+    .nav-links { display: flex; align-items: center; gap: 2px; flex: 1; min-width: 0; }
+    .nav-links { scrollbar-width: none; -ms-overflow-style: none; }
+    .nav-links::-webkit-scrollbar { display: none; }
+    .nav-link { height: var(--nav-h); display: flex; align-items: center; padding: 0 11px; color: rgba(255,255,255,.38); font-size: 10.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; border-bottom: 2px solid transparent; transition: color .2s, border-color .2s; white-space: nowrap; }
+    .nav-link.active { color: var(--white); border-bottom-color: var(--g-yellow); }
+    .nav-mark { display: flex; align-items: center; gap: 4px; font-size: 10px; color: rgba(255,255,255,.4); font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; display: block; }
+
+    .slide-nav {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      z-index: 100;
+    }
+    .slide-nav button {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: var(--white);
+      cursor: pointer;
+      font: inherit;
+      font-size: 15px;
+      line-height: 1;
+      transition: opacity .2s, border-color .2s, background .2s;
+    }
+    .slide-nav button:hover:not(:disabled),
+    .slide-nav button:focus-visible {
+      background: rgba(255,255,255,0.12);
+      border-color: rgba(255,255,255,0.28);
+      outline: none;
+    }
+    .slide-nav button:disabled {
+      cursor: default;
+      opacity: .35;
+    }
+    #nav-index {
+      color: var(--white);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-align: center;
+      min-width: 48px;
+    }
+
+    .reveal { opacity: 0; transform: translateY(34px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
+    .reveal.visible { opacity: 1; transform: none; }
+    .delay-1 { transition-delay: .12s; } .delay-2 { transition-delay: .24s; } .delay-3 { transition-delay: .36s; }
+
+    .o-ring { position: absolute; width: 760px; height: 760px; border: 120px solid rgba(135,59,255,.18); border-radius: 50%; pointer-events: none; }
+
+    #intro { background: var(--dinova-dark); position: relative; overflow: hidden; }
+    #intro .o-ring { right: -160px; bottom: -200px; }
+
+    /* ── Hero Layout (grid stabile) ── */
+    .hero-layout {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 48px;
+      align-items: start;
+      position: relative;
+      z-index: 1;
+      min-height: 65vh;
+    }
+    .hero-col-text {
+      padding-top: 60px;
+    }
+    .hero-logo-brand {
+      display: block;
+      width: min(300px, 20vw);
+      height: auto;
+      margin-bottom: 34px;
+    }
+    .hero-col-text .kicker {
+      margin-bottom: 26px;
+    }
+    .hero-title {
+      font-size: clamp(42px, 5.2vw, 88px);
+      font-weight: 800;
+      letter-spacing: -.045em;
+      line-height: .98;
+      margin-top: 22px;
+    }
+    .hero-lead {
+      font-size: clamp(18px, 1.6vw, 28px);
+      color: var(--muted);
+      line-height: 1.4;
+      max-width: 640px;
+      margin-top: 24px;
+    }
+
+    /* ── Hero Composite (GIF + graphic uniti) ── */
+    .hero-col-visual {
+      position: relative;
+      overflow: visible;
+      min-height: 440px;
+    }
+    .hero-visual-composite {
+      position: absolute;
+      right: -10px;
+      top: -60px;
+      width: min(44vw, 780px);
+      aspect-ratio: 1 / 1;
+      overflow: visible;
+    }
+    .hero-gif {
+      position: absolute;
+      width: 88%;
+      height: auto;
+      top: 5%;
+      right: 14%;
+      border-radius: 8px;
+      opacity: 1;
+    }
+    .hero-graphic {
+      position: absolute;
+      width: 64%;
+      height: auto;
+      right: -5%;
+      bottom: -3%;
+      opacity: .95;
+    }
+
+    /* ── Shift section ── */
+    #shift { background: linear-gradient(180deg, var(--dinova-dark), #020811); }
+    .shift-layout {
+      display: grid;
+      grid-template-columns: 1fr 100px 1fr;
+      gap: 28px; align-items: center; margin-top: 48px;
+    }
+    .shift-card {
+      padding: 48px; border-radius: 10px;
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.03);
+    }
+    .shift-card.future {
+      background: rgba(66,133,244,.07);
+      border-color: rgba(66,133,244,.28);
+    }
+    .shift-card h3 {
+      font-size: clamp(28px, 3vw, 44px);
+      font-weight: 800; line-height: 1.1;
+      color: rgba(255,255,255,.28); margin-bottom: 16px;
+    }
+    .shift-card.future h3 { color: #fff; }
+    .shift-label {
+      font-size: 11px; font-weight: 800;
+      text-transform: uppercase; letter-spacing: .2em;
+      color: rgba(255,255,255,.28); margin-bottom: 16px;
+    }
+    .shift-card.future .shift-label { color: var(--g-blue); }
+    .shift-tags {
+      display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px;
+    }
+    .tag {
+      padding: 7px 11px; border-radius: 4px;
+      border: 1px solid rgba(255,255,255,.08);
+      color: rgba(255,255,255,.28);
+      font-size: 11px; font-weight: 700; letter-spacing: .04em;
+    }
+    .shift-card.future .tag {
+      color: var(--g-blue);
+      background: rgba(66,133,244,.1);
+      border-color: rgba(66,133,244,.24);
+    }
+    .shift-arrow {
+      color: rgba(255,255,255,.22);
+      display: grid; place-items: center;
+    }
+
+    /* ── Gemini Enterprise — Feature Spotlight ── */
+    #gemini-enterprise { background: var(--dinova-dark); align-items: flex-start; }
+    #gemini-enterprise .inner {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      padding-top: calc(var(--nav-h) + 28px);
+      padding-bottom: 0;
+    }
+    #gemini-enterprise h2 { margin-bottom: 4px; }
+    #gemini-enterprise .lead { margin-bottom: 28px; max-width: 680px; }
+
+    .ge-spotlight {
+      display: grid;
+      grid-template-columns: 35% 65%;
+      gap: 40px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    /* ── Left Navigation ── */
+    .ge-nav {
+      padding-top: 4px;
+    }
+    .ge-nav-section {
+      margin-bottom: 24px;
+    }
+    .ge-nav-section:last-child {
+      margin-bottom: 0;
+    }
+    .ge-nav-heading {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .2em;
+      color: var(--muted);
+      margin-bottom: 6px;
+      padding: 0 16px;
+    }
+    .ge-nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      padding: 11px 16px;
+      background: none;
+      border: none;
+      border-left: 3px solid transparent;
+      color: rgba(255,255,255,.6);
+      font: inherit;
+      font-size: clamp(14px, .95vw, 17px);
+      font-weight: 500;
+      cursor: pointer;
+      text-align: left;
+      border-radius: 0 6px 6px 0;
+      transition: color .22s var(--ease), background .22s var(--ease), border-color .22s var(--ease);
+      appearance: none;
+    }
+    .ge-nav-item:hover {
+      color: var(--white);
+      background: rgba(255,255,255,.04);
+    }
+    .ge-nav-item.active {
+      color: var(--white);
+      background: rgba(135,59,255,.12);
+      border-left-color: var(--dinova-violet);
+    }
+    .ge-nav-item .ge-badge {
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+
+    /* ── Right Panel ── */
+    .ge-panel {
+      background: rgba(255,255,255,.025);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .ge-panel-inner {
+      padding: 28px 32px;
+      transition: transform .3s var(--ease), opacity .3s var(--ease);
+    }
+    .ge-panel-inner.slide-out {
+      transform: translateX(-30px);
+      opacity: 0;
+    }
+    .ge-panel-inner.slide-in {
+      transform: translateX(30px);
+      opacity: 0;
+    }
+
+    .ge-placeholder {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 7;
+      border-radius: 8px;
+      margin-bottom: 24px;
+      background: linear-gradient(135deg, var(--ge-color, var(--g-blue)), rgba(255,255,255,.08));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .ge-placeholder img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity .4s var(--ease);
+    }
+    .ge-placeholder img[src]:not([src=""]) {
+      opacity: 1;
+    }
+    .ge-placeholder-label {
+      font-size: clamp(18px, 2vw, 28px);
+      font-weight: 700;
+      color: rgba(255,255,255,.5);
+      letter-spacing: -.02em;
+      z-index: 1;
+      text-shadow: 0 2px 8px rgba(0,0,0,.3);
+      pointer-events: none;
+    }
+
+    .ge-panel-title {
+      font-size: clamp(22px, 2vw, 32px);
+      font-weight: 800;
+      letter-spacing: -.035em;
+      margin-bottom: 10px;
+      color: var(--white);
+    }
+    .ge-panel-desc {
+      font-size: clamp(15px, 1.05vw, 18px);
+      color: rgba(255,255,255,.72);
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+    .ge-panel-sales {
+      font-size: clamp(12px, .85vw, 14px);
+      color: var(--muted);
+      line-height: 1.55;
+      padding: 14px 18px;
+      border-radius: 8px;
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.06);
+    }
+    .ge-panel-sales::before {
+      content: 'Sales angle';
+      display: block;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--g-yellow);
+      margin-bottom: 6px;
+    }
+
+    .ge-badge { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; padding: 3px 7px; border-radius: 3px; flex-shrink: 0; line-height: 1.3; }
+    .ge-badge.ga { color: var(--g-green); background: rgba(52,168,83,.15); }
+    .ge-badge.preview { color: var(--g-yellow); background: rgba(251,188,4,.15); }
+
+    #stack { min-height: 100vh; align-items: center; background: var(--dinova-dark); }
+    .stack-sticky { position: relative; width: min(1520px, calc(100vw - 120px)); margin: 0 auto; min-height: calc(100vh - var(--nav-h)); display: grid; grid-template-columns: minmax(230px, .4fr) minmax(390px, .64fr) minmax(500px, .86fr); gap: 58px; align-items: center; padding: 46px 0 42px; }
+    .stack-stage { position: relative; height: 540px; display: grid; place-items: center; }
+    .stack-asset-wrap { position: relative; width: min(246px, 15vw); z-index: 1; margin: 0; transition: transform .55s var(--ease), filter .55s var(--ease), opacity .55s var(--ease); }
+    .stack-asset-wrap::before { content: ''; position: absolute; inset: 4% 8%; border-radius: 50%; background: radial-gradient(circle, rgba(66,133,244,.16), transparent 68%); filter: blur(28px); opacity: .2; transition: opacity .45s var(--ease), transform .45s var(--ease); }
+    .stack-asset-wrap.is-active::before { opacity: .78; transform: scale(1.05); }
+    .stack-asset { position: relative; display: block; width: 100%; height: auto; filter: drop-shadow(0 18px 34px rgba(0,0,0,.34)); }
+    .stack-marker { position: absolute; right: -18px; width: 16px; height: 16px; border-radius: 50%; background: var(--g-yellow); box-shadow: 0 0 0 8px rgba(251,188,4,.14), 0 0 34px rgba(251,188,4,.9); transform: translateY(-50%); transition: top .45s var(--ease), opacity .3s var(--ease); z-index: 4; }
+    .stack-marker::after { content: ''; position: absolute; left: 22px; top: 7px; width: 56px; height: 2px; background: linear-gradient(90deg, var(--g-yellow), transparent); }
+    .stack-labels { position: relative; height: 540px; width: 100%; }
+    .stack-label { position: absolute; left: 0; width: 100%; appearance: none; border: 1px solid transparent; background: transparent; text-align: left; cursor: pointer; color: rgba(255,255,255,.32); font: inherit; font-size: clamp(17px, 1.32vw, 25px); font-weight: 800; letter-spacing: -.035em; line-height: 1.08; padding: 10px 14px; border-radius: 6px; transform: translateY(-50%); transition: color .24s var(--ease), background .24s var(--ease), border-color .24s var(--ease), transform .24s var(--ease), opacity .24s var(--ease); }
+    .stack-label:hover { color: rgba(255,255,255,.78); background: rgba(255,255,255,.045); }
+    .stack-label:focus-visible { outline: 2px solid var(--g-yellow); outline-offset: 3px; }
+    .stack-label.active { color: var(--white); background: rgba(135,59,255,.16); border-color: rgba(135,59,255,.48); transform: translate(12px, -50%); }
+    .stack-label.dim { opacity: .62; }
+    .stack-copy { max-width: 620px; align-self: center; padding: 30px 32px; border-left: 3px solid var(--dinova-violet); background: rgba(255,255,255,.035); border-radius: 8px; }
+    .layer-eyebrow { color: var(--dinova-cyan); font-weight: 700; text-transform: uppercase; letter-spacing: .2em; font-size: 11px; margin-bottom: 18px; }
+    .layer-title { font-size: clamp(34px, 3vw, 58px); margin-bottom: 18px; }
+    .layer-desc { max-width: 560px; color: rgba(255,255,255,.72); font-size: clamp(18px, 1.35vw, 24px); line-height: 1.45; letter-spacing: -.018em; }
+    .layer-products { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 26px; }
+    .layer-products span { border: 1px solid rgba(92,217,255,.2); color: rgba(255,255,255,.72); background: rgba(92,217,255,.055); padding: 7px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; }
+    .sales-angle { margin-top: 26px; color: rgba(255,255,255,.66); font-size: 15px; line-height: 1.55; }
+
+    .footer-brand { display: flex; align-items: center; justify-content: space-between; margin-top: 48px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,.1); color: rgba(255,255,255,.34); font-size: 12px; }
+    .footer-brand img { height: 22px; opacity: .75; }
+
+    
+    /* ── Novità ── */
+    #novita {
+      background: var(--dinova-dark);
+    }
+    #novita .inner {
+      padding-top: calc(var(--nav-h) + 48px);
+      padding-bottom: 72px;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    .h2-novita { font-size: clamp(38px, 4.8vw, 84px); }
+
+    .novita-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 24px;
+      margin-bottom: 28px;
+    }
+    .novita-pill {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,.18);
+      color: var(--muted);
+      padding: 7px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all .2s var(--ease);
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      letter-spacing: .02em;
+    }
+    .novita-pill:hover { border-color: rgba(255,255,255,.4); color: var(--white); }
+    .novita-pill.active { background: var(--white); color: var(--dinova-dark); border-color: var(--white); }
+    .novita-pill.active .pill-count { opacity: 0.5; }
+    .novita-pill:focus-visible { outline: 2px solid var(--g-yellow); outline-offset: 3px; }
+    .pill-count { opacity: 0.45; font-size: 11px; }
+
+    /* Griglia tile */
+    .novita-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      flex: 1;
+    }
+    .novita-tile {
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 10px;
+      border-left: 3px solid transparent;
+      padding: 20px 22px;
+      text-align: left;
+      cursor: pointer;
+      font-family: inherit;
+      color: var(--white);
+      transition: transform .25s var(--ease), box-shadow .25s var(--ease),
+                  opacity .3s var(--ease), filter .3s var(--ease);
+      display: flex;
+      flex-direction: column;
+      appearance: none;
+    }
+    .novita-tile:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,.32);
+      border-color: rgba(255,255,255,.14);
+    }
+    .novita-tile:focus-visible { outline: 2px solid var(--g-yellow); outline-offset: 3px; }
+    .novita-tile.dimmed {
+      opacity: .2;
+      filter: grayscale(.4);
+      pointer-events: none;
+    }
+    .novita-tile[data-category="AI Hypercomputer"] { border-left-color: var(--g-blue); }
+    .novita-tile[data-category="Agentic Data Cloud"] { border-left-color: var(--dinova-cyan); }
+    .novita-tile[data-category="Security"] { border-left-color: var(--g-red); }
+
+    .novita-tile-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 8px;
+    }
+    .novita-cat {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+    .novita-cat--blue { color: var(--g-blue); }
+    .novita-cat--cyan { color: var(--dinova-cyan); }
+    .novita-cat--red { color: var(--g-red); }
+    .novita-tile-title {
+      font-size: clamp(17px, 1.35vw, 22px);
+      font-weight: 700;
+      letter-spacing: -.025em;
+      line-height: 1.2;
+      color: var(--white);
+    }
+    .novita-tile-tagline {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.35;
+      font-weight: 300;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      margin-top: 6px;
+    }
+    .novita-tile-kpi {
+      font-size: clamp(14px, 1.05vw, 18px);
+      font-weight: 800;
+      color: var(--dinova-cyan);
+      letter-spacing: -.02em;
+      line-height: 1;
+    }
+    .novita-tile-bottom {
+      display: flex;
+      align-items: center;
+      margin-top: auto;
+      padding-top: 16px;
+    }
+    .novita-tile-arrow {
+      margin-left: auto;
+      font-size: 15px;
+      color: rgba(255,255,255,.6);
+      transition: color .25s var(--ease), transform .25s var(--ease);
+      line-height: 1;
+    }
+    .novita-tile:hover .novita-tile-arrow {
+      color: rgba(255,255,255,1);
+      transform: translateX(4px);
+    }
+
+    /* Badge aggiuntivi (usati anche nei tile) */
+    .ge-badge.pre-annuncio { color: var(--g-red); background: rgba(234,67,53,.15); }
+    .ge-badge.ga-preview { color: var(--dinova-cyan); background: rgba(92,217,255,.12); }
+
+    /* Modal full-viewport */
+    .novita-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 48px;
+    }
+    .novita-modal[hidden] { display: none; }
+
+    .novita-modal-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,18,26,.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+    .novita-modal-content {
+      position: relative;
+      z-index: 1;
+      width: min(720px, calc(100vw - 96px));
+      max-height: calc(100vh - 96px);
+      overflow-y: auto;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 16px;
+      padding: 48px;
+      box-shadow: 0 32px 80px rgba(0,0,0,.5);
+    }
+    .novita-modal-close {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+      color: rgba(255,255,255,.6);
+      font-size: 18px;
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .2s, color .2s;
+      font-family: inherit;
+    }
+    .novita-modal-close:hover { background: rgba(255,255,255,.15); color: var(--white); }
+    .novita-modal-close:focus-visible { outline: 2px solid var(--g-yellow); outline-offset: 3px; }
+
+    .novita-modal-header { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+    .novita-modal-title {
+      font-size: clamp(22px, 2.2vw, 34px);
+      font-weight: 800;
+      letter-spacing: -.04em;
+      line-height: 1.1;
+      margin-bottom: 10px;
+      color: var(--white);
+    }
+    .novita-modal-kpi {
+      font-size: 12px;
+      color: var(--dinova-cyan);
+      font-weight: 600;
+      letter-spacing: .02em;
+      margin-bottom: 16px;
+    }
+    .novita-modal-tagline {
+      font-size: clamp(15px, 1.1vw, 18px);
+      color: rgba(255,255,255,.68);
+      line-height: 1.5;
+      font-style: italic;
+      margin-bottom: 28px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid rgba(255,255,255,.07);
+    }
+    .novita-modal-section-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: rgba(255,255,255,.35);
+      margin-bottom: 10px;
+    }
+    .novita-modal-desc {
+      font-size: clamp(14px, 1vw, 16px);
+      color: rgba(255,255,255,.78);
+      line-height: 1.65;
+      font-weight: 300;
+      margin-bottom: 24px;
+    }
+    .novita-modal-angle {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: 10px;
+      padding: 18px 22px;
+      margin-bottom: 32px;
+    }
+    .novita-modal-angle-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--g-yellow);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+    .novita-modal-angle-label::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: currentColor;
+      flex-shrink: 0;
+    }
+    .novita-modal-angle-text {
+      font-size: 14px;
+      color: rgba(255,255,255,.78);
+      line-height: 1.6;
+      font-weight: 300;
+    }
+    .novita-modal-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 22px;
+      border-top: 1px solid rgba(255,255,255,.07);
+    }
+    .novita-modal-nav-btn {
+      background: none;
+      border: 1px solid rgba(255,255,255,.14);
+      color: rgba(255,255,255,.55);
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .02em;
+      transition: color .2s, border-color .2s, background .2s;
+    }
+    .novita-modal-nav-btn:hover:not(:disabled) {
+      color: var(--white);
+      border-color: rgba(255,255,255,.32);
+      background: rgba(255,255,255,.05);
+    }
+    .novita-modal-nav-btn:disabled { opacity: .22; cursor: default; }
+    .novita-modal-counter {
+      font-size: 11px;
+      font-weight: 700;
+      color: rgba(255,255,255,.3);
+      letter-spacing: .08em;
+    }
+
+    @media (max-width: 1180px) {
+      .novita-grid { grid-template-columns: repeat(2, 1fr); }
+      .novita-modal { padding: 32px; }
+      .novita-modal-content { padding: 32px; }
+    }
+    @media (max-width: 640px) {
+      #novita {
+        height: auto;
+        min-height: 100vh;
+        overflow: visible;
+      }
+      #novita .inner {
+        height: auto;
+        padding-top: calc(var(--nav-h) + 42px);
+        padding-bottom: 58px;
+      }
+      #novita .lead {
+        margin-top: 20px;
+      }
+      .novita-filters {
+        margin-top: 22px;
+        margin-bottom: 24px;
+      }
+      .novita-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .novita-tile {
+        padding: 14px 16px;
+      }
+      .novita-tile-meta {
+        margin-bottom: 6px;
+        gap: 5px;
+      }
+      .novita-tile-title {
+        font-size: clamp(14px, 4.5vw, 18px);
+        letter-spacing: -.02em;
+        line-height: 1.15;
+      }
+      .novita-tile-tagline {
+        display: none;
+      }
+      .novita-cat {
+        font-size: 9px;
+      }
+      .ge-badge {
+        font-size: 9px;
+        padding: 2px 5px;
+      }
+      .novita-tile-kpi {
+        font-size: 13px;
+      }
+      .novita-tile-bottom {
+        padding-top: 10px;
+      }
+      .novita-tile-arrow {
+        font-size: 13px;
+        color: rgba(255,255,255,.4);
+      }
+      .novita-tile:hover .novita-tile-arrow {
+        color: rgba(255,255,255,.8);
+      }
+      .novita-modal { padding: 16px; }
+      .novita-modal-content { padding: 24px; }
+    }
+
+    /* ── Closing ── */
+    #closing { scroll-margin-top: var(--nav-h); background: var(--dinova-dark); }
+    .closing-lead { max-width: 780px; margin-bottom: 24px; }
+
+    .closing-grid {
+      display: grid;
+      grid-template-columns: 1fr 28px 1fr 28px 1fr;
+      grid-template-rows: auto 28px auto;
+      margin-top: 54px;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .closing-node {
+      padding: 16px 20px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.03);
+      transition: transform .3s var(--ease), box-shadow .3s var(--ease);
+    }
+    .closing-node:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(0,0,0,.24);
+    }
+    .closing-node-title {
+      font-size: clamp(14px, .95vw, 18px);
+      font-weight: 700;
+      margin-bottom: 6px;
+      letter-spacing: -.02em;
+    }
+    .closing-node-desc {
+      font-size: clamp(12px, .85vw, 14px);
+      color: var(--muted);
+      line-height: 1.5;
+      font-weight: 300;
+    }
+
+    .closing-node-violet { border-left: 3px solid var(--dinova-violet); }
+    .closing-node-violet .closing-node-title { color: var(--dinova-violet); }
+    .closing-node-blue { border-left: 3px solid var(--g-blue); }
+    .closing-node-blue .closing-node-title { color: var(--g-blue); }
+    .closing-node-green { border-left: 3px solid var(--g-green); }
+    .closing-node-green .closing-node-title { color: var(--g-green); }
+    .closing-node-cyan { border-left: 3px solid var(--dinova-cyan); }
+    .closing-node-cyan .closing-node-title { color: var(--dinova-cyan); }
+    .closing-node-lime { border-left: 3px solid var(--dinova-lime); }
+    .closing-node-lime .closing-node-title { color: var(--dinova-lime); }
+
+    .closing-connector {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,.15);
+    }
+
+    .token-stats {
+      display: flex;
+      gap: 14px;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255,255,255,.07);
+      flex-wrap: wrap;
+    }
+    .token-stat {
+      font-size: 11px;
+      color: var(--dinova-cyan);
+      font-weight: 700;
+      letter-spacing: .04em;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 1180px) {
+      .closing-grid { grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+      .closing-connector { display: none; }
+    }
+
+    @media (max-width: 640px) {
+      .closing-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        margin-top: 36px;
+      }
+      .closing-connector { display: none; }
+    }
+
+    @media (max-width: 1180px) {
+      .inner { width: min(100vw - 48px, 1000px); }
+      .stack-sticky { width: min(100vw - 48px, 1000px); }
+      .hero-layout { grid-template-columns: 1fr; min-height: auto; gap: 24px; }
+      .hero-col-text { padding-top: 24px; }
+      .hero-col-visual { min-height: auto; }
+      .hero-visual-composite { position: relative; right: auto; top: auto; width: min(52vw, 460px); margin: 24px 0 0 auto; }
+      .stack-stage { min-height: 360px; height: auto; }
+      .stack-asset-wrap { width: min(230px, 48vw); }
+      .stack-labels { height: auto; min-height: 0; display: grid; gap: 8px; }
+      .stack-label { position: static; transform: none; }
+      .stack-label.active { transform: none; }
+      .stack-copy { display: block; padding-left: 22px; }
+      .ge-spotlight { grid-template-columns: 1fr; gap: 28px; }
+      .nav-links { overflow-x: auto; }
+    }
+    @media (max-width: 768px) {
+      .shift-layout { grid-template-columns: 1fr; gap: 24px; }
+      .shift-arrow { transform: rotate(90deg); }
+    }
+    @media (max-width: 640px) {
+      #nav { padding: 0 18px; gap: 16px; }
+      .nav-mark { display: none; }
+      .inner { width: calc(100vw - 36px); padding: 86px 0 58px; }
+      h1 { font-size: clamp(54px, 17vw, 72px); }
+      h2 { font-size: clamp(40px, 12vw, 58px); }
+      .lead { font-size: 20px; }
+      .hero-logo-brand { width: min(160px, 38vw); }
+      .hero-visual-composite { width: min(64vw, 320px); margin-top: 16px; }
+      .shift-card { padding: 28px; }
+      .shift-card h3 { font-size: 28px; }
+      #stack { min-height: auto; display: block; }
+      .stack-sticky { position: relative; top: auto; height: auto; width: calc(100vw - 36px); padding: 84px 0 72px; gap: 28px; }
+      .stack-stage { min-height: 0; height: auto; }
+      .stack-labels { height: auto; min-height: 0; display: grid; gap: 8px; }
+      .stack-label { position: static; transform: none; font-size: 18px; }
+      .stack-label.active { transform: none; }
+      .stack-marker { display: none; }
+      .stack-copy { padding: 24px; max-width: none; }
+      .layer-title { font-size: 34px; }
+      .layer-desc { font-size: 18px; }
+      .ge-panel-inner { padding: 20px; }
+      .ge-placeholder { aspect-ratio: 16 / 10; }
+      #gemini-enterprise .lead { margin-bottom: 16px; }
+      .footer-brand { align-items: flex-start; flex-direction: column; gap: 16px; }
+      .o-ring { width: 460px; height: 460px; border-width: 74px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <nav id="nav" aria-label="Navigazione principale">
+    <img class="nav-logo" src="dinova/Dinova Design System/assets/logo-wordmark-white.png" alt="Dinova" />
+    <div class="nav-links">
+      <a class="nav-link active" href="#intro">Intro</a>
+      <a class="nav-link" href="#shift">Shift</a>
+      <a class="nav-link" href="#stack">Stack</a>
+      <a class="nav-link" href="#gemini-enterprise">Gemini</a>
+      <a class="nav-link" href="#novita">Novità</a>
+      <a class="nav-link" href="#closing">Chiusura</a>
+    </div>
+    <div class="nav-mark"><span class="dot" style="background:#4285F4"></span><span class="dot" style="background:#EA4335"></span><span class="dot" style="background:#FBBC04"></span><span class="dot" style="background:#34A853"></span> GCN26</div>
+  </nav>
+
+  <nav class="slide-nav" aria-label="Navigazione slide">
+    <button type="button" id="nav-prev" aria-label="Slide precedente">▲</button>
+    <span id="nav-index" aria-live="polite">1 / 1</span>
+    <button type="button" id="nav-next" aria-label="Slide successiva">▼</button>
+  </nav>
+
+  <main>
+    <section id="intro" data-nav="intro">
+      <div class="o-ring"></div>
+      <div class="inner">
+        <div class="hero-layout">
+          <div class="hero-col-text">
+            <div class="kicker reveal">Restituzione Sales · Maggio 2026</div>
+            <img class="hero-logo-brand reveal delay-1" src="dinova/assets/gcp-next-26-logo-white.png" alt="Google Cloud Next '26" />
+            <h1 class="hero-title reveal delay-1">Dal keynote alla<br>conversazione cliente.</h1>
+            <p class="lead hero-lead reveal delay-2">Agentic AI, dati e sicurezza in una mappa sales.</p>
+          </div>
+          <div class="hero-col-visual" aria-hidden="true">
+            <div class="hero-visual-composite">
+              <img src="dinova/assets/next26-hero.gif" alt="" class="hero-gif" />
+              <img src="dinova/assets/next26-graphic.png" alt="" class="hero-graphic" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="shift" data-nav="shift" aria-label="Dalle app agli agenti">
+      <div class="inner">
+        <div class="kicker reveal">Il cambio di paradigma</div>
+        <h2 class="reveal delay-1">Dalle app agli agenti.</h2>
+        <div class="shift-layout reveal delay-2">
+          <div class="shift-card">
+            <div class="shift-label">Ieri</div>
+            <h3>There's an app<br>for that</h3>
+            <p>Tool separati, workflow frammentati, utenti
+               costretti ad adattarsi alle applicazioni.</p>
+            <div class="shift-tags">
+              <span class="tag">CRM</span>
+              <span class="tag">ERP</span>
+              <span class="tag">Email</span>
+              <span class="tag">Ticketing</span>
+              <span class="tag">Storage</span>
+            </div>
+          </div>
+          <div class="shift-arrow" aria-hidden="true">
+            <svg width="86" height="52" viewBox="0 0 86 52">
+              <path d="M4 26h70M55 7l24 19-24 19" fill="none"
+                stroke="currentColor" stroke-width="3"
+                stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="shift-card future">
+            <div class="shift-label">Oggi</div>
+            <h3>There's an agent<br>for that</h3>
+            <p>Agenti che attraversano sistemi, leggono
+               contesto, completano processi e lavorano
+               in autonomia.</p>
+            <div class="shift-tags">
+              <span class="tag">Agent Designer</span>
+              <span class="tag">Inbox</span>
+              <span class="tag">Skills</span>
+              <span class="tag">Long-running</span>
+              <span class="tag">Gateway</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="stack" data-nav="stack" aria-label="Universal Stack GCN26 dinamico">
+      <div class="stack-sticky">
+        <div class="stack-stage">
+          <figure class="stack-asset-wrap is-active">
+            <img class="stack-asset" src="dinova/assets/stack-gcn-clean.png" alt="Universal Stack GCN26 senza testi" />
+            <span class="stack-marker" aria-hidden="true"></span>
+          </figure>
+        </div>
+        <div class="stack-labels" aria-label="Seleziona layer Universal Stack">
+          <button type="button" class="stack-label" data-label="0" style="top: 9%">Agentic Taskforce</button>
+          <button type="button" class="stack-label" data-label="1" style="top: 25%">Agent Platform</button>
+          <button type="button" class="stack-label" data-label="2" style="top: 41%">Agentic Defense</button>
+          <button type="button" class="stack-label" data-label="3" style="top: 57%">Agentic Data Cloud</button>
+          <button type="button" class="stack-label" data-label="4" style="top: 73%">Research &amp; Frontier Models</button>
+          <button type="button" class="stack-label" data-label="5" style="top: 89%">AI Hypercomputer</button>
+        </div>
+        <aside class="stack-copy" aria-live="polite">
+          <div class="layer-eyebrow" id="layerEyebrow">Layer 01 / 06</div>
+          <h2 class="layer-title" id="layerTitle">Universal Stack GCN26</h2>
+          <p class="layer-desc" id="layerDesc">Google porta una lettura full-stack dell'AI enterprise: ogni layer è progettato per rendere il successivo più scalabile, sicuro e adottabile.</p>
+          <div class="layer-products" id="layerProducts"></div>
+          <div class="sales-angle" id="salesAngle">Messaggio Sales: non vendere feature isolate. Usa lo stack per collegare infrastruttura, dati, sicurezza, piattaforma e valore di business.</div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="gemini-enterprise" data-nav="gemini-enterprise" aria-label="Gemini Enterprise">
+      <div class="inner">
+        <div class="kicker reveal">Gemini Enterprise</div>
+        <h2 class="reveal delay-1">Da cerca a fa.</h2>
+        <p class="lead reveal delay-2">Gemini Enterprise non è un assistente. È una piattaforma agentica che agisce, governa e scala su tutta l'organizzazione.</p>
+
+        <div class="ge-spotlight">
+          <!-- LEFT NAV -->
+          <div class="ge-nav">
+            <div class="ge-nav-section">
+              <h3 class="ge-nav-heading">Build &amp; Scale</h3>
+              <button class="ge-nav-item active" data-target="agent-studio" aria-pressed="true">
+                <span>Agent Studio</span>
+                <span class="ge-badge ga">GA</span>
+              </button>
+              <button class="ge-nav-item" data-target="agent-skills" aria-pressed="false">
+                <span>Agent Skills</span>
+                <span class="ge-badge preview">Preview</span>
+              </button>
+              <button class="ge-nav-item" data-target="long-running-tasks" aria-pressed="false">
+                <span>Long Running Tasks</span>
+                <span class="ge-badge preview">Preview</span>
+              </button>
+              <button class="ge-nav-item" data-target="agent-inbox" aria-pressed="false">
+                <span>Agent Inbox</span>
+                <span class="ge-badge preview">Preview</span>
+              </button>
+            </div>
+            <div class="ge-nav-section">
+              <h3 class="ge-nav-heading">Govern &amp; Optimize</h3>
+              <button class="ge-nav-item" data-target="agent-registry" aria-pressed="false">
+                <span>Agent Registry</span>
+                <span class="ge-badge ga">GA</span>
+              </button>
+              <button class="ge-nav-item" data-target="agent-gateway" aria-pressed="false">
+                <span>Agent Gateway</span>
+                <span class="ge-badge preview">Preview</span>
+              </button>
+              <button class="ge-nav-item" data-target="agent-identity" aria-pressed="false">
+                <span>Agent Identity</span>
+                <span class="ge-badge preview">Preview</span>
+              </button>
+              <button class="ge-nav-item" data-target="agent-security" aria-pressed="false">
+                <span>Agent Security</span>
+                <span class="ge-badge preview">Preview</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- RIGHT PANEL -->
+          <div class="ge-panel" id="gePanel" role="region" aria-live="polite">
+            <div class="ge-panel-inner" id="gePanelInner">
+              <div class="ge-placeholder">
+                <img src="" alt="" data-src="" />
+                <span class="ge-placeholder-label" id="gePlaceholderLabel">Agent Studio</span>
+              </div>
+              <h3 class="ge-panel-title" id="gePanelTitle">Agent Studio</h3>
+              <p class="ge-panel-desc" id="gePanelDesc"></p>
+              <div class="ge-panel-sales" id="gePanelSales"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    
+    <section id="novita" data-nav="novita" aria-label="Novità Next '26">
+      <div class="inner">
+        <div class="kicker reveal">Annunci principali</div>
+        <h2 class="reveal delay-1 h2-novita">Cosa è stato annunciato.</h2>
+        <p class="lead reveal delay-2">Nove novità chiave da Next '26 — divise per layer dello stack. Agent Platform è trattato nella sezione dedicata.</p>
+
+        <div class="novita-filters reveal" role="tablist" aria-label="Filtra per categoria">
+          <button class="novita-pill active" data-filter="all" role="tab" aria-selected="true">Tutti <span class="pill-count">9</span></button>
+          <button class="novita-pill" data-filter="AI Hypercomputer" role="tab" aria-selected="false">AI Hypercomputer <span class="pill-count">2</span></button>
+          <button class="novita-pill" data-filter="Agentic Data Cloud" role="tab" aria-selected="false">Agentic Data Cloud <span class="pill-count">3</span></button>
+          <button class="novita-pill" data-filter="Security" role="tab" aria-selected="false">Security <span class="pill-count">4</span></button>
+        </div>
+
+        <div class="novita-grid" role="list" aria-label="Annunci Next '26">
+
+          <button class="novita-tile" role="listitem" data-category="AI Hypercomputer" data-id="1" aria-label="Apri dettaglio: Google all-in sull'AI">
+            <div class="novita-tile-meta">
+              <span class="novita-cat novita-cat--blue">AI Hypercomputer</span>
+              <span class="ge-badge pre-annuncio">Pre-annuncio</span>
+            </div>
+            <div class="novita-tile-title">Google all-in sull'AI: infrastruttura senza paragoni</div>
+            <div class="novita-tile-tagline">TPU 8ª generazione, Virgo Network, Managed Lustre: Google sta costruendo la macchina AI più potente al mondo.</div>
+            <div class="novita-tile-bottom">
+              <span class="novita-tile-kpi">2.7x price/performance TPU 8t</span>
+              <span class="novita-tile-arrow" aria-hidden="true">→</span>
+            </div>
+          </button>
+
+          <button class="novita-tile" role="listitem" data-category="AI Hypercomputer" data-id="2" aria-label="Apri dettaglio: Compute enterprise">
+            <div class="novita-tile-meta">
+              <span class="novita-cat novita-cat--blue">AI Hypercomputer</span>
+              <span class="ge-badge ga">GA</span>
+            </div>
+            <div class="novita-tile-title">Compute enterprise: TCO migliore, senza cambiare il codice</div>
+            <div class="novita-tile-tagline">Da Oracle on-prem al cloud con il 20% di risparmio garantito e VM general-purpose con il doppio della price-performance.</div>
+            <div class="novita-tile-bottom">
+              <span class="novita-tile-kpi">-20% TCO Oracle</span>
+              <span class="novita-tile-arrow" aria-hidden="true">→</span>
+            </div>
+          </button>
+
+          <button class="novita-tile" role="listitem" data-category="Agentic Data Cloud" data-id="3" aria-label="Apri dettaglio: I tuoi dati capiscono il business">
+            <div class="novita-tile-meta">
+              <span class="novita-cat novita-cat--cyan">Agentic Data Cloud</span>
+              <span class="ge-badge ga">GA</span>
+            </div>
+            <div class="novita-tile-title">I tuoi dati capiscono il business, non solo la sintassi</div>
+            <div class="novita-tile-tagline">Knowledge Catalog mappa relazioni e significati business attraverso l'intero data estate aziendale in tempo reale.</div>
+            <div class="novita-tile-bottom">
+              <span class="novita-tile-arrow" aria-hidden="true">→</span>
+            </div>
+          </button>
+
+          <button class="novita-tile" role="listitem" data-category="Agentic Data Cloud" data-id="4" aria-label="Apri dettaglio: Dati liberi dai silos">
+            <div class="novita-tile-meta">
+              <span class="novita-cat novita-cat--cyan">Agentic Data Cloud</span>
+              <span class="ge-badge ga">GA</span>
+            </div>
+            <div class="novita-tile-title">Dati liberi dai silos, su qualsiasi cloud</div>
+            <div class="novita-tile-tagline">Spanner Omni gira su altri cloud, on-prem, persino sul laptop: i dati aziendali sono finalmente portabili senza lock-in.</div>
+            <div class="novita-tile-bottom">
+              <span class="novita-tile-kpi">ROI 117% stimato</span>
+              <span class="novita-tile-arrow" aria-hidden="true">→</span>
+            </div>
+          </button>
+
+          <button class="novita-tile" role="listitem" data-category="Agentic Data Cloud" data-id="5" aria-label="Apri dettaglio: Chiedi ai tuoi dati">
+            <div class="novita-tile-meta">
+              <span class="novita-cat novita-cat--cyan">Agentic Data Cloud</span>
+              <span class="ge-badge ga">GA</span>
+            </div>
+            <div class="novita-tile-title">Chiedi ai tuoi dati invece di interrogarli</div>
+            <div class="novita-tile-tagline">Conversational Analytics: agenti analitici in linguaggio naturale su BigQuery, Spanner, Looker — senza SQL.</div>
+            <div class="novita-tile-bottom">
+              <span class="novita-tile-kpi">-34% costi BigQuery</span>
+              <span class="novita-tile-arrow" aria-hidden="true">→</span>
+            </div>
+          </button>
+
+          <button class="novita-tile" role="listitem" data-category="Security" data-id="6" aria-label="Apri dettaglio: Wiz è Google Cloud">
+            <div class="novita-tile-meta">
+              <span class="novita-cat novita-cat--red">Security</span>
+              <span class="ge-badge ga-preview">GA / Preview</span>
+            </div>
+            <div class="novita-tile-title">Wiz è Google Cloud: security AI-native senza compromessi</div>
+            <div class="novita-tile-tagline">Red, Blue, Green Agent: Wiz porta l'automazione agentic al ciclo completo di sicurezza cloud e AI in GCP.</div>
+            <div class="novita-tile-bottom">
+              <span class="novita-tile-arrow" aria-hidden="true">→</span>
+            </div>
+          </button>
+
+          <button class="novita-tile" role="listitem" data-category="Security" data-id="7" aria-label="Apri dettaglio: Il SOC che non dorme mai">
+            <div class="novita-tile-meta">
+              <span class="novita-cat novita-cat--red">Security</span>
+              <span class="ge-badge ga">GA</span>
+            </div>
+            <div class="novita-tile-title">Il SOC che non dorme mai e impara da ogni alert</div>
+            <div class="novita-tile-tagline">Threat Hunting, Detection Engineering e Third-Party Context Agent: il SOC autonomo è realtà su Google SecOps.</div>
+            <div class="novita-tile-bottom">
+              <span class="novita-tile-kpi">5M+ alert processati</span>
+              <span class="novita-tile-arrow" aria-hidden="true">→</span>
+            </div>
+          </button>
+
+          <button class="novita-tile" role="listitem" data-category="Security" data-id="8" aria-label="Apri dettaglio: Governance AI">
+            <div class="novita-tile-meta">
+              <span class="novita-cat novita-cat--red">Security</span>
+              <span class="ge-badge ga">GA</span>
+            </div>
+            <div class="novita-tile-title">Governance AI senza frenare l'innovazione</div>
+            <div class="novita-tile-tagline">Agent Identity, Model Armor, Agent Gateway: ogni agente ha un'identità verificabile, ogni dato sensibile è protetto.</div>
+            <div class="novita-tile-bottom">
+              <span class="novita-tile-arrow" aria-hidden="true">→</span>
+            </div>
+          </button>
+
+          <button class="novita-tile" role="listitem" data-category="Security" data-id="9" aria-label="Apri dettaglio: Shadow AI">
+            <div class="novita-tile-meta">
+              <span class="novita-cat novita-cat--red">Security</span>
+              <span class="ge-badge preview">Preview</span>
+            </div>
+            <div class="novita-tile-title">Controlla l'AI che i tuoi dipendenti usano senza saperlo</div>
+            <div class="novita-tile-tagline">Chrome Enterprise e Google Cloud Fraud Defense: il browser diventa il perimetro di sicurezza dell'era agentica.</div>
+            <div class="novita-tile-bottom">
+              <span class="novita-tile-arrow" aria-hidden="true">→</span>
+            </div>
+          </button>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Modal full-viewport novità -->
+    <div class="novita-modal" id="novita-modal" hidden role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="novita-modal-backdrop"></div>
+      <div class="novita-modal-content">
+        <button class="novita-modal-close" aria-label="Chiudi dettaglio">✕</button>
+        <div class="novita-modal-header">
+          <span class="novita-cat" id="modal-cat"></span>
+          <span class="ge-badge" id="modal-badge"></span>
+        </div>
+        <h3 class="novita-modal-title" id="modal-title"></h3>
+        <p class="novita-modal-kpi" id="modal-kpi"></p>
+        <p class="novita-modal-tagline" id="modal-tagline"></p>
+        <div class="novita-modal-section-label">Descrizione</div>
+        <p class="novita-modal-desc" id="modal-desc"></p>
+        <div class="novita-modal-angle">
+          <div class="novita-modal-angle-label">Angolo commerciale</div>
+          <p class="novita-modal-angle-text" id="modal-angle"></p>
+        </div>
+        <div class="novita-modal-nav">
+          <button class="novita-modal-nav-btn" id="modal-prev" aria-label="Annuncio precedente">← Precedente</button>
+          <span class="novita-modal-counter" id="modal-counter">1 / 9</span>
+          <button class="novita-modal-nav-btn" id="modal-next" aria-label="Annuncio successivo">Successivo →</button>
+        </div>
+      </div>
+    </div>
+
+
+
+    <section id="closing" data-nav="closing" aria-label="Chiusura">
+      <div class="inner">
+        <div class="kicker reveal">Unire i puntini</div>
+        <h2 class="reveal delay-1">Perché Google, perché ora.</h2>
+        <p class="lead reveal delay-2 closing-lead">Tutto ciò che abbiamo visto al Next converge in una sola direzione: Google è l'unico vendor che governa l'intero stack agentico enterprise.</p>
+
+        <div class="closing-grid">
+          <!-- NODO 1 — Gemini Enterprise -->
+          <div class="closing-node closing-node-violet reveal" style="grid-column:1;grid-row:1">
+            <div class="closing-node-title">Gemini Enterprise</div>
+            <div class="closing-node-desc">Da cerca a fa. La piattaforma agentica è già disponibile.</div>
+          </div>
+          <div class="closing-connector" style="grid-column:2;grid-row:1" aria-hidden="true">
+            <svg width="28" height="14" viewBox="0 0 28 14"><path d="M2 7h20M17 2l7 5-7 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+
+          <!-- NODO 2 — Agentic Platform + AI Security -->
+          <div class="closing-node closing-node-blue reveal delay-1" style="grid-column:3;grid-row:1">
+            <div class="closing-node-title">Agentic Platform + AI Security</div>
+            <div class="closing-node-desc">Agent Identity, Gateway e Registry: sicurezza nativa, non aggiunta dopo.</div>
+          </div>
+          <div class="closing-connector" style="grid-column:4;grid-row:1" aria-hidden="true">
+            <svg width="28" height="14" viewBox="0 0 28 14"><path d="M2 7h20M17 2l7 5-7 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+
+          <!-- NODO 3 — Wiz + Cloudflare -->
+          <div class="closing-node closing-node-green reveal delay-2" style="grid-column:5;grid-row:1">
+            <div class="closing-node-title">Wiz + Cloudflare</div>
+            <div class="closing-node-desc">Multi-cloud security. Non siamo chiusi a GCP: la proposta vale anche su AWS e Azure.</div>
+          </div>
+
+          <!-- Connettore verticale N3 ↓ -->
+          <div class="closing-connector" style="grid-column:5;grid-row:2" aria-hidden="true">
+            <svg width="14" height="28" viewBox="0 0 14 28"><path d="M7 2v20M2 17l5 7 5-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+
+          <!-- NODO 4 — Token agentici 30× -->
+          <div class="closing-node closing-node-cyan reveal" style="grid-column:3;grid-row:3">
+            <div class="closing-node-title">Token agentici 30×</div>
+            <div class="closing-node-desc">Gli agenti bruciano 30× i token di un chatbot. Questo apre la conversazione su small model e LLM locali.</div>
+            <div class="token-stats">
+              <span class="token-stat">~11M token</span>
+              <span class="token-stat">×30 vs chatbot tradizionale</span>
+            </div>
+          </div>
+          <div class="closing-connector" style="grid-column:4;grid-row:3" aria-hidden="true">
+            <svg width="28" height="14" viewBox="0 0 28 14"><path d="M2 7h20M17 2l7 5-7 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+
+          <!-- NODO 5 — Workspace + Opportunità Microsoft -->
+          <div class="closing-node closing-node-lime reveal delay-1" style="grid-column:5;grid-row:3">
+            <div class="closing-node-title">Workspace + Opportunità Microsoft</div>
+            <div class="closing-node-desc">C'è spazio per rivitalizzare Workspace. Il momento è ora, prima che Microsoft recuperi.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    const layerData = [
+      { title: 'Agentic Taskforce', desc: 'Il livello dove gli agenti diventano forza lavoro digitale: business user, team e processi quotidiani.', products: ['Gemini Enterprise App', 'Agent Designer', 'Inbox', 'Projects', 'Skills'], sales: 'Parla con COO, CHRO e Operations: non "un chatbot", ma capacità operative distribuite nel lavoro quotidiano.' },
+      { title: 'Agent Platform', desc: 'La piattaforma per costruire, scalare, governare e ottimizzare agenti enterprise-grade.', products: ['ADK', 'Agent Runtime', 'Agent Studio', 'Registry', 'Gateway', 'Observability'], sales: 'Parla con CIO, CTO ed Engineering: qui nasce l\'agent factory enterprise.' },
+      { title: 'Agentic Defense', desc: 'Sicurezza e governance non come add-on, ma come fondazione nativa degli agenti.', products: ['Agent Identity', 'Model Armor', 'Wiz', 'Registry', 'Gateway'], sales: 'Parla con CISO e compliance: questo layer trasforma la demo AI in piattaforma governabile.' },
+      { title: 'Agentic Data Cloud', desc: 'Dati contestuali, governati e semanticamente chiari: la base perché gli agenti possano ragionare e agire.', products: ['Knowledge Catalog', 'BigQuery', 'Data Agent Kit', 'Looker', 'BigQuery MCP'], sales: 'Prima domanda al cliente: dove sono i dati, chi li governa, quanto sono pronti per gli agenti?' },
+      { title: 'Research & Frontier Models', desc: 'Gemini e modelli multimodali spostano l\'AI da risposta a capacità operativa su task lunghi e realtime.', products: ['Gemini Live API', 'Live Avatar', 'Gemini TTS', 'Long-horizon agents'], sales: 'Parla di esperienze multimodali, voce, video, automazione e compiti multi-day.' },
+      { title: 'AI Hypercomputer', desc: 'Compute, storage, rete e runtime per reggere costi, latenza, inferenza e scala dell\'AI agentica.', products: ['TPU 8', 'Virgo Network', 'GKE', 'Cloud Run', 'Managed Lustre'], sales: 'Quando il cliente parla di performance, costo o scala, la conversazione parte dall\'infrastruttura.' }
+    ];
+
+    const geminiData = {
+      'agent-studio': {
+        badge: 'GA',
+        desc: 'Progetta, sviluppa e deploya agenti con un\'interfaccia visuale drag-and-drop. Dal prototipo alla produzione senza scrivere codice. Supporta ADK, modelli Google, modelli open e di terze parti.',
+        ctx: 'Sviluppa e testa agenti visivamente, senza scrivere codice.',
+        name: 'Agent Studio',
+        color: '--g-blue',
+        sales: 'Accelera la costruzione di agenti con un\'interfaccia visuale che democratizza lo sviluppo AI: non serve un team di ML engineer per prototipare e mettere in produzione agenti enterprise.'
+      },
+      'agent-skills': {
+        badge: 'Preview',
+        desc: 'Skill pre-built e custom che estendono le capacit\u00e0 degli agenti: ricerca documentale, orchestrazione API, analisi dati, integrazione con strumenti enterprise. Una libreria in crescita di skill certificate e pronte all\'uso.',
+        ctx: 'Estendi le capacit\u00e0 degli agenti con skill pre-built o custom.',
+        name: 'Agent Skills',
+        color: '--dinova-violet',
+        sales: 'Ogni skill \u00e8 un modulo riutilizzabile che riduce i tempi di sviluppo del 60%: non si parte da zero, si compongono funzionalit\u00e0 come mattoncini.'
+      },
+      'long-running-tasks': {
+        badge: 'Preview',
+        desc: 'Agenti che operano in background su processi multi-step che durano ore o giorni. Attendono eventi esterni, gestiscono approvazioni umane, eseguono escalation automatiche. Il runtime che rende gli agenti davvero autonomi.',
+        ctx: 'Processi asincroni che durano ore o giorni, senza timeout.',
+        name: 'Long Running Tasks',
+        color: '--dinova-cyan',
+        sales: 'Gli agenti che operano in background per giorni sono il salto dalla demo alla produzione reale: processi che prima richiedevano supervisione umana continua diventano autonomi.'
+      },
+      'agent-inbox': {
+        badge: 'Preview',
+        desc: 'Human-in-the-loop semplificato: un unico punto di raccolta per tutte le richieste di intervento umano \u2014 approvazioni, eccezioni, escalation \u2014 generate dagli agenti automatici. Controllo senza collo di bottiglia.',
+        ctx: 'Notifiche e approvazioni human-in-the-loop direttamente in Gemini.',
+        name: 'Agent Inbox',
+        color: '--g-green',
+        sales: 'Human-in-the-loop senza collo di bottiglia: il giusto compromesso tra automazione e controllo che ogni compliance team richiede per approvare i deployment AI.'
+      },
+      'agent-registry': {
+        badge: 'GA',
+        desc: 'Catalogo centralizzato di tutti gli agenti dell\'organizzazione: inventario, versioning, ownership, policy compliance e audit trail completo. La fonte di verit\u00e0 unica per la flotta agentica enterprise.',
+        ctx: 'Catalogo centralizzato di tutti gli agenti dell\'organizzazione.',
+        name: 'Agent Registry',
+        color: '--g-yellow',
+        sales: 'Senza un registro centralizzato non puoi governare, non puoi auditare, non puoi scalare. \u00c8 il punto di partenza obbligato per qualsiasi strategia agentica enterprise.'
+      },
+      'agent-gateway': {
+        badge: 'Preview',
+        desc: 'API gateway specializzato per traffico agentico: routing intelligente tra agenti, rate limiting, autenticazione, osservabilit\u00e0 e policy enforcement a livello di rete. Il perimetro di sicurezza per ogni chiamata agente-agente.',
+        ctx: 'Proxy sicuro per ogni chiamata da e verso gli agenti.',
+        name: 'Agent Gateway',
+        color: '--g-red',
+        sales: 'Il perimetro di sicurezza per l\'era agentica: ogni chiamata tra agenti \u00e8 autenticata, tracciata e governata senza modificare una riga di codice degli agenti.'
+      },
+      'agent-identity': {
+        badge: 'Preview',
+        desc: 'Identit\u00e0 digitale forte per ogni agente: policy granulari, permessi contestuali, audit completo di ogni azione. Integrazione nativa con IAM enterprise e SSO per allinearsi ai framework di sicurezza esistenti.',
+        ctx: 'Identit\u00e0 verificabile per ogni agente: chi \u00e8, cosa pu\u00f2 fare.',
+        name: 'Agent Identity',
+        color: '--dinova-lime',
+        sales: 'Ogni agente ha un\'identit\u00e0 verificabile come un dipendente: il prerequisito essenziale per qualsiasi deployment enterprise che richieda controllo degli accessi.'
+      },
+      'agent-security': {
+        badge: 'Preview',
+        desc: 'Sicurezza integrata nel ciclo di vita dell\'agente: threat detection comportamentale, data loss prevention, policy engine contestuale e osservabilit\u00e0 continua. La sicurezza non \u00e8 un add-on, \u00e8 un layer nativo della piattaforma.',
+        ctx: 'Policy, audit e protezione runtime su tutta la flotta.',
+        name: 'Agent Security',
+        color: '--dinova-pink',
+        sales: 'La sicurezza non \u00e8 un add-on da installare dopo: \u00e8 un layer nativo che protegge ogni agente dal momento in cui viene creato fino al runtime in produzione.'
+      }
+    };
+
+    const setLayer = (index) => {
+      const labels = document.querySelectorAll('.stack-label');
+      const marker = document.querySelector('.stack-marker');
+      const markerTops = ['9%', '25%', '41%', '57%', '73%', '89%'];
+      labels.forEach((label) => {
+        const isActive = Number(label.dataset.label) === index;
+        label.classList.toggle('active', isActive);
+        label.classList.toggle('dim', index >= 0 && !isActive);
+        label.setAttribute('aria-pressed', String(isActive));
+      });
+      if (marker) marker.style.top = markerTops[index] || markerTops[5];
+      const data = layerData[index];
+      if (!data) return;
+      document.getElementById('layerEyebrow').textContent = `Layer ${String(index + 1).padStart(2, '0')} / 06`;
+      document.getElementById('layerTitle').textContent = data.title;
+      document.getElementById('layerDesc').textContent = data.desc;
+      document.getElementById('salesAngle').textContent = data.sales;
+      document.getElementById('layerProducts').innerHTML = data.products.map((item) => `<span>${item}</span>`).join('');
+    };
+
+    const initStack = () => {
+      document.querySelectorAll('.stack-label').forEach((label) => {
+        label.addEventListener('click', () => setLayer(Number(label.dataset.label)));
+      });
+      setLayer(0);
+    };
+
+    const initReveal = () => {
+      const revealEls = document.querySelectorAll('.reveal');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+      }, { threshold: 0.12 });
+      revealEls.forEach((el) => observer.observe(el));
+    };
+
+    const initNav = () => {
+      const navLinks = [...document.querySelectorAll('.nav-link')];
+      const sections = [...document.querySelectorAll('section[data-nav]')];
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const id = entry.target.dataset.nav;
+          navLinks.forEach((link) => link.classList.toggle('active', link.getAttribute('href') === `#${id}`));
+        });
+      }, { threshold: 0.38 });
+      sections.forEach((section) => observer.observe(section));
+    };
+
+    const initGeminiEnterprise = () => {
+      const navItems = document.querySelectorAll('.ge-nav-item');
+      const panelInner = document.getElementById('gePanelInner');
+      const panelTitle = document.getElementById('gePanelTitle');
+      const panelDesc = document.getElementById('gePanelDesc');
+      const panelSales = document.getElementById('gePanelSales');
+      const placeholderLabel = document.getElementById('gePlaceholderLabel');
+      const placeholder = document.querySelector('.ge-placeholder');
+      const placeholderImg = placeholder ? placeholder.querySelector('img') : null;
+
+      let isAnimating = false;
+
+      const showFeature = (id) => {
+        if (isAnimating) return;
+        const data = geminiData[id];
+        if (!data) return;
+
+        // Update active state on nav items
+        navItems.forEach((item) => {
+          const match = item.dataset.target === id;
+          item.classList.toggle('active', match);
+          item.setAttribute('aria-pressed', String(match));
+        });
+
+        // Slide out current content
+        panelInner.classList.add('slide-out');
+        isAnimating = true;
+
+        setTimeout(() => {
+          // Update content
+          panelTitle.textContent = data.name || id;
+          panelDesc.textContent = data.ctx || '';
+          panelSales.textContent = data.sales || '';
+          placeholderLabel.textContent = data.name || id;
+          if (placeholder) {
+            placeholder.style.setProperty('--ge-color', `var(${data.color || '--g-blue'})`);
+          }
+          if (placeholderImg) {
+            placeholderImg.removeAttribute('src');
+            placeholderImg.setAttribute('data-src', `dinova/assets/gemini-${id}.png`);
+          }
+
+          // Prepare slide in
+          panelInner.classList.remove('slide-out');
+          panelInner.classList.add('slide-in');
+
+          // Force reflow, then animate in
+          void panelInner.offsetWidth;
+          panelInner.classList.remove('slide-in');
+
+          setTimeout(() => {
+            isAnimating = false;
+          }, 300);
+        }, 300);
+      };
+
+      navItems.forEach((item) => {
+        item.addEventListener('click', () => {
+          const id = item.dataset.target;
+          // Only switch if not already active
+          if (!item.classList.contains('active')) {
+            showFeature(id);
+          }
+        });
+      });
+
+      // Set default: first item (Agent Studio)
+      const defaultItem = navItems[0];
+      if (defaultItem) {
+        const id = defaultItem.dataset.target;
+        const data = geminiData[id];
+        if (data) {
+          panelTitle.textContent = data.name || id;
+          panelDesc.textContent = data.ctx || '';
+          panelSales.textContent = data.sales || '';
+          placeholderLabel.textContent = data.name || id;
+          if (placeholder) {
+            placeholder.style.setProperty('--ge-color', `var(${data.color || '--g-blue'})`);
+          }
+          if (placeholderImg) {
+            placeholderImg.removeAttribute('src');
+            placeholderImg.setAttribute('data-src', `dinova/assets/gemini-${id}.png`);
+          }
+        }
+      }
+    };
+
+    const initNovita = () => {
+      const novitaData = {
+        1: {
+          category: 'AI Hypercomputer', catClass: 'novita-cat--blue',
+          badge: 'Pre-annuncio', badgeClass: 'pre-annuncio',
+          kpi: '2.7x price/performance TPU 8t · 10 TB/s storage · 20x vs altri hyperscaler',
+          title: 'Google all-in sull\'AI: infrastruttura senza paragoni',
+          tagline: 'TPU 8ª generazione, Virgo Network, Managed Lustre: Google sta costruendo la macchina AI più potente al mondo — e la rende disponibile a chiunque lavori su GCP.',
+          desc: 'TPU 8t scala fino a 9.600 chip in un singolo superpod con 2 petabyte di memoria condivisa: i modelli frontier si addestrano in settimane, non mesi. TPU 8i è il chip per l\'inferenza real-time — triplica la SRAM on-chip, riduce la latenza dei modelli complessi fino al 5x. Virgo Network li connette tutti: 134.000 TPU in un cluster non-blocking con 4x la bandwidth delle generazioni precedenti, eliminando il collo di bottiglia di rete che rallenta i competitor. Managed Lustre porta il throughput dello storage a 10 TB/s — 10x rispetto all\'anno scorso, 20x rispetto agli altri hyperscaler.',
+          angle: 'Non si vendono i chip — si vende la credibilità dell\'infrastruttura. Per un cliente che valuta dove costruire la propria strategia AI, lavorare su GCP significa avere accesso alla stessa macchina su cui girano Gemini e i modelli Google DeepMind. Il vantaggio competitivo non è acquistabile altrove.'
+        },
+        2: {
+          category: 'AI Hypercomputer', catClass: 'novita-cat--blue',
+          badge: 'GA', badgeClass: 'ga',
+          kpi: '-20% TCO Oracle · 2x price-performance Axion N4A · 20 region Oracle@GCP',
+          title: 'Compute enterprise: TCO migliore, senza cambiare il codice',
+          tagline: 'Da Oracle on-prem al cloud con il 20% di risparmio garantito, e VM general-purpose con il doppio della price-performance: GCP ridisegna il TCO dei workload più critici.',
+          desc: 'Le istanze M4N, con 26.57 GiB di RAM per vCPU e IOPS leader di mercato via Hyperdisk Extreme, abbattono il costo totale dei workload Oracle di oltre il 20%: meno core necessari significa meno licenze, con risparmio immediato e misurabile. Oracle Database@Google Cloud si espande a 20 region con supporto GoldenGate e replica BigQuery near-real-time. Sul fronte general-purpose, le istanze N4A basate sul processore Arm custom Axion di Google offrono fino a 2x la price-performance e 80% in più di efficienza energetica rispetto alle VM x86 comparabili, su workload Java, microservizi, batch e web server senza toccare una riga di applicazione.',
+          angle: 'Il TCO è l\'argomento che apre le porte in qualsiasi conversazione di migrazione. Un risparmio superiore al 20% su Oracle è verificabile prima ancora di firmare — e questo accelera l\'approvazione del budget a qualsiasi livello decisionale. Sul compute general-purpose, la leva è la semplicità: stesso workload, costo dimezzato, zero rework applicativo.'
+        },
+        3: {
+          category: 'Agentic Data Cloud', catClass: 'novita-cat--cyan',
+          badge: 'GA', badgeClass: 'ga',
+          kpi: '',
+          title: 'I tuoi dati capiscono il business, non solo la sintassi',
+          tagline: 'Knowledge Catalog mappa relazioni e significati business attraverso l\'intero data estate aziendale — in tempo reale, continuamente aggiornato.',
+          desc: 'Knowledge Catalog sostituisce i dizionari di dati statici con un motore di contesto dinamico: estrae entità, risolve definizioni conflittuali tra sistemi diversi e costruisce una mappa semantica del business aggiornata in continuo. Gli agenti AI che operano su questi dati smettono di produrre risposte generiche e iniziano a rispondere con la precisione di un analista senior che conosce l\'azienda da anni. Il Deep Research Agent in Gemini Enterprise lo usa nativamente per sintetizzare dati live, documenti interni e ricerche web in un\'unica risposta deterministica.',
+          angle: 'È la risposta alla domanda che ogni responsabile dati pone durante le demo: "Ma i vostri agenti capiscono davvero il mio business?" Knowledge Catalog è la risposta tecnica — e commerciale. Senza un layer semantico come questo, qualsiasi progetto AI in produzione rimane una demo.'
+        },
+        4: {
+          category: 'Agentic Data Cloud', catClass: 'novita-cat--cyan',
+          badge: 'GA', badgeClass: 'ga',
+          kpi: 'ROI 117% stimato · Payback in 6 mesi',
+          title: 'Dati liberi dai silos, su qualsiasi cloud',
+          tagline: 'Spanner Omni gira su altri cloud, on-prem, persino sul laptop: i dati aziendali sono finalmente portabili senza lock-in.',
+          desc: 'Il database transazionale distribuito di Google esce dal perimetro GCP e diventa deployabile anywhere — multi-cloud, on-prem, edge. L\'Iceberg REST Catalog bidirezionale permette lettura e scrittura cross-engine senza ETL. Lakehouse federation per AlloyDB offre sincronizzazione zero-ETL con BigQuery. Per le organizzazioni già su altri cloud, il messaggio è preciso: Google Cloud non richiede di abbandonare lo stack esistente, lo unifica.',
+          angle: 'L\'argomento anti-lock-in è tra i più usati dai competitor per bloccare conversazioni su GCP. Spanner Omni lo smonta in modo definitivo: è Google che porta i propri database fuori dal proprio cloud, non il cliente che cede il controllo. Efficace come apertura con CTO strutturalmente diffidenti verso i hyperscaler.'
+        },
+        5: {
+          category: 'Agentic Data Cloud', catClass: 'novita-cat--cyan',
+          badge: 'GA', badgeClass: 'ga',
+          kpi: '-34% costi BigQuery · +35% YoY velocità query',
+          title: 'Chiedi ai tuoi dati invece di interrogarli',
+          tagline: 'Conversational Analytics: agenti analitici in linguaggio naturale su BigQuery, AlloyDB, Spanner, Looker — senza SQL, senza data scientist.',
+          desc: 'Chiunque in azienda può dialogare in linguaggio naturale con dati live su tutti i principali database Google Cloud. Il sistema supporta follow-up conversazionali, genera insight, suggerisce domande successive. Dashboard Agents trasformano le dashboard statiche in interfacce dialoganti. BigQuery avanza del 35% YoY sulla velocità delle query con Advanced Runtime Optimizations, con savings fino al 34% sui workload variabili via Fluid Scaling.',
+          angle: 'Use case immediato e tangibile per figure di business non tecniche — CFO, Operations, Sales — che prendono decisioni sui dati ma non usano SQL. In una proposta di managed services, questo è il risultato visibile che il management apprezza e ricorda. Riduce anche la dipendenza dal team dati per le analisi di routine.'
+        },
+        6: {
+          category: 'Security', catClass: 'novita-cat--red',
+          badge: 'GA / Preview', badgeClass: 'ga-preview',
+          kpi: '',
+          title: 'Wiz è Google Cloud: security AI-native senza compromessi',
+          tagline: 'Red, Blue, Green Agent: Wiz porta l\'automazione agentic al ciclo completo di sicurezza cloud e AI — ora nativamente integrata in GCP.',
+          desc: 'Wiz è ora parte di Google Cloud, con copertura agentless completa per ambienti multi-cloud e AI. Red Agent (Preview) simula attacchi come un avversario esterno reale. Blue Agent (GA) automatizza threat hunting e investigation dall\'intero stack code-to-cloud. Green Agent (Preview) converte i security findings in piani di remediation per i team responsabili, riducendo il Mean Time to Remediation. Wiz Agentic Workflows orchestra tutto in un hub visuale con human-in-the-loop configurabile e drag-and-drop. Coverage totale: qualsiasi CSP, hosted e custom code, cloud e PaaS, ambienti AI inclusi.',
+          angle: 'L\'integrazione Wiz-GCP abbassa significativamente la frizione nel proporre security cloud ai clienti già su GCP: una piattaforma sola, un vendor da gestire, una console. Nelle conversazioni con CISO, il posizionamento rispetto a stack frammentati (CrowdStrike + Defender + tool custom) diventa immediato.'
+        },
+        7: {
+          category: 'Security', catClass: 'novita-cat--red',
+          badge: 'GA', badgeClass: 'ga',
+          kpi: '5M+ alert processati · Da 30 min a 1 min per alert',
+          title: 'Il SOC che non dorme mai e impara da ogni alert',
+          tagline: 'Threat Hunting, Detection Engineering e Third-Party Context Agent: il SOC autonomo è realtà su Google Security Operations.',
+          desc: 'Tre nuovi agenti specializzati completano il portfolio SecOps: il Threat Hunting Agent caccia proattivamente pattern d\'attacco nascosti; il Detection Engineering Agent genera automaticamente regole YARA-L per scenari non ancora coperti; il Third-Party Context Agent arricchisce i workflow con dati contestuali da fonti esterne. Il Triage & Investigation Agent, già in GA, ha processato oltre 5 milioni di alert — riducendo il tempo medio di analisi da 30 minuti a 1 minuto.',
+          angle: 'L\'argomento più efficace con CISO che hanno team SOC sottodimensionati: "Aggiungete la capacità operativa di un analyst senior che lavora h24, a un costo mensile prevedibile." Rilevante anche per clienti con obblighi NIS2, dove la copertura h24 è un requisito che pesa sul budget delle strutture più piccole.'
+        },
+        8: {
+          category: 'Security', catClass: 'novita-cat--red',
+          badge: 'GA', badgeClass: 'ga',
+          kpi: '',
+          title: 'Governance AI senza frenare l\'innovazione',
+          tagline: 'Agent Identity, Model Armor, Agent Gateway: ogni agente ha un\'identità verificabile, ogni interazione è ispezionata, ogni dato sensibile è protetto.',
+          desc: 'La triade di governance agentic: Agent Identity assegna un ID crittografico univoco a ogni agente con audit trail completo; Model Armor protegge a runtime contro prompt injection, tool poisoning e data leakage — integrato con Firebase, Agent Runtime, Agent Gateway, senza modificare il codice; Agent Gateway è il punto di controllo centralizzato per tutto il traffico agentic, con supporto nativo per i protocolli MCP e A2A. Security Command Center Standard introduce ora data security posture management, compliance e risk analysis senza costi aggiuntivi.',
+          angle: 'La governance è l\'argomento che trasforma i "curiosi dell\'AI" in "compratori di AI enterprise". Non è un vincolo operativo — è il motivo per cui il CFO e il Legal approvano il budget. Nelle conversazioni in cui sono presenti sia il responsabile tecnico che quello di business, questo layer è il fattore abilitante di tutto il resto.'
+        },
+        9: {
+          category: 'Security', catClass: 'novita-cat--red',
+          badge: 'Preview', badgeClass: 'preview',
+          kpi: '',
+          title: 'Controlla l\'AI che i tuoi dipendenti usano senza saperlo',
+          tagline: 'Chrome Enterprise e Google Cloud Fraud Defense: il browser e il digital trust diventano il perimetro di sicurezza dell\'era agentica.',
+          desc: 'Con l\'esplosione degli strumenti AI non autorizzati (shadow AI), Chrome Enterprise introduce reporting specifico per mappare quali servizi AI vengono usati nell\'organizzazione e da chi, con AI-aware extension threat detections che identificano estensioni browser che esfiltrano dati verso endpoint non approvati. In parallelo, reCAPTCHA evolve in Google Cloud Fraud Defense: verifica human, bot e agenti autonomi nell\'intera customer journey digitale — dalla registrazione al pagamento.',
+          angle: 'Il tema shadow AI è uno dei più immediati con CISO e DPO: il problema esiste già, è diffuso, e la maggior parte delle organizzazioni non ha ancora strumenti per misurarlo. L\'entry point è la visibilità, non il blocco — il che abbassa significativamente la resistenza interna all\'adozione.'
+        }
+      };
+
+      const allIds = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+      let currentFilter = 'all';
+      let currentModalId = null;
+
+      const pills    = document.querySelectorAll('.novita-pill');
+      const tiles    = document.querySelectorAll('.novita-tile');
+      const modal    = document.getElementById('novita-modal');
+      const modalCat     = document.getElementById('modal-cat');
+      const modalBadge   = document.getElementById('modal-badge');
+      const modalKpi     = document.getElementById('modal-kpi');
+      const modalTitle   = document.getElementById('modal-title');
+      const modalTagline = document.getElementById('modal-tagline');
+      const modalDesc    = document.getElementById('modal-desc');
+      const modalAngle   = document.getElementById('modal-angle');
+      const modalCounter = document.getElementById('modal-counter');
+      const modalPrev    = document.getElementById('modal-prev');
+      const modalNext    = document.getElementById('modal-next');
+      const modalClose   = modal.querySelector('.novita-modal-close');
+
+      // Filtro → dim (non hide)
+      pills.forEach(pill => {
+        pill.addEventListener('click', () => {
+          pills.forEach(p => { p.classList.remove('active'); p.setAttribute('aria-selected', 'false'); });
+          pill.classList.add('active');
+          pill.setAttribute('aria-selected', 'true');
+          currentFilter = pill.dataset.filter;
+          tiles.forEach(tile => {
+            const match = currentFilter === 'all' || tile.dataset.category === currentFilter;
+            tile.classList.toggle('dimmed', !match);
+          });
+        });
+      });
+
+      // Ottieni gli id visibili (non dimmed) nell'ordine della griglia
+      const getVisibleIds = () =>
+        allIds.filter(id => {
+          const t = document.querySelector(`.novita-tile[data-id="${id}"]`);
+          return t && !t.classList.contains('dimmed');
+        });
+
+      // Apri modal
+      const openModal = (id) => {
+        const d = novitaData[id];
+        if (!d) return;
+        currentModalId = id;
+
+        modalCat.textContent     = d.category;
+        modalCat.className       = `novita-cat ${d.catClass}`;
+        modalBadge.textContent   = d.badge;
+        modalBadge.className     = `ge-badge ${d.badgeClass}`;
+        modalKpi.textContent     = d.kpi;
+        modalKpi.style.display   = d.kpi ? '' : 'none';
+        modalTitle.textContent   = d.title;
+        modalTagline.textContent = d.tagline;
+        modalDesc.textContent    = d.desc;
+        modalAngle.textContent   = d.angle;
+
+        const visible = getVisibleIds();
+        const idx = visible.indexOf(id);
+        modalCounter.textContent   = `${idx + 1} / ${visible.length}`;
+        modalPrev.disabled         = idx === 0;
+        modalNext.disabled         = idx === visible.length - 1;
+
+        modal.hidden = false;
+        modalClose.focus();
+      };
+
+      // Chiudi modal
+      const closeModal = () => { modal.hidden = true; currentModalId = null; };
+
+      // Naviga tra card
+      const navigateModal = (dir) => {
+        const visible = getVisibleIds();
+        const newIdx  = visible.indexOf(currentModalId) + dir;
+        if (newIdx >= 0 && newIdx < visible.length) openModal(visible[newIdx]);
+      };
+
+      // Event listeners
+      tiles.forEach(tile =>
+        tile.addEventListener('click', () => openModal(Number(tile.dataset.id)))
+      );
+      modalClose.addEventListener('click', closeModal);
+      modal.querySelector('.novita-modal-backdrop').addEventListener('click', closeModal);
+      modalPrev.addEventListener('click', () => navigateModal(-1));
+      modalNext.addEventListener('click', () => navigateModal(1));
+
+      document.addEventListener('keydown', (e) => {
+        if (modal.hidden) return;
+        if (e.key === 'Escape')     closeModal();
+        if (e.key === 'ArrowLeft')  navigateModal(-1);
+        if (e.key === 'ArrowRight') navigateModal(1);
+      });
+    };
+
+    const sections = [...document.querySelectorAll('section')];
+    let current = 0;
+
+    function goTo(i) {
+      current = Math.max(0, Math.min(i, sections.length - 1));
+      sections[current].scrollIntoView({ behavior: 'smooth' });
+      document.getElementById('nav-index').textContent = (current + 1) + ' / ' + sections.length;
+      document.getElementById('nav-prev').disabled = current === 0;
+      document.getElementById('nav-next').disabled = current === sections.length - 1;
+    }
+
+    document.getElementById('nav-next').addEventListener('click', () => goTo(current + 1));
+    document.getElementById('nav-prev').addEventListener('click', () => goTo(current - 1));
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowDown' || e.key === ' ') goTo(current + 1);
+      if (e.key === 'ArrowUp') goTo(current - 1);
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        current = sections.indexOf(entry.target);
+        document.getElementById('nav-index').textContent = (current + 1) + ' / ' + sections.length;
+        document.getElementById('nav-prev').disabled = current === 0;
+        document.getElementById('nav-next').disabled = current === sections.length - 1;
+      });
+    }, { threshold: 0.6 });
+    sections.forEach((section) => observer.observe(section));
+
+    initReveal();
+    initNav();
+    initStack();
+    initGeminiEnterprise();
+    initNovita();
+    goTo(0);
+  </script>
+</body>
+</html>

@@ -28,37 +28,30 @@
 ## Design system (sintesi)
 
 | Token | Valore |
-|---|---|
-| `--dark` | `#00121A` |
-| `--violet` | `#873BFF` |
+|---|---|---|
+| `--dinova-dark` | `#00121A` |
+| `--dinova-violet` | `#873BFF` |
 | `--g-blue` | `#4285F4` |
 | `--g-red` | `#EA4335` |
 | `--g-yellow` | `#FBBC04` |
 | `--g-green` | `#34A853` |
-| `--cyan` | `#5CD9FF` |
-| `--lime` | `#AAE505` |
-| `--orange` | `#FF7031` |
-| `--pink` | `#FF70F3` |
-| `--slate` | `#49556D` |
+| `--dinova-cyan` | `#5CD9FF` |
+| `--dinova-lime` | `#AAE505` |
+| `--dinova-orange` | `#FF7031` |
+| `--dinova-pink` | `#FF70F3` |
+| `--dinova-slate` | `#49556D` |
 
 Font: Poppins (300/400/500/600/700/800) da `dinova/fonts/`.
 
 ## Struttura sezioni (in ordine)
 
-1. **Intro** — hero a due colonne, contesto restituzione sales
-2. **Shift** — "app for that" → "agent for that", numeri chiave
-3. **Stack** — Universal Stack GCN26, interattivo a 3 colonne con PNG + label cliccabili
-4. **Gemini** — tre porte d'ingresso (App / Agent Platform / CX)
-5. **Workspace** — quattro feature (Chat, Canvas, MCP, M365 migration)
-6. **Platform** — Build / Scale / Govern / Optimize
-7. **Proof** — 6 customer card con ROI misurato
-8. **Sales** — playbook per persona (COO, CIO/CTO, CISO, CDO)
-9. **Take Away** — 4 messaggi finali
+1. **Intro** — hero con GIF + grafica GCN26
+2. **Shift** — app for that → agent for that
+3. **Stack** — Universal Stack interattivo
+4. **Gemini Enterprise** — Build & Scale + Govern & Optimize
+5. **Novità** — 9 annunci Next '26 con filtri e accordion
+6. **Closing** — Unire i puntini, 5 nodi connessi
 
-## Issue aperte (da docs/ANALISI_V2.md)
+## Issue aperte
 
-| Priorità | Sezione | Issue |
-|---|---|---|
-| 🔴 Alta | Proof | Color Health senza logo |
-| 🟡 Media | Platform | Card Govern visivamente dominante |
-| 🟢 Bassa | Stack | Verificare bold rendering "AI Hypercomputer" a full resolution |
+> Issue aperte: vedi `docs/ROADMAP.md` e `docs/PR_PROMPT_issues.md`

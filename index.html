@@ -199,78 +199,50 @@
     }
 
     /* ── Shift section ── */
-    #shift { padding: 0; align-items: stretch; }
-    .shift-split {
-      display: flex;
-      width: 100%;
-      height: 100%;
+    #shift { background: linear-gradient(180deg, #00121A, #020811); }
+    .shift-layout {
+      display: grid;
+      grid-template-columns: 1fr 100px 1fr;
+      gap: 28px; align-items: center; margin-top: 48px;
     }
-    .shift-panel {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 64px 5vw 0;
-      overflow: hidden;
+    .shift-card {
+      padding: 48px; border-radius: 10px;
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.03);
     }
-
-    /* Colore pannello = colore background della GIF */
-    .shift-panel--past  { background: #1B1D1F; }
-    .shift-panel--future { background: #FEFEFE; }
-
-    /* Testo sinistra */
-    .shift-panel--past .shift-label {
+    .shift-card.future {
+      background: rgba(66,133,244,.07);
+      border-color: rgba(66,133,244,.28);
+    }
+    .shift-card h3 {
+      font-size: clamp(28px, 3vw, 44px);
+      font-weight: 800; line-height: 1.1;
+      color: rgba(255,255,255,.28); margin-bottom: 16px;
+    }
+    .shift-card.future h3 { color: #fff; }
+    .shift-label {
       font-size: 11px; font-weight: 800;
       text-transform: uppercase; letter-spacing: .2em;
-      color: rgba(255,255,255,0.3); margin-bottom: 16px;
+      color: rgba(255,255,255,.28); margin-bottom: 16px;
     }
-    .shift-panel--past .shift-heading {
-      color: rgba(255,255,255,0.25);
-      font-size: clamp(28px, 3.5vw, 52px);
-      font-weight: 800; line-height: 1.1; margin-bottom: 16px;
+    .shift-card.future .shift-label { color: var(--g-blue); }
+    .shift-tags {
+      display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px;
     }
-    .shift-panel--past .shift-desc {
-      color: rgba(255,255,255,0.4); font-size: 15px;
-      line-height: 1.6; margin-bottom: 20px;
+    .tag {
+      padding: 7px 11px; border-radius: 4px;
+      border: 1px solid rgba(255,255,255,.08);
+      color: rgba(255,255,255,.28);
+      font-size: 11px; font-weight: 700; letter-spacing: .04em;
     }
-    .shift-panel--past .tag {
-      background: rgba(255,255,255,0.06);
-      border-color: rgba(255,255,255,0.1);
-      color: rgba(255,255,255,0.4);
+    .shift-card.future .tag {
+      color: var(--g-blue);
+      background: rgba(66,133,244,.1);
+      border-color: rgba(66,133,244,.24);
     }
-    .shift-panel--past .shift-tags {
-      display: flex; flex-wrap: wrap; gap: 8px;
-    }
-    .shift-panel--future .shift-tags {
-      display: flex; flex-wrap: wrap; gap: 8px;
-    }
-
-    /* Testo destra */
-    .shift-panel--future .shift-label {
-      font-size: 11px; font-weight: 800;
-      text-transform: uppercase; letter-spacing: .2em;
-      color: #4285F4; margin-bottom: 16px;
-    }
-    .shift-panel--future .shift-heading {
-      color: #00121A;
-      font-size: clamp(28px, 3.5vw, 52px);
-      font-weight: 800; line-height: 1.1; margin-bottom: 16px;
-    }
-    .shift-panel--future .shift-desc {
-      color: rgba(0,18,26,0.6); font-size: 15px;
-      line-height: 1.6; margin-bottom: 20px;
-    }
-    .shift-panel--future .tag {
-      background: rgba(0,18,26,0.06);
-      border-color: rgba(0,18,26,0.15);
-      color: rgba(0,18,26,0.7);
-    }
-
-    /* GIF (ora MP4): grande, bottom-aligned, nessun margin esterno */
-    .shift-gif {
-      display: block; width: 80%; max-width: 460px;
-      margin: auto auto 0; align-self: flex-end;
-      flex-shrink: 0; object-fit: contain; background: transparent;
+    .shift-arrow {
+      color: rgba(255,255,255,.22);
+      display: grid; place-items: center;
     }
 
     /* ── Gemini Enterprise ── */
@@ -292,9 +264,10 @@
     .ge-badge { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; padding: 3px 7px; border-radius: 3px; flex-shrink: 0; line-height: 1.3; }
     .ge-badge.ga { color: var(--g-green); background: rgba(52,168,83,.15); }
     .ge-badge.preview { color: var(--g-yellow); background: rgba(251,188,4,.15); }
-    .ge-detail { margin-top: 52px; padding: 48px; border-radius: 12px; border: 1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.025); }
+    .ge-detail { margin-top: 52px; padding: 48px; border-radius: 12px; border: 1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.025); scroll-margin-top: var(--nav-h); }
     .ge-detail[hidden] { display: none; }
     .ge-detail-desc { font-size: clamp(17px, 1.2vw, 22px); color: rgba(255,255,255,.74); line-height: 1.55; max-width: 820px; }
+    .ge-detail-context { font-size: 15px; color: var(--muted); margin-bottom: 20px; }
     .platform-full-img { max-width: 960px; width: 100%; height: auto; display: block; margin: 40px auto 0; border-radius: 14px; border: 1px solid rgba(255,255,255,.08); box-shadow: 0 20px 60px rgba(0,0,0,.3); background: #00121A; clip-path: inset(3px round 14px); }
 
     #stack { min-height: 100vh; align-items: center; background: #00121A; }
@@ -319,8 +292,6 @@
     .layer-products { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 26px; }
     .layer-products span { border: 1px solid rgba(92,217,255,.2); color: rgba(255,255,255,.72); background: rgba(92,217,255,.055); padding: 7px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; }
     .sales-angle { margin-top: 26px; color: rgba(255,255,255,.66); font-size: 15px; line-height: 1.55; }
-    .stack-steps { display: none; }
-    .stack-step { height: auto; }
 
     .footer-brand { display: flex; align-items: center; justify-content: space-between; margin-top: 48px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,.1); color: rgba(255,255,255,.34); font-size: 12px; }
     .footer-brand img { height: 22px; opacity: .75; }
@@ -466,7 +437,8 @@
     }
 
     @media (max-width: 1180px) {
-      .closing-grid { gap: 14px 0; }
+      .closing-grid { grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+      .closing-connector { display: none; }
     }
 
     @media (max-width: 640px) {
@@ -495,9 +467,8 @@
       .nav-links { overflow-x: auto; }
     }
     @media (max-width: 768px) {
-      .shift-split { flex-direction: column; }
-      .shift-panel { min-height: 50vh; padding: 48px 5vw 0; }
-      .shift-gif { width: min(50%, 280px); }
+      .shift-layout { grid-template-columns: 1fr; gap: 24px; }
+      .shift-arrow { transform: rotate(90deg); }
     }
     @media (max-width: 640px) {
       #nav { padding: 0 18px; gap: 16px; }
@@ -508,10 +479,8 @@
       .lead { font-size: 20px; }
       .hero-logo-brand { width: min(160px, 38vw); }
       .hero-visual-composite { width: min(64vw, 320px); margin-top: 16px; }
-      .shift-panel { padding: 36px 5vw 0; }
-      .shift-panel--past .shift-heading,
-      .shift-panel--future .shift-heading { font-size: 28px; }
-      .shift-gif { width: min(45%, 200px); }
+      .shift-card { padding: 28px; }
+      .shift-card h3 { font-size: 28px; }
       #stack { min-height: auto; display: block; }
       .stack-sticky { position: relative; top: auto; height: auto; padding: 84px 24px 72px; gap: 28px; }
       .stack-stage { min-height: 0; height: auto; }
@@ -550,7 +519,7 @@
 
   <nav class="slide-nav" aria-label="Navigazione slide">
     <button type="button" id="nav-prev" aria-label="Slide precedente">▲</button>
-    <span id="nav-index" aria-live="polite">1 / 5</span>
+    <span id="nav-index" aria-live="polite">1 / 1</span>
     <button type="button" id="nav-next" aria-label="Slide successiva">▼</button>
   </nav>
 
@@ -575,43 +544,46 @@
       </div>
     </section>
 
-    <section id="shift" data-nav="shift">
-      <div class="shift-split">
-
-        <div class="shift-panel shift-panel--past">
-          <div class="shift-panel-content">
+    <section id="shift" data-nav="shift" aria-label="Dalle app agli agenti">
+      <div class="inner">
+        <div class="kicker reveal">Il cambio di paradigma</div>
+        <h2 class="reveal delay-1">Dalle app agli agenti.</h2>
+        <div class="shift-layout reveal delay-2">
+          <div class="shift-card">
             <div class="shift-label">Ieri</div>
-            <h2 class="shift-heading">There's an app<br>for that</h2>
-            <p class="shift-desc">Tool separati, workflow frammentati,
-              utenti costretti ad adattarsi alle applicazioni.</p>
+            <h3>There's an app<br>for that</h3>
+            <p>Tool separati, workflow frammentati, utenti
+               costretti ad adattarsi alle applicazioni.</p>
             <div class="shift-tags">
-              <span class="tag">CRM</span><span class="tag">ERP</span>
-              <span class="tag">Email</span><span class="tag">Ticketing</span>
+              <span class="tag">CRM</span>
+              <span class="tag">ERP</span>
+              <span class="tag">Email</span>
+              <span class="tag">Ticketing</span>
               <span class="tag">Storage</span>
             </div>
           </div>
-          <video class="shift-gif" src="dinova/assets/agents-dark.mp4"
-                 autoplay muted loop playsinline aria-hidden="true"></video>
-        </div>
-
-        <div class="shift-panel shift-panel--future">
-          <div class="shift-panel-content">
+          <div class="shift-arrow" aria-hidden="true">
+            <svg width="86" height="52" viewBox="0 0 86 52">
+              <path d="M4 26h70M55 7l24 19-24 19" fill="none"
+                stroke="currentColor" stroke-width="3"
+                stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="shift-card future">
             <div class="shift-label">Oggi</div>
-            <h2 class="shift-heading">There's an agent<br>for that</h2>
-            <p class="shift-desc">Agenti che attraversano sistemi,
-              leggono contesto, completano processi e lavorano
-              in autonomia.</p>
+            <h3>There's an agent<br>for that</h3>
+            <p>Agenti che attraversano sistemi, leggono
+               contesto, completano processi e lavorano
+               in autonomia.</p>
             <div class="shift-tags">
               <span class="tag">Agent Designer</span>
-              <span class="tag">Inbox</span><span class="tag">Skills</span>
+              <span class="tag">Inbox</span>
+              <span class="tag">Skills</span>
               <span class="tag">Long-running</span>
               <span class="tag">Gateway</span>
             </div>
           </div>
-          <video class="shift-gif" src="dinova/assets/agents-white.mp4"
-                 autoplay muted loop playsinline aria-hidden="true"></video>
         </div>
-
       </div>
     </section>
 
@@ -639,9 +611,6 @@
           <div class="sales-angle" id="salesAngle">Messaggio Sales: non vendere feature isolate. Usa lo stack per collegare infrastruttura, dati, sicurezza, piattaforma e valore di business.</div>
         </aside>
       </div>
-      <div class="stack-steps" aria-hidden="true">
-        <div class="stack-step" data-step="-1"></div><div class="stack-step" data-step="5"></div><div class="stack-step" data-step="4"></div><div class="stack-step" data-step="3"></div><div class="stack-step" data-step="2"></div><div class="stack-step" data-step="1"></div><div class="stack-step" data-step="0"></div>
-      </div>
     </section>
 
     <section id="gemini-enterprise" data-nav="gemini-enterprise" aria-label="Gemini Enterprise">
@@ -655,22 +624,22 @@
           <div class="platform-block reveal">
             <h3 class="block-title">Build &amp; Scale</h3>
             <div class="ge-item">
-              <button class="ge-btn" data-target="agent-studio" aria-expanded="false">
+                             <button class="ge-btn" aria-controls="geDetail" data-target="agent-studio" aria-expanded="false">
                 <span class="ge-btn-left">Agent Studio<span class="ge-badge ga">GA</span></span>
               </button>
             </div>
             <div class="ge-item">
-              <button class="ge-btn" data-target="agent-skills" aria-expanded="false">
+                             <button class="ge-btn" aria-controls="geDetail" data-target="agent-skills" aria-expanded="false">
                 <span class="ge-btn-left">Agent Skills<span class="ge-badge preview">Preview</span></span>
               </button>
             </div>
             <div class="ge-item">
-              <button class="ge-btn" data-target="long-running-tasks" aria-expanded="false">
+                             <button class="ge-btn" aria-controls="geDetail" data-target="long-running-tasks" aria-expanded="false">
                 <span class="ge-btn-left">Long Running Tasks<span class="ge-badge preview">Preview</span></span>
               </button>
             </div>
             <div class="ge-item">
-              <button class="ge-btn" data-target="agent-inbox" aria-expanded="false">
+                             <button class="ge-btn" aria-controls="geDetail" data-target="agent-inbox" aria-expanded="false">
                 <span class="ge-btn-left">Agent Inbox<span class="ge-badge preview">Preview</span></span>
               </button>
             </div>
@@ -680,22 +649,22 @@
           <div class="platform-block reveal delay-1">
             <h3 class="block-title">Govern &amp; Optimize</h3>
             <div class="ge-item">
-              <button class="ge-btn" data-target="agent-registry" aria-expanded="false">
+                             <button class="ge-btn" aria-controls="geDetail" data-target="agent-registry" aria-expanded="false">
                 <span class="ge-btn-left">Agent Registry<span class="ge-badge ga">GA</span></span>
               </button>
             </div>
             <div class="ge-item">
-              <button class="ge-btn" data-target="agent-gateway" aria-expanded="false">
+                             <button class="ge-btn" aria-controls="geDetail" data-target="agent-gateway" aria-expanded="false">
                 <span class="ge-btn-left">Agent Gateway<span class="ge-badge preview">Preview</span></span>
               </button>
             </div>
             <div class="ge-item">
-              <button class="ge-btn" data-target="agent-identity" aria-expanded="false">
+                             <button class="ge-btn" aria-controls="geDetail" data-target="agent-identity" aria-expanded="false">
                 <span class="ge-btn-left">Agent Identity<span class="ge-badge preview">Preview</span></span>
               </button>
             </div>
             <div class="ge-item">
-              <button class="ge-btn" data-target="agent-security" aria-expanded="false">
+                             <button class="ge-btn" aria-controls="geDetail" data-target="agent-security" aria-expanded="false">
                 <span class="ge-btn-left">Agent Security<span class="ge-badge preview">Preview</span></span>
               </button>
             </div>
@@ -703,7 +672,8 @@
         </div>
 
         <!-- APPROFONDIMENTO -->
-        <div class="ge-detail" id="geDetail" hidden>
+        <div class="ge-detail" id="geDetail" role="region" aria-live="polite" hidden>
+          <p class="ge-detail-context" id="geDetailContext"></p>
           <p class="ge-detail-desc" id="geDetailDesc"></p>
           <img src="dinova/assets/gemini-platform-full.png" alt="Gemini Agent Platform" class="platform-full-img" />
         </div>
@@ -1029,35 +999,43 @@
     const geminiData = {
       'agent-studio': {
         badge: 'GA',
-        desc: 'Progetta, sviluppa e deploya agenti con un\'interfaccia visuale drag-and-drop. Dal prototipo alla produzione senza scrivere codice. Supporta ADK, modelli Google, modelli open e di terze parti.'
+        desc: 'Progetta, sviluppa e deploya agenti con un\'interfaccia visuale drag-and-drop. Dal prototipo alla produzione senza scrivere codice. Supporta ADK, modelli Google, modelli open e di terze parti.',
+        ctx: 'Sviluppa e testa agenti visivamente, senza scrivere codice.'
       },
       'agent-skills': {
         badge: 'Preview',
-        desc: 'Skill pre-built e custom che estendono le capacit\u00e0 degli agenti: ricerca documentale, orchestrazione API, analisi dati, integrazione con strumenti enterprise. Una libreria in crescita di skill certificate e pronte all\'uso.'
+        desc: 'Skill pre-built e custom che estendono le capacit\u00e0 degli agenti: ricerca documentale, orchestrazione API, analisi dati, integrazione con strumenti enterprise. Una libreria in crescita di skill certificate e pronte all\'uso.',
+        ctx: 'Estendi le capacit\u00e0 degli agenti con skill pre-built o custom.'
       },
       'long-running-tasks': {
         badge: 'Preview',
-        desc: 'Agenti che operano in background su processi multi-step che durano ore o giorni. Attendono eventi esterni, gestiscono approvazioni umane, eseguono escalation automatiche. Il runtime che rende gli agenti davvero autonomi.'
+        desc: 'Agenti che operano in background su processi multi-step che durano ore o giorni. Attendono eventi esterni, gestiscono approvazioni umane, eseguono escalation automatiche. Il runtime che rende gli agenti davvero autonomi.',
+        ctx: 'Processi asincroni che durano ore o giorni, senza timeout.'
       },
       'agent-inbox': {
         badge: 'Preview',
-        desc: 'Human-in-the-loop semplificato: un unico punto di raccolta per tutte le richieste di intervento umano \u2014 approvazioni, eccezioni, escalation \u2014 generate dagli agenti automatici. Controllo senza collo di bottiglia.'
+        desc: 'Human-in-the-loop semplificato: un unico punto di raccolta per tutte le richieste di intervento umano \u2014 approvazioni, eccezioni, escalation \u2014 generate dagli agenti automatici. Controllo senza collo di bottiglia.',
+        ctx: 'Notifiche e approvazioni human-in-the-loop direttamente in Gemini.'
       },
       'agent-registry': {
         badge: 'GA',
-        desc: 'Catalogo centralizzato di tutti gli agenti dell\'organizzazione: inventario, versioning, ownership, policy compliance e audit trail completo. La fonte di verit\u00e0 unica per la flotta agentica enterprise.'
+        desc: 'Catalogo centralizzato di tutti gli agenti dell\'organizzazione: inventario, versioning, ownership, policy compliance e audit trail completo. La fonte di verit\u00e0 unica per la flotta agentica enterprise.',
+        ctx: 'Catalogo centralizzato di tutti gli agenti dell\'organizzazione.'
       },
       'agent-gateway': {
         badge: 'Preview',
-        desc: 'API gateway specializzato per traffico agentico: routing intelligente tra agenti, rate limiting, autenticazione, osservabilit\u00e0 e policy enforcement a livello di rete. Il perimetro di sicurezza per ogni chiamata agente-agente.'
+        desc: 'API gateway specializzato per traffico agentico: routing intelligente tra agenti, rate limiting, autenticazione, osservabilit\u00e0 e policy enforcement a livello di rete. Il perimetro di sicurezza per ogni chiamata agente-agente.',
+        ctx: 'Proxy sicuro per ogni chiamata da e verso gli agenti.'
       },
       'agent-identity': {
         badge: 'Preview',
-        desc: 'Identit\u00e0 digitale forte per ogni agente: policy granulari, permessi contestuali, audit completo di ogni azione. Integrazione nativa con IAM enterprise e SSO per allinearsi ai framework di sicurezza esistenti.'
+        desc: 'Identit\u00e0 digitale forte per ogni agente: policy granulari, permessi contestuali, audit completo di ogni azione. Integrazione nativa con IAM enterprise e SSO per allinearsi ai framework di sicurezza esistenti.',
+        ctx: 'Identit\u00e0 verificabile per ogni agente: chi \u00e8, cosa pu\u00f2 fare.'
       },
       'agent-security': {
         badge: 'Preview',
-        desc: 'Sicurezza integrata nel ciclo di vita dell\'agente: threat detection comportamentale, data loss prevention, policy engine contestuale e osservabilit\u00e0 continua. La sicurezza non \u00e8 un add-on, \u00e8 un layer nativo della piattaforma.'
+        desc: 'Sicurezza integrata nel ciclo di vita dell\'agente: threat detection comportamentale, data loss prevention, policy engine contestuale e osservabilit\u00e0 continua. La sicurezza non \u00e8 un add-on, \u00e8 un layer nativo della piattaforma.',
+        ctx: 'Policy, audit e protezione runtime su tutta la flotta.'
       }
     };
 
@@ -1113,6 +1091,7 @@
       const buttons = document.querySelectorAll('.ge-btn');
       const detail = document.getElementById('geDetail');
       const desc = document.getElementById('geDetailDesc');
+      const ctx = document.getElementById('geDetailContext');
       let activeId = null;
       buttons.forEach((btn) => {
         btn.addEventListener('click', () => {
@@ -1130,8 +1109,12 @@
             btn.classList.add('active');
             btn.setAttribute('aria-expanded', 'true');
             const data = geminiData[id];
-            if (data) desc.textContent = data.desc;
+            if (data) {
+              desc.textContent = data.desc;
+              ctx.textContent = data.ctx;
+            }
             detail.hidden = false;
+            detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             activeId = id;
           }
         });

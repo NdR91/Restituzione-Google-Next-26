@@ -899,7 +899,7 @@
       .stack-label { position: static; transform: none; }
       .stack-label.active { transform: none; }
       .stack-copy { display: block; padding-left: 22px; }
-      .platform-blocks { grid-template-columns: 1fr; gap: 32px; }
+      .ge-spotlight { grid-template-columns: 1fr; gap: 28px; }
       .nav-links { overflow-x: auto; }
     }
     @media (max-width: 768px) {
@@ -927,8 +927,9 @@
       .stack-copy { padding: 24px; max-width: none; }
       .layer-title { font-size: 34px; }
       .layer-desc { font-size: 18px; }
-      .ge-detail { padding: 24px; }
-      .platform-visual { padding: 16px; }
+      .ge-panel-inner { padding: 20px; }
+      .ge-placeholder { aspect-ratio: 16 / 10; }
+      #gemini-enterprise .lead { margin-bottom: 16px; }
       .footer-brand { align-items: flex-start; flex-direction: column; gap: 16px; }
       .o-ring { width: 460px; height: 460px; border-width: 74px; }
     }
@@ -1350,42 +1351,66 @@
       'agent-studio': {
         badge: 'GA',
         desc: 'Progetta, sviluppa e deploya agenti con un\'interfaccia visuale drag-and-drop. Dal prototipo alla produzione senza scrivere codice. Supporta ADK, modelli Google, modelli open e di terze parti.',
-        ctx: 'Sviluppa e testa agenti visivamente, senza scrivere codice.'
+        ctx: 'Sviluppa e testa agenti visivamente, senza scrivere codice.',
+        name: 'Agent Studio',
+        color: '--g-blue',
+        sales: 'Accelera la costruzione di agenti con un\'interfaccia visuale che democratizza lo sviluppo AI: non serve un team di ML engineer per prototipare e mettere in produzione agenti enterprise.'
       },
       'agent-skills': {
         badge: 'Preview',
         desc: 'Skill pre-built e custom che estendono le capacit\u00e0 degli agenti: ricerca documentale, orchestrazione API, analisi dati, integrazione con strumenti enterprise. Una libreria in crescita di skill certificate e pronte all\'uso.',
-        ctx: 'Estendi le capacit\u00e0 degli agenti con skill pre-built o custom.'
+        ctx: 'Estendi le capacit\u00e0 degli agenti con skill pre-built o custom.',
+        name: 'Agent Skills',
+        color: '--dinova-violet',
+        sales: 'Ogni skill \u00e8 un modulo riutilizzabile che riduce i tempi di sviluppo del 60%: non si parte da zero, si compongono funzionalit\u00e0 come mattoncini.'
       },
       'long-running-tasks': {
         badge: 'Preview',
         desc: 'Agenti che operano in background su processi multi-step che durano ore o giorni. Attendono eventi esterni, gestiscono approvazioni umane, eseguono escalation automatiche. Il runtime che rende gli agenti davvero autonomi.',
-        ctx: 'Processi asincroni che durano ore o giorni, senza timeout.'
+        ctx: 'Processi asincroni che durano ore o giorni, senza timeout.',
+        name: 'Long Running Tasks',
+        color: '--dinova-cyan',
+        sales: 'Gli agenti che operano in background per giorni sono il salto dalla demo alla produzione reale: processi che prima richiedevano supervisione umana continua diventano autonomi.'
       },
       'agent-inbox': {
         badge: 'Preview',
         desc: 'Human-in-the-loop semplificato: un unico punto di raccolta per tutte le richieste di intervento umano \u2014 approvazioni, eccezioni, escalation \u2014 generate dagli agenti automatici. Controllo senza collo di bottiglia.',
-        ctx: 'Notifiche e approvazioni human-in-the-loop direttamente in Gemini.'
+        ctx: 'Notifiche e approvazioni human-in-the-loop direttamente in Gemini.',
+        name: 'Agent Inbox',
+        color: '--g-green',
+        sales: 'Human-in-the-loop senza collo di bottiglia: il giusto compromesso tra automazione e controllo che ogni compliance team richiede per approvare i deployment AI.'
       },
       'agent-registry': {
         badge: 'GA',
         desc: 'Catalogo centralizzato di tutti gli agenti dell\'organizzazione: inventario, versioning, ownership, policy compliance e audit trail completo. La fonte di verit\u00e0 unica per la flotta agentica enterprise.',
-        ctx: 'Catalogo centralizzato di tutti gli agenti dell\'organizzazione.'
+        ctx: 'Catalogo centralizzato di tutti gli agenti dell\'organizzazione.',
+        name: 'Agent Registry',
+        color: '--g-yellow',
+        sales: 'Senza un registro centralizzato non puoi governare, non puoi auditare, non puoi scalare. \u00c8 il punto di partenza obbligato per qualsiasi strategia agentica enterprise.'
       },
       'agent-gateway': {
         badge: 'Preview',
         desc: 'API gateway specializzato per traffico agentico: routing intelligente tra agenti, rate limiting, autenticazione, osservabilit\u00e0 e policy enforcement a livello di rete. Il perimetro di sicurezza per ogni chiamata agente-agente.',
-        ctx: 'Proxy sicuro per ogni chiamata da e verso gli agenti.'
+        ctx: 'Proxy sicuro per ogni chiamata da e verso gli agenti.',
+        name: 'Agent Gateway',
+        color: '--g-red',
+        sales: 'Il perimetro di sicurezza per l\'era agentica: ogni chiamata tra agenti \u00e8 autenticata, tracciata e governata senza modificare una riga di codice degli agenti.'
       },
       'agent-identity': {
         badge: 'Preview',
         desc: 'Identit\u00e0 digitale forte per ogni agente: policy granulari, permessi contestuali, audit completo di ogni azione. Integrazione nativa con IAM enterprise e SSO per allinearsi ai framework di sicurezza esistenti.',
-        ctx: 'Identit\u00e0 verificabile per ogni agente: chi \u00e8, cosa pu\u00f2 fare.'
+        ctx: 'Identit\u00e0 verificabile per ogni agente: chi \u00e8, cosa pu\u00f2 fare.',
+        name: 'Agent Identity',
+        color: '--dinova-lime',
+        sales: 'Ogni agente ha un\'identit\u00e0 verificabile come un dipendente: il prerequisito essenziale per qualsiasi deployment enterprise che richieda controllo degli accessi.'
       },
       'agent-security': {
         badge: 'Preview',
         desc: 'Sicurezza integrata nel ciclo di vita dell\'agente: threat detection comportamentale, data loss prevention, policy engine contestuale e osservabilit\u00e0 continua. La sicurezza non \u00e8 un add-on, \u00e8 un layer nativo della piattaforma.',
-        ctx: 'Policy, audit e protezione runtime su tutta la flotta.'
+        ctx: 'Policy, audit e protezione runtime su tutta la flotta.',
+        name: 'Agent Security',
+        color: '--dinova-pink',
+        sales: 'La sicurezza non \u00e8 un add-on da installare dopo: \u00e8 un layer nativo che protegge ogni agente dal momento in cui viene creato fino al runtime in produzione.'
       }
     };
 
@@ -1438,37 +1463,90 @@
     };
 
     const initGeminiEnterprise = () => {
-      const buttons = document.querySelectorAll('.ge-btn');
-      const detail = document.getElementById('geDetail');
-      const desc = document.getElementById('geDetailDesc');
-      const ctx = document.getElementById('geDetailContext');
-      let activeId = null;
-      buttons.forEach((btn) => {
-        btn.addEventListener('click', () => {
-          const id = btn.dataset.target;
-          if (activeId === id) {
-            btn.classList.remove('active');
-            btn.setAttribute('aria-expanded', 'false');
-            detail.hidden = true;
-            activeId = null;
-          } else {
-            document.querySelectorAll('.ge-btn.active').forEach((b) => {
-              b.classList.remove('active');
-              b.setAttribute('aria-expanded', 'false');
-            });
-            btn.classList.add('active');
-            btn.setAttribute('aria-expanded', 'true');
-            const data = geminiData[id];
-            if (data) {
-              desc.textContent = data.desc;
-              ctx.textContent = data.ctx;
-            }
-            detail.hidden = false;
-            detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            activeId = id;
+      const navItems = document.querySelectorAll('.ge-nav-item');
+      const panelInner = document.getElementById('gePanelInner');
+      const panelTitle = document.getElementById('gePanelTitle');
+      const panelDesc = document.getElementById('gePanelDesc');
+      const panelSales = document.getElementById('gePanelSales');
+      const placeholderLabel = document.getElementById('gePlaceholderLabel');
+      const placeholder = document.querySelector('.ge-placeholder');
+      const placeholderImg = placeholder ? placeholder.querySelector('img') : null;
+
+      let isAnimating = false;
+
+      const showFeature = (id) => {
+        if (isAnimating) return;
+        const data = geminiData[id];
+        if (!data) return;
+
+        // Update active state on nav items
+        navItems.forEach((item) => {
+          const match = item.dataset.target === id;
+          item.classList.toggle('active', match);
+          item.setAttribute('aria-pressed', String(match));
+        });
+
+        // Slide out current content
+        panelInner.classList.add('slide-out');
+        isAnimating = true;
+
+        setTimeout(() => {
+          // Update content
+          panelTitle.textContent = data.name || id;
+          panelDesc.textContent = data.ctx || '';
+          panelSales.textContent = data.sales || '';
+          placeholderLabel.textContent = data.name || id;
+          if (placeholder) {
+            placeholder.style.setProperty('--ge-color', `var(${data.color || '--g-blue'})`);
+          }
+          if (placeholderImg) {
+            placeholderImg.removeAttribute('src');
+            placeholderImg.setAttribute('data-src', `dinova/assets/gemini-${id}.png`);
+          }
+
+          // Prepare slide in
+          panelInner.classList.remove('slide-out');
+          panelInner.classList.add('slide-in');
+
+          // Force reflow, then animate in
+          void panelInner.offsetWidth;
+          panelInner.classList.remove('slide-in');
+
+          setTimeout(() => {
+            isAnimating = false;
+          }, 300);
+        }, 300);
+      };
+
+      navItems.forEach((item) => {
+        item.addEventListener('click', () => {
+          const id = item.dataset.target;
+          // Only switch if not already active
+          if (!item.classList.contains('active')) {
+            showFeature(id);
           }
         });
       });
+
+      // Set default: first item (Agent Studio)
+      const defaultItem = navItems[0];
+      if (defaultItem) {
+        const id = defaultItem.dataset.target;
+        const data = geminiData[id];
+        if (data) {
+          panelTitle.textContent = data.name || id;
+          panelDesc.textContent = data.ctx || '';
+          panelSales.textContent = data.sales || '';
+          placeholderLabel.textContent = data.name || id;
+          if (placeholder) {
+            placeholder.style.setProperty('--ge-color', `var(${data.color || '--g-blue'})`);
+          }
+          if (placeholderImg) {
+            placeholderImg.removeAttribute('src');
+            placeholderImg.setAttribute('data-src', `dinova/assets/gemini-${id}.png`);
+          }
+        }
+      }
     };
 
     const initNovita = () => {

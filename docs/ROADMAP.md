@@ -183,7 +183,7 @@ Il `body::before` ha due radial-gradient in `position: fixed` che si spostano vi
 |---|---|---|
 | `#intro` | ✅ OK | Hero a due colonne. Layout stabile. |
 | `#shift` | ✅ OK | Card before/after. Leggibile e coerente. |
-| `#stack` | ⚠️ Warning | Funziona. Layout custom intenzionale ma da documentare. Vedi UI-M4. |
+| `#stack` | ⚠️ Warning | Layout in correzione (UI-M4). Contenuti da rivedere — segnalato per ciclo successivo. |
 
 ---
 
@@ -194,8 +194,8 @@ Il `body::before` ha due radial-gradient in `position: fixed` che si spostano vi
 | 1 | UI-C1 | Novità | 🔴 Critico | Immediato | 45–90 min |
 | 2 | UI-M3 | Novità h2 | 🟡 Medio | Con UI-C1 | 5 min |
 | 3 | UI-C2 | Gemini Enterprise | 🔴 Critico | Subito dopo | 30–60 min |
-| 4 | UI-M1 | Background globale | 🟡 Medio | Dopo critici | 20–30 min |
-| 5 | UI-M2 | Closing bg | 🟡 Medio | Con UI-M1 | 10–15 min |
+| 4 | ~~UI-M1~~ | ~~Background globale~~ | ✅ Done | — | — |
+| 5 | ~~UI-M2~~ | ~~Closing bg~~ | ✅ Done | — | — |
 | 6 | UI-M4 | Stack layout | 🟡 Medio | Solo se necessario | 20–30 min |
 | 7 | T5 | Token dashboard | 📋 Bloccato | Attende Fabio | 1–2h |
 | — | — | Copy review | 📋 Deferred | Dopo fix | — |

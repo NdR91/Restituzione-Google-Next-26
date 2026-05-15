@@ -46,7 +46,7 @@
       inset: 0;
       pointer-events: none;
       background:
-        radial-gradient(circle at 85% 8%, rgba(135,59,255,.18), transparent 32%),
+        radial-gradient(circle at 85% 8%, rgba(135,59,255,.06), transparent 32%),
         radial-gradient(circle at 10% 80%, rgba(66,133,244,.12), transparent 34%);
       z-index: 0;
     }
@@ -201,7 +201,7 @@
     }
 
     /* ── Shift section ── */
-    #shift { background: linear-gradient(180deg, #00121A, #020811); }
+    #shift { background: linear-gradient(180deg, var(--dinova-dark), #020811); }
     .shift-layout {
       display: grid;
       grid-template-columns: 1fr 100px 1fr;
@@ -248,7 +248,7 @@
     }
 
     /* ── Gemini Enterprise — Feature Spotlight ── */
-    #gemini-enterprise { background: #00121A; align-items: flex-start; }
+    #gemini-enterprise { background: var(--dinova-dark); align-items: flex-start; }
     #gemini-enterprise .inner {
       display: flex;
       flex-direction: column;
@@ -410,8 +410,8 @@
     .ge-badge.ga { color: var(--g-green); background: rgba(52,168,83,.15); }
     .ge-badge.preview { color: var(--g-yellow); background: rgba(251,188,4,.15); }
 
-    #stack { min-height: 100vh; align-items: center; background: #00121A; }
-    .stack-sticky { position: relative; width: 100%; min-height: calc(100vh - var(--nav-h)); display: grid; grid-template-columns: minmax(230px, .4fr) minmax(390px, .64fr) minmax(500px, .86fr); gap: 58px; align-items: center; padding: 46px 7vw 42px; }
+    #stack { min-height: 100vh; align-items: center; background: var(--dinova-dark); }
+    .stack-sticky { position: relative; width: min(1520px, calc(100vw - 120px)); margin: 0 auto; min-height: calc(100vh - var(--nav-h)); display: grid; grid-template-columns: minmax(230px, .4fr) minmax(390px, .64fr) minmax(500px, .86fr); gap: 58px; align-items: center; padding: 46px 0 42px; }
     .stack-stage { position: relative; height: 540px; display: grid; place-items: center; }
     .stack-asset-wrap { position: relative; width: min(246px, 15vw); z-index: 1; margin: 0; transition: transform .55s var(--ease), filter .55s var(--ease), opacity .55s var(--ease); }
     .stack-asset-wrap::before { content: ''; position: absolute; inset: 4% 8%; border-radius: 50%; background: radial-gradient(circle, rgba(66,133,244,.16), transparent 68%); filter: blur(28px); opacity: .2; transition: opacity .45s var(--ease), transform .45s var(--ease); }
@@ -802,7 +802,7 @@
     }
 
     /* ── Closing ── */
-    #closing { scroll-margin-top: var(--nav-h); }
+    #closing { scroll-margin-top: var(--nav-h); background: var(--dinova-dark); }
     .closing-lead { max-width: 780px; margin-bottom: 24px; }
 
     .closing-grid {
@@ -889,6 +889,7 @@
 
     @media (max-width: 1180px) {
       .inner { width: min(100vw - 48px, 1000px); }
+      .stack-sticky { width: min(100vw - 48px, 1000px); }
       .hero-layout { grid-template-columns: 1fr; min-height: auto; gap: 24px; }
       .hero-col-text { padding-top: 24px; }
       .hero-col-visual { min-height: auto; }
@@ -918,7 +919,7 @@
       .shift-card { padding: 28px; }
       .shift-card h3 { font-size: 28px; }
       #stack { min-height: auto; display: block; }
-      .stack-sticky { position: relative; top: auto; height: auto; padding: 84px 24px 72px; gap: 28px; }
+      .stack-sticky { position: relative; top: auto; height: auto; width: calc(100vw - 36px); padding: 84px 0 72px; gap: 28px; }
       .stack-stage { min-height: 0; height: auto; }
       .stack-labels { height: auto; min-height: 0; display: grid; gap: 8px; }
       .stack-label { position: static; transform: none; font-size: 18px; }

@@ -2,78 +2,62 @@
 
 **Data target:** 18 maggio 2026  
 **File attivo:** `index.html`  
-**Ultimo aggiornamento:** 14 maggio 2026
+**Ultimo aggiornamento:** 15 maggio 2026
 
 ---
 
-## Approccio
+## Stato attuale
 
-La V3 non riparte da zero: si modifica `index.html` (V2) tenendo ciò che serve e intervenendo sul resto.  
-Prima di iniziare qualsiasi modifica: **salvare `index.html` → `archive/v2-final.html`** come snapshot pulito.
-
----
-
-## Blocco 0 — Sblocchi (priorità massima)
-
-- [x] **Snapshot V2** — copiare `index.html` → `archive/v2-final.html`
-- [x] **GitLab repo** (Andrea) — necessario per la collaborazione con Fabio
-- [ ] **Contenuti novità da Fabio** — selezione dei 3 temi per la sezione Novità (Data, Workspace, altro); dipende anche dal Notebook LM che prepara Fabio
+Tutti i ticket di hygiene completati (T1–T4, T6). Rimangono aperti solo item bloccati su dati/asset esterni e la review finale.
 
 ---
 
-## Blocco 2 — Ristrutturazione V3
+## Completato ✅
 
-> Lavorare su `index.html`. Ordine consigliato: prima le rimozioni, poi le modifiche, poi le aggiunte.
+### Blocco 0 — Sblocchi
+- [x] Snapshot V2 → `archive/v2-final.html`
+- [x] GitLab repo (Andrea) — collaborazione con Fabio attiva
+- [x] Sezione Novità — implementata da Fabio (9 annunci, filtri pill, accordion)
 
-### Rimozioni
+### Blocco 2 — Ristrutturazione V3
+- [x] Rimozioni: Gemini (3 porte), Workspace standalone, Proof, Sales playbook, Take Away
+- [x] Stack — mantenuta attiva
+- [x] Apertura — Intro ridisegnata (GIF, grafica, logo GCN26); Shift come sezione standalone
+- [x] Gemini Enterprise — 2 blocchi Build & Scale + Govern & Optimize, 8 bottoni espandibili, badge disponibilità
+- [x] Chiusura "Unire i puntini" — 5 nodi connessi (struttura base; dashboard token ancora da completare)
 
-- [x] **Stack** — ripristinata e mantenuta attiva per ora (da rivalutare)
-- [x] **Gemini** (3 porte d'ingresso) — eliminata
-- [x] **Workspace** — eliminata come sezione standalone
-- [x] **Proof** — eliminata
-- [x] **Sales** — eliminato il playbook per persona
-- [x] **Take Away** — eliminata
-
-### Modifiche
-
-- [x] **Apertura** — Intro ridisegnata (GIF, grafica, logo GCN26, copy aggiornato); Shift mantenuta come sezione standalone senza numeri
-
-- [x] **Gemini Enterprise** (ex Platform) — ristrutturare in 2 blocchi con bottoni interattivi espandibili:
-  - **Build & Scale:** Agent Studio, Agent Skills, Long Running Tasks, Agent Inbox
-  - **Govern & Optimize:** Agent Registry, Agent Gateway, Agent Identity, Agent Security/Policy
-  - Aggiungere visual Gemini Platform semplificata (no testo pesante) nell'header della sezione
-  - Nell'approfondimento espanso dei bottoni: includere l'**immagine giga** della piattaforma con tutti i componenti (Agent Registry, Gateway, Identity, Security…)
-  - Aggiungere badge disponibilità (Private Preview / GA) dove applicabile
-
-### Aggiunte
-
-- [ ] **Novità** — nuova sezione con 3 bottoni tematici *(dipende da contenuti Fabio)*
-  - Workspace (uno dei 3 temi)
-  - Data
-  - Altro tema da definire con Fabio
-
-- [x] **Chiusura "Unire i puntini"** — nuova sezione con schema visivo/animazione:
-  - Gemini Enterprise → Agentic Platform
-  - Agentic Platform → AI Security (Agent Identity + Gateway)
-  - AI Security → Wiz + Cloudflare (multi-cloud)
-  - Costi token agentici (30x) → Small / local model — mostrare dashboard reale (~11M token bruciati per questa presentazione, convertiti in €, confronto con Gemini Pro e con vecchi chatbot tipo Luca)
-  - Workspace intelligence → Opportunità vs Microsoft
+### Ticket hygiene (da PR_PROMPT_issues.md)
+- [x] T1 — Pulizia residui scroll-snap stack
+- [x] T2 — Gemini Enterprise detail UX (scroll smooth, aria-controls, testo contestuale per bottone)
+- [x] T3 — Allineamento CLAUDE.md → DOM V3
+- [x] T4 — Closing grid tablet (connettori nascosti sotto 1180px)
+- [x] T6 — Verifica asset (nessun 404)
 
 ---
 
-## Blocco 3 — Approfondimenti (Andrea, in parallelo)
+## In attesa / bloccato ⏳
+
+- [ ] **T5 — Dashboard token reale** (bloccato su dati Fabio)
+  - Servono: token count reale, costo €, confronto Gemini Pro, confronto chatbot Luca
+- [ ] **Partner award image** — `dinova/assets/partner-award.png` non ancora disponibile
+
+---
+
+## Da fare prima del 18 maggio 🔴
+
+- [ ] **Review con Francesca** — layout e design
+- [ ] **Verifica 100vh overflow** su `#gemini-enterprise` (rimozione `.platform-visual` da confermare visivamente)
+- [ ] **Copy** — tutto il copy è da rivedere (deferred, da fare in un passaggio dedicato)
+- [ ] Review completa della presentazione
+- [ ] Pronta per il 18 maggio
+
+---
+
+## Blocco 3 — Approfondimenti (Andrea, in parallelo, non bloccante)
 
 - [ ] Studiare reinforcement learning + API dedicata menzionata al Next
 - [ ] Approfondire Data Insite Agent
 - [ ] Definire caso d'uso Agent Design (risposta alle domande di Max)
-
----
-
-## Blocco 4 — Review finale
-
-- [ ] Coinvolgere Francesca per decisioni di layout e design
-- [ ] Review completa della presentazione
-- [ ] ✅ Pronta per il 18 maggio
 
 ---
 
@@ -83,3 +67,4 @@ Prima di iniziare qualsiasi modifica: **salvare `index.html` → `archive/v2-fin
 - Analisi V2: `docs/ANALISI_V2.md`
 - Blueprint V2: `docs/BLUEPRINT.md`
 - Copy V2: `docs/copy.md`
+- Issue backlog: `docs/PR_PROMPT_issues.md`

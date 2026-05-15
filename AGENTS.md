@@ -39,6 +39,20 @@ Preferire CSS transitions/animations. Usare JS solo dove CSS non è sufficiente.
 
 ---
 
+## Collaborazione Git
+
+- Non lavorare direttamente su `main`, salvo correzioni minime concordate.
+- Creare una branch per ogni sezione o task significativo, ad esempio `feature/gemini-enterprise`, `feature/ai-security`, `fix/navigation`.
+- Le branch di sezione devono limitarsi al blocco relativo in `index.html`.
+- Le modifiche trasversali a stile, navigazione o animazioni globali devono stare in branch dedicate.
+- Evitare modifiche contemporanee alla stessa sezione di `index.html`.
+- Prima di iniziare una sessione, aggiornare `main` e riallineare la propria branch.
+- Fare commit piccoli e descrittivi.
+- Aprire una Pull Request verso `main` per revisionare e integrare le modifiche.
+- Non usare `push --force`, `reset --hard` o comandi distruttivi senza accordo esplicito.
+
+---
+
 ## Fonti per i contenuti
 
 Non inventare funzionalità o nomi di prodotto. Verificare sempre nei materiali sorgente:

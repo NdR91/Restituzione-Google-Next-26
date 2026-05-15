@@ -102,18 +102,74 @@ Dopo ogni modifica, ricarica la pagina nel browser (`Cmd+R`).
 
 ## 👥 Collaborazione
 
-### Workflow
+Per non sovrascriversi a vicenda, lavorare sempre su branch separate e integrare una sezione alla volta.
 
-1. **Prima di lavorare**: `git pull`
-2. **Durante**: lavora direttamente su `Google Cloud Next 26 - V2.html`
-3. **Dopo le modifiche**: `git add . && git commit -m "descrizione"` && `git push`
+### Metodo consigliato
 
-### Regole
+1. **Aggiorna `main` prima di iniziare**
 
-- ❌ **NON committare** in `archive/` — è read-only
-- ❌ **NON modificare** `install.sh` (già rimosso, ignorato)
-- ✅ **Sì a**: modifiche su HTML, CSS, copy.md, asset
-- ✅ **Commit frequenti** con messaggi descrittivi
+   ```bash
+   git checkout main
+   git pull
+   ```
+
+2. **Passa alla branch della tua sezione**
+
+   Se la branch esiste già (come ora):
+
+   ```bash
+   git checkout feature/agentic-platform
+   ```
+
+   Se devi crearla (prima volta):
+
+   ```bash
+   git checkout -b feature/agentic-platform
+   ```
+
+   Branch disponibili in questo progetto:
+   - `feature/intro`
+   - `feature/gemini-enterprise`
+   - `feature/agentic-platform`
+   - `feature/ai-security`
+   - `feature/closing`
+   - `fix/navigation`
+
+3. **Lavora solo sulla parte assegnata**
+
+   Il file attivo è `index.html`. Se la branch è per una sezione, modificare solo il blocco relativo a quella sezione.
+
+4. **Fai commit piccoli e chiari**
+
+   ```bash
+   git add index.html
+   git commit -m "Aggiorna sezione Agentic Platform"
+   ```
+
+5. **Pubblica la branch e apri una Pull Request**
+
+   ```bash
+   git push -u origin feature/agentic-platform
+   ```
+
+6. **Prima del merge, riallinea la branch se `main` è cambiato**
+
+   ```bash
+   git checkout feature/agentic-platform
+   git fetch
+   git merge origin/main
+   ```
+
+### Regole pratiche
+
+- ❌ Non lavorare direttamente su `main`, salvo correzioni minime concordate.
+- ❌ Non modificare contemporaneamente la stessa sezione di `index.html`.
+- ❌ Non committare in `archive/` o `uploads/` — sono read-only.
+- ❌ Non usare `push --force`, `reset --hard` o comandi distruttivi senza accordo esplicito.
+- ✅ Usare branch per sezione quando le modifiche sono indipendenti.
+- ✅ Usare branch dedicate per modifiche trasversali, ad esempio stile globale, navigazione o animazioni.
+- ✅ Fare merge frequenti su `main`, una sezione alla volta.
+- ✅ Tenere commit piccoli e messaggi descrittivi.
 
 ---
 

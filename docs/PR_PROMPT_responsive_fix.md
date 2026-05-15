@@ -1,6 +1,6 @@
 # Prompt per antigravity — PR: fix responsive verticale (URGENTE)
 
-**Workflow:** PR su `index.html`. Branch: `fix/responsive-vertical`.
+**Workflow:** PR su `index.html`. Branch: `test/responsive-vertical`.
 **Reviewer:** Andrea.
 **Priorità:** ALTA. Bloccante per la restituzione del 18 maggio.
 **Vincoli (da `CLAUDE.md`):** offline-first, vanilla-first, token CSS sempre, no build tools.
@@ -165,9 +165,9 @@ La grid è `repeat(3, 1fr)` con 3 righe × 3 colonne = 9 tile. Su schermi corti,
 
 ## Note PM per Fabio e Andrea
 
-- **Decisione architetturale che richiede sign-off:** lo scroll-snap "presentation mode" era una scelta voluta? Se sì, capirne la motivazione prima di rimuoverlo. La mia raccomandazione PM è abbandonarlo perché incompatibile con l'eterogeneità di schermi della restituzione del 18 maggio.
+- **Decisione presa: lo scroll-snap viene rimosso.** La pagina gira su schermi eterogenei (laptop personali, proiettore di sala il 18 maggio) e l'approccio fluido è l'unico robustamente sicuro. Non serve sign-off prima di partire: antigravity implementa questo prompt, poi Andrea revisiona la PR sul branch `test/responsive-vertical` prima del merge su `main`.
 - **Test sul proiettore di sala:** se possibile fare un test fisico prima del 18 sulla configurazione reale (PC + proiettore + risoluzione effettiva). Lo zoom del browser e la modalità presentazione del browser (F11) cambiano l'altezza utile.
-- **Plan B:** se Andrea ritiene irrinunciabile lo scroll-snap, fix alternativo è mantenere `min-height: 100vh` + `overflow: auto` (non hidden) sulle sezioni: il contenuto eccedente scrolla internamente alla sezione, lo snap resta. Meno elegante ma compromesso.
+- **Nessun Plan B nel codice.** Se dopo revisione di Andrea emergesse una ragione forte per ripristinare lo snap, si apre una PR separata. Per ora il branch `test/responsive-vertical` implementa **solo** la soluzione fluida descritta in questo prompt.
 
 ---
 

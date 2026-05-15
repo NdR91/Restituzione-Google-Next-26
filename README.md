@@ -113,15 +113,24 @@ Per non sovrascriversi a vicenda, lavorare sempre su branch separate e integrare
    git pull
    ```
 
-2. **Crea una branch per la sezione o il task**
+2. **Passa alla branch della tua sezione**
+
+   Se la branch esiste già (come ora):
+
+   ```bash
+   git checkout feature/agentic-platform
+   ```
+
+   Se devi crearla (prima volta):
 
    ```bash
    git checkout -b feature/agentic-platform
    ```
 
-   Esempi di nomi:
+   Branch disponibili in questo progetto:
    - `feature/intro`
    - `feature/gemini-enterprise`
+   - `feature/agentic-platform`
    - `feature/ai-security`
    - `feature/closing`
    - `fix/navigation`

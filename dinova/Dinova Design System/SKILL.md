@@ -72,12 +72,9 @@ All in `assets/` folder:
 - `logo-o-dark.png` — Brand O mark, dark navy
 - `bg-o-dark.png` — O mark as full-bleed dark BG
 - `bg-o-purple.png` — O mark on purple gradient
-- `illus-woman-ai.png/.jpg` — Woman + AI illustration
+- `illus-woman-ai.png` — Woman + AI illustration
 - `illus-man-design.png` — Man + design tools illustration
 - `illus-woman-vr.png` — Woman + VR illustration
-- `bg-data-particles.jpg` — Dark abstract tech background
-- `bg-data-city.jpg` — 3D wireframe city background
-- `photo-team-purple.jpg` — Team photo with violet duotone
 
 ### 8. The brand "O" shape
 The Dinova signature visual is a **large circle** (the "O" in "dinova.one"). Recreate it with CSS:

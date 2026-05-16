@@ -208,10 +208,7 @@ assets/
   bg-o-purple.png            — "O" on purple gradient background
   bg-o-purple-light.png      — "O" on lighter purple background
   bg-purple-solid.png        — Solid violet background
-  bg-data-particles.jpg      — Dark navy + swirling purple particles background
-  bg-data-city.jpg           — 3D wireframe city in purple, dark BG
-  photo-team-purple.jpg      — Team photo with violet duotone overlay
-  illus-woman-ai.jpg/.png    — Illustration: woman with AI workplace (dark + light BG)
+  illus-woman-ai.png         — Illustration: woman with AI workplace
   illus-man-design.png       — Illustration: man with design tools (light BG)
   illus-woman-vr.png         — Illustration: woman with VR headset (light BG)
   illus-woman-ai-2.png       — Illustration variant (light BG)

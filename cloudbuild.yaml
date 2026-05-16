@@ -4,14 +4,14 @@ steps:
     args:
       - 'build'
       - '-t'
-      - 'europe-west1-docker.pkg.dev/$PROJECT_ID/cloud-run-source-deploy/google-next:$COMMIT_SHA'
+      - 'europe-west1-docker.pkg.dev/$PROJECT_ID/rgnext-registry/rgnext-image:$COMMIT_SHA'
       - '.'
 
   # 2. Push su Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
     args:
       - 'push'
-      - 'europe-west1-docker.pkg.dev/$PROJECT_ID/cloud-run-source-deploy/google-next:$COMMIT_SHA'
+      - 'europe-west1-docker.pkg.dev/$PROJECT_ID/rgnext-registry/rgnext-image:$COMMIT_SHA'
 
   # 3. Deploy su Cloud Run
   - name: 'gcr.io/google.com/cloudsdktool/google-cloud-cli'
@@ -19,8 +19,8 @@ steps:
     args:
       - 'run'
       - 'deploy'
-      - 'google-next'
-      - '--image=europe-west1-docker.pkg.dev/$PROJECT_ID/cloud-run-source-deploy/google-next:$COMMIT_SHA'
+      - 'rgnext-service'
+      - '--image=europe-west1-docker.pkg.dev/$PROJECT_ID/rgnext-registry/rgnext-image:$COMMIT_SHA'
       - '--region=europe-west1'
       - '--allow-unauthenticated'
       - '--memory=256Mi'
@@ -29,4 +29,4 @@ steps:
       - '--max-instances=10'
 
 images:
-  - 'europe-west1-docker.pkg.dev/$PROJECT_ID/cloud-run-source-deploy/google-next:$COMMIT_SHA'
+  - 'europe-west1-docker.pkg.dev/$PROJECT_ID/rgnext-registry/rgnext-image:$COMMIT_SHA'

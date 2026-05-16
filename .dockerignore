@@ -1,0 +1,14 @@
+.git/
+.gitignore
+.gitattributes
+node_modules/
+archive/
+uploads/
+docs/
+.opencode/
+README.md
+CLAUDE.md
+AGENTS.md
+package.json
+package-lock.json
+*.md

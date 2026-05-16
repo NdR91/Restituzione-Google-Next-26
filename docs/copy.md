@@ -44,7 +44,7 @@ $0M
 
 Investimento Partner Program 2026–2027
 
-![Universal Stack GCN26 senza testi](dinova/assets/stack-gcn-clean.png)
+![Universal Stack GCN26 senza testi](dinova/assets/google-cloud-next-26-universal-stack-clean.png)
 
 Agentic Taskforce Agent Platform Agentic Defense Agentic Data Cloud Research &amp; Frontier Models AI Hypercomputer
 
@@ -130,37 +130,37 @@ Customer proof
 
 ## ROI misurato. Non pilot.
 
-![Renault](dinova/assets/logos/Renault-Logo.png)
+![Renault](dinova/assets/logos/renault-logo.png)
 
 €260M
 
 Riduzione costi su supply chain e shop floor.
 
-![L'Oréal](dinova/assets/logos/LOreal-Logo.png)
+![L'Oréal](dinova/assets/logos/loreal-logo.png)
 
 Beauty Tech
 
 Piattaforma agentica proprietaria su Gemini Agent Platform.
 
-![Citi](dinova/assets/logos/Citibank-Logo.png)
+![Citi](dinova/assets/logos/citi-logo.png)
 
 90%
 
 Rollover gestiti proattivamente dall’assistente AI.
 
-![Color Health](dinova/assets/logos/ColorHealth-logo.png)
+![Color Health](dinova/assets/logos/color-health-logo.png)
 
 Virtual Clinic
 
 Accesso esteso allo screening oncologico.
 
-![Humana](dinova/assets/logos/Humana-logo.png)
+![Humana](dinova/assets/logos/humana-logo.png)
 
 80M
 
 Chiamate/anno con 20.000 operatori potenziati.
 
-![Best Buy](dinova/assets/logos/bestbuy-logo.png)
+![Best Buy](dinova/assets/logos/best-buy-logo.png)
 
 +200%
 

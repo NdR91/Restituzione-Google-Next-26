@@ -167,15 +167,15 @@ Oggi nel nodo `.closing-node-cyan` ci sono solo due chip statici (`~11M token`, 
 La V3 referenzia immagini non presenti in V2:
 - `dinova/assets/gemini-platform.png` (header `#gemini-enterprise`)
 - `dinova/assets/gemini-platform-full.png` (`#geDetail`)
-- `dinova/assets/gcp-next-26-logo-white.png` (hero logo)
-- `dinova/assets/next26-hero.gif`
-- `dinova/assets/next26-graphic.png`
-- `dinova/assets/stack-gcn-clean.png`
+- `dinova/assets/google-cloud-next-26-logo-white.png` (hero logo)
+- `dinova/assets/google-next-26-hero-animation.gif`
+- `dinova/assets/google-next-26-hero-graphic.png`
+- `dinova/assets/google-cloud-next-26-universal-stack-clean.png`
 
 ### Cosa fare
 1. Verifica filesystem: tutti gli asset elencati esistono nel path indicato.
 2. Verifica peso totale: se la pagina apre offline lenta (>3s su connessione local), ottimizzare i PNG (TinyPNG / pngquant) mantenendo qualità accettabile su full HD da sala.
-3. Verifica alt-text: `dinova/assets/next26-hero.gif` ha `alt=""` (decorativo) — confermare che è la scelta corretta a a11y level.
+3. Verifica alt-text: `dinova/assets/google-next-26-hero-animation.gif` ha `alt=""` (decorativo) — confermare che è la scelta corretta a a11y level.
 
 ### Acceptance
 - [ ] Nessun 404 in console quando si apre `index.html`

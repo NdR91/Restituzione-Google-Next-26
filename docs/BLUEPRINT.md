@@ -57,5 +57,5 @@ Nella V2 lo stack è ricostruito in SVG/CSS per essere animabile. Il PNG resta i
 
 - `Google Cloud Next 26 - V2.html`: sorgente standalone pulita, non bundled, con CSS/JS inline ordinati.
 - Include navigazione sticky, reveal, count-up, sezione stack interattiva a tre colonne e sezioni Sales-ready.
-- La sezione stack usa `dinova/assets/stack-gcn-clean.png`, titoli layer cliccabili allineati al PNG e pannello descrittivo con chip/sales angle.
+- La sezione stack usa `dinova/assets/google-cloud-next-26-universal-stack-clean.png`, titoli layer cliccabili allineati al PNG e pannello descrittivo con chip/sales angle.
 - Lo stack non usa più un lungo scroll-linked stage: l’interazione primaria è click sui layer per evitare spazio scuro residuo e migliorare il ritmo in presentazione.

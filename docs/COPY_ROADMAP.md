@@ -37,17 +37,14 @@ Kicker:  Restituzione Sales · Maggio 2026
 H1:      Dal keynote alla conversazione cliente.
 ```
 
-### Modifiche proposte
+### Modifiche proposte — ✅ DEFINITO
 
-**Kicker** → da rinominare. Due opzioni:
-- `I nostri takeaway dal Google Cloud Next` *(preferenza Fabio)*
-- `Takeaway Google Cloud Next` *(più asciutto)*
-
-**H1** → invariato o da discutere. "Dal keynote alla conversazione cliente" è funzionale ma generico. Valutare se allinearlo al tono della narrativa stack (agenti, autonomia, stack).
+**Kicker** → invariato: `Restituzione Sales · Maggio 2026`  
+**H1** → `Takeaway Google Cloud Next`
 
 ### Stato
-- [ ] Decidere testo kicker (le 2 opzioni sopra)
-- [ ] Confermare o rivedere H1
+- [x] Kicker confermato — nessuna modifica
+- [x] H1 → "Takeaway Google Cloud Next"
 - **Sforzo:** 5 min
 
 ---

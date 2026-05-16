@@ -137,6 +137,7 @@
 
     #intro { background: var(--dinova-dark); position: relative; overflow: hidden; }
     #intro .o-ring { right: -160px; bottom: -200px; }
+    #intro .inner { padding-top: 60px; }
 
     /* ── Hero Layout (grid stabile) ── */
     .hero-layout {
@@ -153,16 +154,11 @@
     }
     .hero-logo-brand {
       display: block;
-      width: min(300px, 20vw);
+      width: min(260px, 20vw);
       height: auto;
-      margin-bottom: 34px;
     }
 
     .hero-title {
-      font-size: clamp(42px, 5.2vw, 88px);
-      font-weight: 800;
-      letter-spacing: -.045em;
-      line-height: .98;
       margin-top: 22px;
     }
     .hero-lead {
@@ -932,7 +928,7 @@
       h1 { font-size: clamp(54px, 17vw, 72px); }
       h2 { font-size: clamp(40px, 12vw, 58px); }
       .lead { font-size: 20px; }
-      .hero-logo-brand { width: min(160px, 38vw); }
+      .hero-logo-brand { width: min(200px, 50vw); }
       .hero-visual-composite { width: min(64vw, 320px); margin-top: 16px; }
       .shift-card { padding: 28px; }
       .shift-card h3 { font-size: 28px; }
@@ -956,6 +952,53 @@
       html { scroll-behavior: auto; }
       *, *::before, *::after { animation: none !important; transition: none !important; }
       .reveal { opacity: 1; transform: none; }
+    }
+
+    /* ── Stack Auto-play ── */
+    .stack-progress-wrap {
+      width: 100%;
+      height: 3px;
+      background: rgba(255,255,255,.08);
+      border-radius: 2px;
+      margin-bottom: 16px;
+      overflow: hidden;
+      opacity: 0;
+      transition: opacity .35s ease;
+    }
+    .stack-progress-wrap.visible {
+      opacity: 1;
+    }
+    .stack-progress-bar {
+      height: 100%;
+      width: 0%;
+      background: var(--dinova-cyan);
+      border-radius: 2px;
+    }
+    .stack-play-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 20px;
+      appearance: none;
+      border: 1px solid rgba(255,255,255,.12);
+      background: transparent;
+      color: rgba(255,255,255,.36);
+      cursor: pointer;
+      font-size: 11px;
+      padding: 4px 12px;
+      border-radius: 4px;
+      transition: color .2s, border-color .2s, background .2s;
+      font-family: inherit;
+      letter-spacing: .03em;
+    }
+    .stack-play-btn:hover {
+      color: var(--white);
+      border-color: var(--dinova-cyan);
+      background: rgba(92,217,255,.08);
+    }
+    .stack-play-btn.playing {
+      color: var(--dinova-cyan);
+      border-color: var(--dinova-cyan);
     }
   </style>
 </head>
@@ -987,7 +1030,7 @@
           <div class="hero-col-text">
             <div class="kicker reveal">Restituzione Sales · Maggio 2026</div>
             <img class="hero-logo-brand reveal delay-1" src="dinova/assets/google-cloud-next-26-logo-white.png" alt="Google Cloud Next '26" />
-            <h1 class="hero-title reveal delay-1">Dal keynote alla<br>conversazione cliente.</h1>
+            <h1 class="hero-title reveal delay-1">I nostri takeaway</h1>
           </div>
           <div class="hero-col-visual" aria-hidden="true">
             <div class="hero-visual-composite">
@@ -1059,11 +1102,13 @@
           <button type="button" class="stack-label" data-label="5" style="top: 89%">AI Hypercomputer</button>
         </div>
         <aside class="stack-copy" aria-live="polite">
+          <div class="stack-progress-wrap"><div class="stack-progress-bar" id="stackProgressBar"></div></div>
           <div class="layer-eyebrow" id="layerEyebrow">Layer 01 / 06</div>
           <h2 class="layer-title" id="layerTitle">Universal Stack GCN26</h2>
           <p class="layer-desc" id="layerDesc">Google porta una lettura full-stack dell'AI enterprise: ogni layer è progettato per rendere il successivo più scalabile, sicuro e adottabile.</p>
           <div class="layer-products" id="layerProducts"></div>
           <div class="sales-angle" id="salesAngle">Messaggio Sales: non vendere feature isolate. Usa lo stack per collegare infrastruttura, dati, sicurezza, piattaforma e valore di business.</div>
+          <button type="button" id="stackPlayBtn" class="stack-play-btn" aria-label="Avvia presentazione automatica">&#9654; Auto</button>
         </aside>
       </div>
     </section>
@@ -1350,12 +1395,12 @@
 
   <script>
     const layerData = [
-      { title: 'Agentic Taskforce', desc: 'Il livello dove gli agenti diventano forza lavoro digitale: business user, team e processi quotidiani.', products: ['Gemini Enterprise App', 'Agent Designer', 'Inbox', 'Projects', 'Skills'], sales: 'Parla con COO, CHRO e Operations: non "un chatbot", ma capacità operative distribuite nel lavoro quotidiano.' },
-      { title: 'Agent Platform', desc: 'La piattaforma per costruire, scalare, governare e ottimizzare agenti enterprise-grade.', products: ['ADK', 'Agent Runtime', 'Agent Studio', 'Registry', 'Gateway', 'Observability'], sales: 'Parla con CIO, CTO ed Engineering: qui nasce l\'agent factory enterprise.' },
-      { title: 'Agentic Defense', desc: 'Sicurezza e governance non come add-on, ma come fondazione nativa degli agenti.', products: ['Agent Identity', 'Model Armor', 'Wiz', 'Registry', 'Gateway'], sales: 'Parla con CISO e compliance: questo layer trasforma la demo AI in piattaforma governabile.' },
-      { title: 'Agentic Data Cloud', desc: 'Dati contestuali, governati e semanticamente chiari: la base perché gli agenti possano ragionare e agire.', products: ['Knowledge Catalog', 'BigQuery', 'Data Agent Kit', 'Looker', 'BigQuery MCP'], sales: 'Prima domanda al cliente: dove sono i dati, chi li governa, quanto sono pronti per gli agenti?' },
-      { title: 'Research & Frontier Models', desc: 'Gemini e modelli multimodali spostano l\'AI da risposta a capacità operativa su task lunghi e realtime.', products: ['Gemini Live API', 'Live Avatar', 'Gemini TTS', 'Long-horizon agents'], sales: 'Parla di esperienze multimodali, voce, video, automazione e compiti multi-day.' },
-      { title: 'AI Hypercomputer', desc: 'Compute, storage, rete e runtime per reggere costi, latenza, inferenza e scala dell\'AI agentica.', products: ['TPU 8', 'Virgo Network', 'GKE', 'Cloud Run', 'Managed Lustre'], sales: 'Quando il cliente parla di performance, costo o scala, la conversazione parte dall\'infrastruttura.' }
+      { title: 'Agentic Taskforce', desc: 'Questo è il frontend — gli strumenti in mano agli utenti finali. Gemini Enterprise App sta diventando una piattaforma agentica a tutti gli effetti: Workflow, memoria, orchestrazione. Con questi cambiamenti GE diventa appetibile non solo per chi non ha Workspace, ma anche per chi ce l\'ha già.', products: ['Gemini Enterprise App', 'Agent Designer', 'Inbox', 'Projects', 'Skills'], sales: 'Il bit commerciale: fino a ieri GE era sovrapponibile a un chatbot avanzato. Adesso ha workflow e agents long-running. Il messaggio cambia: non \'hai l\'AI in Workspace\' ma \'hai una forza lavoro digitale.\'' },
+      { title: 'Agent Platform', desc: 'Vertex AI non esiste più. Non è solo un rebranding: è un segnale forte della direzione. Questa piattaforma raccoglie tutto ciò che c\'è sotto e mette a disposizione tutto il necessario per l\'Enterprise AI. È anche la conferma che la direzione che Dinova ha immaginato per la sua platform era quella giusta.', products: ['ADK', 'Agent Runtime', 'Agent Studio', 'Registry', 'Gateway', 'Observability'], sales: 'Da vendere a CIO e CTO: non una feature nuova, ma la conferma di un\'architettura. Google ha costruito quello che noi stiamo proponendo ai clienti.' },
+      { title: 'Agentic Defense', desc: 'La sicurezza AI sta diventando concreta. In Italia siamo ancora nelle prime messe in produzione, ma nei settori regolamentati — finance, healthcare — diventerà un prerequisito. Model Armor, Identity, Gateway: Google ha già la risposta.', products: ['Agent Identity', 'Model Armor', 'Wiz', 'Registry', 'Gateway'], sales: 'Iniziamo a vederlo oggi per proporlo domani. Chi presidia questo tema adesso avrà vantaggio quando il mercato lo chiederà.' },
+      { title: 'Agentic Data Cloud', desc: 'I tuoi dati capiscono il business, non solo la sintassi. Knowledge Catalog semantico, interrogazioni in linguaggio naturale: senza una fondazione dati solida, gli agenti non scalano.', products: ['Knowledge Catalog', 'BigQuery', 'Data Agent Kit', 'Looker', 'BigQuery MCP'], sales: 'Prima domanda al cliente: dove sono i dati, chi li governa, quanto sono pronti? Non si può costruire un agente su dati che non parlano di business.' },
+      { title: 'Research & Frontier Models', desc: 'Google ha DeepMind — un laboratorio che studia l\'applicazione dell\'AI nel mondo reale. L\'annuncio di quest\'anno: Long Running Agents. Oggi chatti e aspetti secondi. Domani ci saranno agenti che lavorano per ore, con compiti complessi, attivati da eventi — non da una chat.', products: ['Gemini Live API', 'Live Avatar', 'Gemini TTS', 'Long-horizon agents'], sales: 'Dare un orizzonte temporale: non è fantascienza, è la prossima fase. Chi inizia a costruire l\'infrastruttura oggi sarà pronto quando arriverà.' },
+      { title: 'AI Hypercomputer', desc: '<span style="color:#EA4335;font-weight:700">⚠️ [PLACEHOLDER — inserire dato investimento Google in TPU/infrastruttura AI]</span> miliardi investiti nell\'infrastruttura AI del futuro. Cloud è un\'ottima soluzione — ma ogni 5 ore sei lì a pregare di trovare ancora token. Google arriva con la tecnologia e ha già l\'infrastruttura.', products: ['TPU 8', 'Virgo Network', 'GKE', 'Cloud Run', 'Managed Lustre'], sales: 'Il confronto diretto: non è questione di modello, è questione di API e finestre di contesto. Google non ti rompe dopo due chiamate.' }
     ];
 
     const geminiData = {
@@ -1440,16 +1485,150 @@
       if (!data) return;
       document.getElementById('layerEyebrow').textContent = `Layer ${String(index + 1).padStart(2, '0')} / 06`;
       document.getElementById('layerTitle').textContent = data.title;
-      document.getElementById('layerDesc').textContent = data.desc;
+      document.getElementById('layerDesc').innerHTML = data.desc;
       document.getElementById('salesAngle').textContent = data.sales;
       document.getElementById('layerProducts').innerHTML = data.products.map((item) => `<span>${item}</span>`).join('');
     };
 
     const initStack = () => {
-      document.querySelectorAll('.stack-label').forEach((label) => {
-        label.addEventListener('click', () => setLayer(Number(label.dataset.label)));
+      const labels = document.querySelectorAll('.stack-label');
+      const copyPanel = document.querySelector('.stack-copy');
+      const stack = document.getElementById('stack');
+      const playBtn = document.getElementById('stackPlayBtn');
+      const barWrap = document.querySelector('.stack-progress-wrap');
+      const bar = document.getElementById('stackProgressBar');
+
+      // Auto-play state
+      let currentLayer = 0;       // 0 = top (Agentic Taskforce), 5 = bottom (AI Hypercomputer)
+      let playing = false;
+      let manuallyPaused = false;
+      let isVisible = false;
+      let layerTimer = null;
+      let inactTimer = null;
+      let rafId = null;
+      let barStart = 0;
+      const BAR_DURATION = 4000;
+      const INACTIVITY_DELAY = 8000;
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // ── Label clicks → navigate + manual pause ──
+      labels.forEach((label) => {
+        label.addEventListener('click', () => {
+          const idx = Number(label.dataset.label);
+          setLayer(idx);
+          currentLayer = idx;
+          pauseAutoPlay(true);
+        });
       });
+
+      // ── Copy panel click → manual pause ──
+      copyPanel.addEventListener('click', () => {
+        if (playing) pauseAutoPlay(true);
+      });
+
+      // ── Play / Pause button ──
+      playBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (playing) {
+          pauseAutoPlay(true);
+        } else {
+          resumeAutoPlay();
+        }
+      });
+
+      // ── IntersectionObserver: avvia quando la sezione è visibile ──
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          isVisible = entry.isIntersecting;
+          if (entry.isIntersecting && !manuallyPaused && !playing && !prefersReducedMotion) {
+            startAutoPlay();
+          } else if (!entry.isIntersecting) {
+            pauseAutoPlay(false);
+          }
+        });
+      }, { threshold: 0.3 });
+      observer.observe(stack);
+
+      // ── Stato iniziale ──
       setLayer(0);
+
+      // ── Auto-play control ──
+
+      function startAutoPlay() {
+        if (playing || manuallyPaused || prefersReducedMotion) return;
+        playing = true;
+        playBtn.classList.add('playing');
+        playBtn.textContent = '\u23F8 Pause';
+        barWrap.classList.add('visible');
+        // Primo avvio: parte dal layer 5 (AI Hypercomputer, bottom)
+        if (currentLayer === 0) currentLayer = 5;
+        advance();
+      }
+
+      function advance() {
+        if (!playing) return;
+        setLayer(currentLayer);
+        startBar();
+        layerTimer = setTimeout(() => {
+          currentLayer = currentLayer === 0 ? 5 : currentLayer - 1;
+          advance();
+        }, BAR_DURATION);
+      }
+
+      function pauseAutoPlay(manual) {
+        if (!playing && !manual) return;
+        playing = false;
+        clearTimeout(layerTimer);
+        stopBar();
+        playBtn.classList.remove('playing');
+        playBtn.textContent = '\u25B6 Auto';
+        barWrap.classList.remove('visible');
+
+        if (manual && isVisible) {
+          manuallyPaused = true;
+          clearTimeout(inactTimer);
+          inactTimer = setTimeout(() => {
+            if (!isVisible) return;
+            manuallyPaused = false;
+            if (!playing) startAutoPlay();
+          }, INACTIVITY_DELAY);
+        }
+      }
+
+      function resumeAutoPlay() {
+        manuallyPaused = false;
+        clearTimeout(inactTimer);
+        if (!playing) startAutoPlay();
+      }
+
+      function startBar() {
+        barStart = performance.now();
+        bar.style.width = '100%';
+        cancelAnimationFrame(rafId);
+        rafId = requestAnimationFrame(function tick() {
+          if (!playing) return;
+          const elapsed = performance.now() - barStart;
+          const remaining = Math.max(0, BAR_DURATION - elapsed);
+          bar.style.width = (remaining / BAR_DURATION * 100) + '%';
+          if (elapsed < BAR_DURATION) {
+            rafId = requestAnimationFrame(tick);
+          }
+        });
+      }
+
+      function stopBar() {
+        cancelAnimationFrame(rafId);
+        rafId = null;
+        bar.style.width = '0%';
+      }
+
+      // Cleanup memory leak
+      window.addEventListener('beforeunload', () => {
+        clearTimeout(layerTimer);
+        clearTimeout(inactTimer);
+        cancelAnimationFrame(rafId);
+        observer.disconnect();
+      });
     };
 
     const initReveal = () => {

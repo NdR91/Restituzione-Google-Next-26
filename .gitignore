@@ -21,5 +21,11 @@ package-lock.json
 # Large binary reference material (not part of the built page)
 uploads/*.pptx
 
+# Docker compose locale (minipc)
+docker-compose.yml
+
 # Claude Code worktrees e sessioni agenti
 .claude/
+
+# Sessioni temporanee agenti e task
+.tmp/
